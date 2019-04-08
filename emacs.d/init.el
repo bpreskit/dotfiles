@@ -111,7 +111,20 @@
 		       (define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
 		       (define-key python-mode-map (kbd "C-M-i") 'jedi:complete))))
 
+;; Org mode stuff.
+(add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
+(define-key org-mode-map (kbd "M-j") 'org-meta-return)
+(define-key org-mode-map (kbd "M-J") 'org-insert-todo-heading)
+(define-key org-mode-map (kbd "C-c a") 'org-agenda)
+(define-key org-mode-map (kbd "C-M-u") 'org-up-element)
+(define-key org-mode-map (kbd "C-M-d") 'org-down-element)
+(define-key org-mode-map (kbd "M-d") 'org-table-kill-row)
+(define-key org-mode-map (kbd "M-n") 'org-next-item)
+(define-key org-mode-map (kbd "M-p") 'org-previous-item)
 
+
+;;;; JIRA
+(setq jiralib-url "https://jira.purestorage.com/")
 
 ;; Set up JS(X) autocomplete
 (add-to-list 'load-path "/path/to/tern/emacs/")
@@ -127,6 +140,7 @@
 ;; Set up go completion
 (require 'go-complete)
 (require 'go-mode)
+(add-to-list 'exec-path (getenv "GOPATH"))
 (add-hook 'completion-at-point-functions 'go-complete-at-point)
 (add-hook 'go-mode-hook
 	  (lambda () (progn
@@ -181,6 +195,8 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; Set my key shortcuts.
 
 (global-set-key (kbd "C-x ;") 'copy-line-to-end)
 (global-set-key (kbd "C-x :") 'copy-line-to-beginning)
