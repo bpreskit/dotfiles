@@ -7,18 +7,20 @@
 ;; 
 (setq inhibit-startup-screen t)
 (setq column-number-mode t)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "Bits" :slant normal :weight normal :height 105 :width normal))))
+ '(magit-hash ((t (:foreground "yellow"))))
+ '(italic ((t (:slant italic)))))
+
 (auto-revert-mode 1)
 (let ((default-directory "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
 (add-hook 'find-file-hook (lambda () (linum-mode 1)))
 (add-hook 'find-file-hook (lambda () (set-face-attribute 'default nil :height 105)))
-;; (add-hook 'octave-mode-hook
-;;	  (progn (lambda () (setq octave-comment-char ?%))
-;;		 (lambda () (setq comment-start "% "))
-;;		 (lambda () (setq comment-add 0))
-;;	 ;; (define-key octave-mode-map (kbd "C-M-n") 'forward-sexp)
-;;	 ;; (define-key octave-mode-map (kbd "C-M-p") 'backward-sexp)
-;;		 ))
 (add-hook 'octave-mode-hook
 	  (lambda () (progn (setq octave-comment-char ?%)
 			    (setq comment-start "% ")
@@ -38,13 +40,6 @@
 (add-hook 'shell-mode-hook
 	  (lambda () (setq comint-process-echoes t)))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "Bits" :slant normal :weight normal :height 105 :width normal))))
- '(magit-hash ((t (:foreground "yellow")))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -112,6 +107,7 @@
 		       (define-key python-mode-map (kbd "C-M-i") 'jedi:complete))))
 
 ;; Org mode stuff.
+(require 'org)
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
 (define-key org-mode-map (kbd "M-J") 'org-insert-todo-heading)
