@@ -1,14 +1,78 @@
-alias clem='emacs -nw'
-alias oct='octave --no-gui'
-BFG_LOC=~/Downloads/git_stuff/
-BFG_FIL=bfg-1.13.0.jar
-alias bfg='java -jar $BFG_LOC$BFG_FIL'
-alias clipboard="xclip -selection clipboard"
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
-
-#
-# Aliases for git (OMZ hates it when I put them in ~/.oh-my-zsh)
-#
-alias gcm="git commit -m"
+alias emacs="emacs -nw"
 alias gs="git status"
+which gcm >/dev/null && unalias gcm
+alias gcm="git commit -m"
+which gl >/dev/null && unalias gl
+alias gl="git log"
+which gst >/dev/null && unalias gst
+which gsta >/dev/null && unalias gsta
+alias gst="git stash"
+alias gpl="git pull"
+which gg >/dev/null && unalias gg
+alias ggrep="git grep"
+alias gloh='git log --oneline --decorate | head'
+alias grbfs='git rebase feature/storreduce'
+alias grbr5='git rebase release-5.0.0'
+alias gcor5='git checkout release-5.0.0'
+alias gcofs='git checkout feature/storreduce'
+
+function gbdrm {
+    local branch=$1
+    local remote_branch=$(git branch -r | grep $branch | tr -d "\*[:blank:]")
+    local remote
+    if [[ -n $remote_branch ]]; then
+	remote=$(cut -d "/" -f 1 <<< $remote_branch)
+	git push --delete $remote $branch
+    fi
+    git branch -d $branch
+}
+
+function gbg {
+    git branch | grep "$@" | tr -d "\*[:blank:]"
+}
+
+function gcog {
+    branch=$(gbg "$1")
+    branch=$(echo $branch | sed 's/\(^\*\?\s*\)\|\(\s*$\)//')
+    branch_lines=$(echo $branch | wc -l)
+    if [[ "$branch_lines" -eq 0 ]]; then
+	echo "No branch exists containing $1"
+    elif [[ "$branch_lines" -gt 1 ]]; then
+	i=0
+	echo $branch | while read line; do
+	    echo "$i) $line"
+	    i=$(( $i + 1 ))
+	done
+	readint "Which branch? " 0 $branch_lines
+	n=$(( $? + 1 ))	
+	script="$n p"
+	branch=$(echo $branch | sed -n $script)
+    fi
+    git checkout $branch
+}
+
+function gbc {
+    git branch "$@" | cat
+}
+
+function readint {
+    if [[ $# -ne 3 ]]; then
+    	return
+    fi
+    if [[ ! $3 -ge $2 ]]; then
+    	return
+    fi
+
+    a=$2
+    end_loop=""
+    while [[ -z $end_loop ]]; do
+    	vared -p $1 -c a
+    	if [[ $a -ge $2 ]] && [[ $a -le $3 ]]; then
+    	    end_loop="end"
+	    return $a
+    	else
+	    echo "Should be between $2 and $3!"
+	    a=$2
+	fi	
+    done
+}
