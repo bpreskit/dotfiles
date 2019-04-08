@@ -79,3 +79,81 @@
     (set-window-buffer nw curb)
     (switch-to-buffer nb)
     (select-window cw)))
+
+(defun golden-window-split-down (&optional rev)
+  (interactive "P")
+  (let ((size (round (* (if rev -0.618 0.618) (window-height)))))
+    (split-window-below size)))
+
+(defun golden-window-split-right (&optional rev)
+  (interactive "P")
+  (let ((size (round(* (if rev 0.382 0.618) (window-width)))))
+    (split-window-right size)))
+
+(defun my-git-blame ()
+  (interactive)
+  (golden-window-split-right t)
+  (mo-git-blame-current))
+
+;; (defun my-git-blame-quit ()
+;;   (interactive)
+;;   )
+
+;; (defun golden-rebalance (&optional horiz)
+;;   (interactive "P")
+;;   (let ((dir1 (if horiz 'right 'down))
+;; 	(dir2 (if horiz 'left 'up))
+;; 	(dir3 (if horiz 'down 'right))
+;; 	(dir4 (if horiz 'up 'left)))
+;;     ;body
+;;     ((let ((win1 (window-in-direction dir1))
+;; 	   (win2 (window-in-direction dir2)))
+;;        ;body
+;;        (
+;;	
+;; 	)))
+;;     )
+;;   )
+
+(defun golden-cycle ()
+  (interactive)
+  (setq gold1 0.618)
+  (setq gold2 (- 1 gold1))
+  (setq cur-dim (window-height))
+  (setq top-dim (floor (* (frame-height) gold1)))
+  (setq mid-dim (floor (* (frame-height) 0.5)))
+  (setq bot-dim (floor (* (frame-height) gold2)))
+  (if (= cur-dim bot-dim)
+      (set-window-dim mid-dim)
+      (if (= cur-dim mid-dim)
+	  (set-window-dim top-dim)
+	(if (= cur-dim top-dim)
+	    (set-window-dim bot-dim)
+	  (set-window-dim mid-dim)))))
+
+(defun set-window-dim (dim &optional horiz)
+  (interactive "P")
+  (if horiz
+      (progn
+	(setq dim-fun 'enlarge-window-horizontally)
+       (setq cur-dim (window-width)))
+    (progn
+      (setq dim-fun 'enlarge-window)
+      (setq cur-dim (window-height))))
+    (funcall dim-fun (- dim cur-dim)))
+
+(defun resize-to-fraction (&optional frac horiz)
+  (interactive "P")
+  (if (equal frac nil)
+      (setq frac 0.5))
+  (if horiz
+      (progn
+	(setq dim (frame-width))
+	(setq cur-dim (window-width))
+	(setq dim-fun 'enlarge-window-horizontally))
+    (progn
+	(setq dim (frame-height))
+	(setq cur-dim (window-height))
+	(setq dim-fun 'enlarge-window)))
+  (setq target-dim (floor (* frac dim)))
+  (funcall dim-fun (- target-dim cur-dim)))
