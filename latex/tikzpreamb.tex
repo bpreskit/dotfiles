@@ -1,0 +1,51 @@
+\usetikzlibrary{matrix,backgrounds,arrows.meta,decorations.markings,positioning}
+\usetikzlibrary{external}\tikzexternalize[prefix=tikzes/]
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+   1 with {\arrow[semithick]{open triangle 60}}},
+   double distance=1.4pt, shorten >= 5.5pt,
+   preaction = {decorate},
+   postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+\pgfdeclarelayer{myback}
+\pgfsetlayers{myback,background,main}
+\tikzset{mycolor/.style = {line width=1bp,color=#1}}%
+\tikzset{myfillcolor/.style = {fill=#1}}%
+\tikzset{chartnode/.style={
+    rectangle,rounded corners=3mm,align=center,font=\LARGE,
+    very thick,top color=white,minimum height=3cm,text width=4cm,
+}}
+\tikzset{
+  linsolve/.style={chartnode,
+    draw={rgb,255:red,10;green,100;blue,40},
+    bottom color={rgb,255:red,18;green,180;blue,72},
+    minimum width=10cm,
+}}
+\tikzset{
+  magsolve/.style={chartnode,
+    draw={rgb,255:red,24;green,28;blue,95},
+    bottom color={rgb,255:red,107;green,110;blue,160},
+    minimum width=4.75cm
+}}
+\tikzset{
+  angsync/.style={chartnode,
+    draw={rgb,255:red,197;green,31;blue,20},
+    bottom color={rgb,255:red,255;green,142;blue,135},
+    minimum width=4.75cm
+}}
+\tikzset{chartfat/.tip={Triangle[length=2mm,width=3.5cm]}}
+\newlength{\chartoffset}
+\setlength{\chartoffset}{-0.75cm}
+\newlength{\dpone}
+\newlength{\dptwo}
+\setlength{\dpone}{.3cm}
+\setlength{\dptwo}{1.4cm}
+\newlength{\diagvecbump}
+\setlength{\diagvecbump}{1.13125em}
+
+\NewDocumentCommand{\highlight}{O{blue!40} m m}{%
+  \draw[mycolor=#1] (#2.north west)rectangle (#3.south east);
+}
+
+\NewDocumentCommand{\fhighlight}{O{blue!40} m m}{%
+  \fill[myfillcolor=#1] (#2.north west)rectangle (#3.south east);
+}

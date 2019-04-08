@@ -1,0 +1,14 @@
+alias clem='emacs -nw'
+alias oct='octave --no-gui'
+BFG_LOC=~/Downloads/git_stuff/
+BFG_FIL=bfg-1.13.0.jar
+alias bfg='java -jar $BFG_LOC$BFG_FIL'
+alias clipboard="xclip -selection clipboard"
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
+
+#
+# Aliases for git (OMZ hates it when I put them in ~/.oh-my-zsh)
+#
+alias gcm="git commit -m"
+alias gs="git status"

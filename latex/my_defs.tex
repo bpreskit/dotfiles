@@ -1,0 +1,268 @@
+\newtheorem{theorem}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{surfacecor}{Corollary 1}
+\newtheorem{conjecture}{Conjecture} 
+\newtheorem{question}{Question} 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\let\mod\undefined
+\let\Re\undefined
+\let\Im\undefined
+\let\vec\undefined
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\circop}{circ}
+\DeclareMathOperator{\mod}{\mathbin{mod}}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\vec}{vec}
+\DeclareMathOperator{\mat}{mat}
+\DeclareMathOperator{\Skew}{Skew}
+\DeclareMathOperator{\SNR}{SNR}
+\DeclareMathOperator{\SDP}{SDP}
+\DeclareMathOperator{\BlkMag}{BlockMag}
+\DeclareMathOperator{\BlkVec}{BlockVec}
+
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+\DeclarePairedDelimiter{\clopen}{[}{)}%]
+\DeclarePairedDelimiter{\oplsed}{(}{]}%)
+
+\newcommand{\coauthorrole}{The dissertation author was a principal researcher on this paper.}
+\newcommand{\includethis}[1]{
+  \includegraphics[width=\textwidth,trim={.2in 2.5in .55in 2.4in}]{#1}}
+
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\H}{\ensuremath{\mathcal{H}}}
+\newcommand{\sym}{\mathcal{S}}
+\newcommand{\Sbb}{\ensuremath{\mathbb{S}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\newcommand{\Rn}{\ensuremath{\R^n}}
+\newcommand{\Rm}{\ensuremath{\R^m}}
+\newcommand{\Rd}{\ensuremath{\R^d}}
+\newcommand{\Hd}{\ensuremath{\H^d}}
+\newcommand{\Hn}{\ensuremath{\H^n}}
+\newcommand{\Cn}{\ensuremath{\C^n}}
+\newcommand{\Cm}{\ensuremath{\C^m}}
+\newcommand{\Cd}{\ensuremath{\C^d}}
+\newcommand{\mfr}{\mathfrak{R}}
+\newcommand{\ulmfr}{\underline{\mfr}}
+\newcommand{\mfd}{\mathfrak{d}}
+\newcommand{\Rmxn}{\ensuremath{\R^{m \times n}}}
+\newcommand{\Cmxn}{\ensuremath{\C^{m \times n}}}
+\newcommand{\Rnxn}{\ensuremath{\R^{n \times n}}}
+\newcommand{\Cnxn}{\ensuremath{\C^{n \times n}}}
+\newcommand{\Cdxd}{\ensuremath{\C^{d \times d}}}
+\newcommand{\Rdxd}{\ensuremath{\R^{d \times d}}}
+\newcommand{\bigfrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+\newcommand{\kron}{\otimes}
+\newcommand{\iid}{\overset{\text{i.i.d.}}{\sim}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\SNRdb}{\mathrm{SNR}_{\mathrm{db}}}
+\renewcommand{\th}{\ensuremath{^{\text{th}}}}
+\newcommand{\st}{\ensuremath{^{\text{st}}}}
+\newcommand{\ow}{\text{otherwise}}
+\renewcommand{\c}{\ensuremath{\mathbf{c}}}
+\newcommand{\x}{\ensuremath{\mathbf{x}}}
+\newcommand{\m}{\ensuremath{\mathbf{m}}}
+\newcommand{\y}{\ensuremath{\mathbf{y}}}
+\newcommand{\tf}{\ensuremath{\tilde{f}}}
+\newcommand{\ux}{\underline{x}}
+\newcommand{\tux}{\tilde{\ux}}
+\newcommand{\tu}{\tilde{u}}
+\newcommand{\uu}{\underline{u}}
+\newcommand{\uz}{\underline{z}}
+\newcommand{\uX}{\underline{X}}
+\newcommand{\uR}{\underline{R}}
+\newcommand{\utX}{\underline{\tX}}
+\newcommand{\tbx}{\tilde{x}}
+\newcommand{\uL}{\underline{L}}
+\newcommand{\uV}{\underline{V}}
+\newcommand{\uv}{\underline{v}}
+\newcommand{\uW}{\underline{W}}
+\newcommand{\tF}{\widetilde{F}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\CN}{\mathcal{C N}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\hz}{\hat{z}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\hL}{\hat{L}}
+\renewcommand{\v}{\ensuremath{\mathbf{v}}}
+\renewcommand{\u}{\ensuremath{\mathbf{u}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\mg}{martingale}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\rv}{random variable}
+\newcommand{\psd}{\ensuremath{\mathcal{S}_+}}
+\newcommand{\psdn}{\ensuremath{\mathcal{S}_+^n}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\one}{\ensuremath{\mathbbm{1}}}
+\renewcommand{\a}{\ensuremath{\overline{a}}}
+\newcommand{\dbar}{\overline{d}}
+\newcommand{\deltabar}{\overline{\delta}}
+\newcommand{\mintheta}{\min_{\theta \in [0, 2\pi]}}
+\newcommand{\minthetas}[1]{\min_{\theta_{#1} \in [0, 2\pi]}}
+\newcommand{\sumedge}{\sum_{(i, j) \in E}}
+\newcommand{\eit}{\ee^{\ii \theta}}
+\newcommand{\eits}[1]{\ee^{\ii \theta_{#1}}}
+\newcommand{\eiti}{\ee^{\ii \theta_i}}
+\newcommand{\conj}[1]{\overline{#1}}
+\renewcommand{\subset}{\subseteq}
+\def \a {\mathbf a}
+\def \b {\mathbf b}
+\def \x {\mathbf x}
+\def \z {\mathbf z}
+\def \y {\mathbf y}
+\def \u {\mathbf u}
+\def \v {\mathbf v}
+\def \m {\mathbf m}
+\def \n {\mathbf n}
+\newcommand{\tX}{\ensuremath{\widetilde{X}}}
+\newcommand{\tx}{\ensuremath{\widetilde{\x}}}
+
+\newcommand{\rowmat}[3]{\ensuremath{\begin{bmatrix} #1_{#2} & \cdots & #1_{#3} \end{bmatrix}}}
+\newcommand{\rowmatfun}[3]{
+  \ensuremath{\noexpandarg
+    \begin{bmatrix}
+      \StrSubstitute{#1}{@}{{#2}} &
+      \cdots &
+      \StrSubstitute{#1}{@}{{#3}}
+    \end{bmatrix}
+  }
+}
+\newcommand{\rowmatfl}[2]{\ensuremath{\begin{bmatrix} #1 & \cdots & #2 \end{bmatrix}}}
+
+\newcommand{\colmatfl}[2]{\ensuremath{\begin{bmatrix} #1 \\ \vdots \\ #2 \end{bmatrix}}}
+\newcommand{\colmat}[3]{\ensuremath{\begin{bmatrix} #1_{#2} \\ \vdots \\ #1_{#3} \end{bmatrix}}}
+\newcommand{\colmatfun}[3]{
+  \ensuremath{\noexpandarg
+    \begin{bmatrix}
+      \StrSubstitute{#1}{@}{{#2}} \\
+      \vdots \\
+      \StrSubstitute{#1}{@}{{#3}}
+    \end{bmatrix}
+  }
+}
+\newcommand{\diagmatfl}[2]{\diagcornmat{#1}{#2}}
+\newcommand{\diagcornmat}[2]{
+  \ensuremath{
+    \begin{bmatrix}
+      #1 & \cdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      0 & \cdots & #2
+    \end{bmatrix}
+  }
+}
+\newcommand{\bigdiagcornmat}[2]{
+  \ensuremath{
+    \begin{bmatrix}
+      #1 & 0 & \cdots & 0 \\
+      0 & \ddots & & \vdots \\
+      \vdots & & \ddots & 0 \\
+      0 & \cdots & 0 & #2
+    \end{bmatrix}
+    }
+  }
+\newcommand{\diagmat}[3]{
+  \diagcornmat{#1_{#2}}{#1_{#3}}
+}
+\newcommand{\diagmatfun}[3]{\noexpandarg
+  \diagcornmat{\StrSubstitute{#1}{@}{#2}}{\StrSubstitute{#1}{@}{#3}}
+}
+\newcommand{\cornmat}[5]{
+  \ensuremath{
+  \begin{bmatrix} #1_{#2#4} & \cdots & #1_{#2#5} \\
+    \vdots & \ddots & \vdots \\
+    #1_{#3#4} & \cdots & #1_{#3#5}
+  \end{bmatrix}
+  }
+}
+\newcommand{\cornmatfun}[5]{
+  \ensuremath{\noexpandarg
+    \StrSubstitute{#1}{@r}{{#2}}[\cmftop]
+    \StrSubstitute{#1}{@r}{{#3}}[\cmfbot]
+    \expandarg
+    \begin{bmatrix}
+      \StrSubstitute{\cmftop}{@c}{{#4}}  & \cdots & \StrSubstitute{\cmftop}{@c}{{#5}} \\
+    \vdots & \ddots & \vdots \\
+    \StrSubstitute{\cmfbot}{@c}{{#4}} & \cdots & \StrSubstitute{\cmfbot}{@c}{{#5}}
+  \end{bmatrix}
+  }
+}
+
+\newcommand{\cornmatfunexp}[5]{
+  \ensuremath{%\noexpandarg
+    \StrSubstitute{#1}{@r}{{#2}}[\cmftop]
+    \StrSubstitute{#1}{@r}{{#3}}[\cmfbot]
+    \expandarg
+    \begin{bmatrix}
+      \StrSubstitute{\cmftop}{@c}{{#4}}  & \cdots & \StrSubstitute{\cmftop}{@c}{{#5}} \\
+    \vdots & \ddots & \vdots \\
+    \StrSubstitute{\cmfbot}{@c}{{#4}} & \cdots & \StrSubstitute{\cmfbot}{@c}{{#5}}
+  \end{bmatrix}
+  }
+}
+
+\newcommand{\BPnote}[1]{\textcolor{ForestGreen}{[{\em {\bf **BP Note:} #1}]}}
+
+\newcommand{\crefrangeconjunction}{--}
+
+\newenvironment{remark}
+               {\textbf{Remark.}}
+               {}
+               
+\newenvironment{piecewise}
+               {\left\{\begin{array}{r@{,\quad}l}}
+               {\end{array}\right.}
+
+\global\newlength\thewidth
+\newcommand\findwidth[1]{\setbox0\hbox{#1}\setlength\thewidth{\wd0}}
+
+\newcommand\myphantom[3][c]{\findwidth{#3}\makebox[\thewidth][#1]{#2}}
+
+\newcommand\mathphantom[3][c]{\ThisStyle{%
+\findwidth{$\SavedStyle#3$}\makebox[\thewidth][#1]{$\SavedStyle#2$}
+}}
