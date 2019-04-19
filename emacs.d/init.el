@@ -56,6 +56,7 @@
 		       (color-theme-tty-dark))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
+;; Global modes
 ;; Do some stuff to set up smartparens.
 (require 'smartparens)
 (smartparens-global-mode)
@@ -65,6 +66,9 @@
 (sp-pair "\"" nil :actions :rem)
 (sp-pair "'" nil :actions :rem)
 (sp-pair "\\\"" nil :actions :rem)
+
+;; Auto-complete
+(global-auto-complete-mode)
 
 ;; Monitor whitespace problems
 (require 'whitespace)
@@ -136,6 +140,7 @@
 ;; Set up go completion
 (require 'go-complete)
 (require 'go-mode)
+(require 'go-playground)
 (add-to-list 'exec-path (getenv "GOPATH"))
 (add-hook 'completion-at-point-functions 'go-complete-at-point)
 (add-hook 'go-mode-hook
@@ -146,6 +151,7 @@
 (define-key go-mode-map (kbd "C-h d") 'godoc)
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook #'gofmt-before-save)
+(define-key go-playground-mode-map (kbd "C-c RET") 'go-playground-exec)
 
 ;; Set up C++ stuff
 (add-hook 'c-mode-hook

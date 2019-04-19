@@ -28,3 +28,4 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c l") 'windmove-right)
 (global-set-key (kbd "C-c +") 'golden-cycle)
+(global-set-key (kbd "C-M-i") 'auto-complete)
