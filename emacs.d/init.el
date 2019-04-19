@@ -1,10 +1,5 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
+;; Added by Package.el.  (package-initialize)
 
-;; 
 (setq inhibit-startup-screen t)
 (setq column-number-mode t)
 (custom-set-faces
@@ -16,29 +11,8 @@
  '(magit-hash ((t (:foreground "yellow"))))
  '(italic ((t (:slant italic)))))
 
-(auto-revert-mode 1)
 (let ((default-directory "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
-(add-hook 'find-file-hook (lambda () (linum-mode 1)))
-(add-hook 'find-file-hook (lambda () (set-face-attribute 'default nil :height 105)))
-(add-hook 'octave-mode-hook
-	  (lambda () (progn (setq octave-comment-char ?%)
-			    (setq comment-start "% ")
-			    (setq comment-add 0))))
-(add-hook 'inferior-octave-mode-hook
-	  (lambda ()
-	    (progn
-	      (define-key inferior-octave-mode-map (kbd "C-M-n") 'forward-sexp)
-	      (define-key inferior-octave-mode-map
-		(kbd "C-M-p") 'backward-sexp))))
-(setq gofmt-command "goimports")
-(add-hook 'before-save-hook #'gofmt-before-save)
-
-;; (setq python-shell-interpreter "python3")
-(setq hide-ifdef-lines t)
-(setq hide-ifdef-initially t)
-(add-hook 'shell-mode-hook
-	  (lambda () (setq comint-process-echoes t)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -48,7 +22,20 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags irony-eldoc elpy flycheck-irony company-irony irony neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode electric-case))))
+    (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode electric-case))))
+
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/") t)
+(if (not
+     (string= (package-install-selected-packages) "All your packages are already installed"))
+    (progn (package-refresh-contents)
+	   (package-install-selected-packages)))
+
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
@@ -60,18 +47,9 @@
   '(progn
      (color-theme-initialize)
      (message "tryna set the theme...")))
-(color-theme-tty-dark)
 (add-hook 'after-init-hook
-	  (lambda () (color-theme-tty-dark)))
+	  (lambda () (color-theme-deep-blue)))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
-
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
 
 ;; Do some stuff to set up smartparens.
 (require 'smartparens)
@@ -86,7 +64,25 @@
 ;; Monitor whitespace problems
 (require 'whitespace)
 (setq whitespace-style '(face trailing empty space-after-tab space-before-tab))
-;; (global-whitespace-mode 1)
+
+;; Some random hooks.
+(add-hook 'find-file-hook (lambda () (linum-mode 1)))
+(add-hook 'octave-mode-hook
+	  (lambda () (progn (setq octave-comment-char ?%)
+			    (setq comment-start "% ")
+			    (setq comment-add 0))))
+(add-hook 'inferior-octave-mode-hook
+	  (lambda ()
+	    (progn
+	      (define-key inferior-octave-mode-map (kbd "C-M-n") 'forward-sexp)
+	      (define-key inferior-octave-mode-map
+		(kbd "C-M-p") 'backward-sexp))))
+
+(setq hide-ifdef-lines t)
+(setq hide-ifdef-initially t)
+(add-hook 'shell-mode-hook
+	  (lambda () (setq comint-process-echoes t)))
+
 
 ;; Set up python autocomplete
 (require 'jedi)
@@ -118,7 +114,6 @@
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 
-
 ;;;; JIRA
 (setq jiralib-url "https://jira.purestorage.com/")
 
@@ -144,7 +139,8 @@
 (define-key go-mode-map (kbd "M-.") 'godef-jump)
 (define-key go-mode-map (kbd "C-x 4 M-.") '(lambda () (interactive) (godef-jump 'point t)))
 (define-key go-mode-map (kbd "C-h d") 'godoc)
-;(define-key go-mode-map (kbd "C-h d") 'godoc)
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; Set up C++ stuff
 (add-hook 'c-mode-hook
@@ -158,35 +154,6 @@
 
 (require 'ivy)
 (ivy-mode)
-
-;; Setup irony things
-(require 'irony)
-;; If irony server was never installed, install it.
-(unless (irony--find-server-executable) (call-interactively #'irony-install-server))
-
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-
-;; Use compilation database first, clang_complete as fallback.
-(setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
-						irony-cdb-clang-complete))
-
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-;; I use irony with company to get code completion.
-(require 'company-irony
-	 (progn
-	   (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
-
-;; I use irony with flycheck to get real-time syntax checking.
-(require 'flycheck-irony
-	 (progn
-	   (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
-
-;; Eldoc shows argument list of the function you are currently writing in the echo area.
-(require 'eldoc
-	 (progn
-	   (add-hook 'irony-mode-hook #'irony-eldoc)))
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
