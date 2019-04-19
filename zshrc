@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/ir/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -21,7 +21,7 @@ ZSH_THEME="miloshadzic"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -36,7 +36,7 @@ ZSH_THEME="miloshadzic"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -76,7 +76,7 @@ export PATH=$PATH:/usr/lib/llvm-3.8/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -85,26 +85,13 @@ export PATH=$PATH:/usr/lib/llvm-3.8/bin
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Set personal aliases
 if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
 fi
 
-# These lines set up the SSH agent, which is necessary to get into the
-# StorReduce machine.
+# These lines set up the SSH agent, which is necessary to get into
+# your SSH connections.
 SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
@@ -114,7 +101,6 @@ function start_agent {
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
     /usr/bin/ssh-add;
-    /usr/bin/ssh-add ~/.ssh/id_pure_root;
 }
 
 if [ -f "${SSH_ENV}" ]
@@ -128,18 +114,16 @@ else
     start_agent;
 fi
 
-# Want to set up a few named directories to get into the git repos
-purity=~/purity
-srdm=~/storreduce-dev-machine
-storreduce=~/Development/storreduce/src/code.storreduce.com
-iridium=~/ir-bpreskitt
-srbin=/home/ir/purity/tools/storreduce_tools/usr/bin
-: ~purity ~storreduce ~iridium ~srbin ~srdm
-
 # Some setting
 export IGNOREEOF=42
 
-# A couple gvm/go configurations added by the ansible playbook
-[[ -s "/home/ir/.gvm/scripts/gvm" ]] && source "/home/ir/.gvm/scripts/gvm"
-gvm use go1.8.6 > /dev/null
-gvm pkgset use storreduce > /dev/null
+if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+   source "$HOME/.gvm/scripts/gvm"
+   LATEST_GO=$(gvm list | grep -E "go[0-9\.]+" | cut -d "o" -f 2 | sort -Vr | head -n 1)
+   gvm use "go${LATEST_GO}" > /dev/null
+fi
+
+# Username on VM at work is "ir"
+if [[ $(whoami) = "ir" ]]; then
+    source ~/.zshrc_pure
+fi
