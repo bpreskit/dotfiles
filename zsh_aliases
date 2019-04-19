@@ -11,10 +11,11 @@ alias gpl="git pull"
 which gg >/dev/null && unalias gg
 alias ggrep="git grep"
 alias gloh='git log --oneline --decorate | head'
-alias grbfs='git rebase feature/storreduce'
-alias grbr5='git rebase release-5.0.0'
-alias gcor5='git checkout release-5.0.0'
-alias gcofs='git checkout feature/storreduce'
+# alias grbfs='git rebase feature/storreduce'
+# alias grbr5='git rebase release-5.0.0'
+# alias gcor5='git checkout release-5.0.0'
+# alias gcofs='git checkout feature/storreduce'
+alias gcom
 
 function gbdrm {
     local branch=$1
