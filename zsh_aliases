@@ -1,3 +1,4 @@
+alias em="emacs -nw"
 alias gs="git status"
 which gcm >/dev/null && unalias gcm
 alias gcm="git commit -m"

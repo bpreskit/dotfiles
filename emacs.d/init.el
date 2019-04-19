@@ -50,7 +50,9 @@
      (color-theme-initialize)
      (message "tryna set the theme...")))
 (add-hook 'after-init-hook
-	  (lambda () (color-theme-deep-blue)))
+	  (lambda () (if (display-graphic-p)
+			 (color-theme-deep-blue)
+		       (color-theme-tty-dark))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
 ;; Do some stuff to set up smartparens.
