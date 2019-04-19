@@ -43,6 +43,7 @@
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
 
 (load-library "mycode.el")
+(load-library "keybindings.el")
 (require 'color-theme)
 (message "Loading color-themes from init.el")
 (eval-after-load "color-theme"
