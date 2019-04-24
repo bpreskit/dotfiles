@@ -29,3 +29,4 @@
 (global-set-key (kbd "C-c l") 'windmove-right)
 (global-set-key (kbd "C-c +") 'golden-cycle)
 (global-set-key (kbd "C-M-i") 'auto-complete)
+(global-set-key (kbd "C-x 1") 'delete-other-windows-or-restore)

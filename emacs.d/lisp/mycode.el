@@ -145,3 +145,21 @@
 	   'enlarge-window))
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
+
+(lexical-let (win-conf)
+  (defun delete-other-windows-or-restore ()
+    "Basically does (delete-other-windows), but saves your window config.  If you run it while there's only one window open, it restores from the saved config."
+    (interactive)
+    (let ((one-window (= 1 (count-windows)))
+	  (saved-conf (not (null win-conf))))
+      (catch 'done
+	(if (and one-window saved-conf)
+	    (progn
+	      (set-window-configuration win-conf)
+	      (setq win-conf nil)
+	      (throw 'done nil)))
+	(if (not one-window)
+	    (progn
+	      (setq win-conf (current-window-configuration))
+	      (delete-other-windows)
+	      (throw 'done nil)))))))
