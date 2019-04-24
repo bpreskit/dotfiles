@@ -91,7 +91,7 @@
 (setq hide-ifdef-initially t)
 (add-hook 'shell-mode-hook
 	  (lambda () (setq comint-process-echoes t)))
-
+(remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
 ;; Set up python autocomplete
 (require 'jedi)
