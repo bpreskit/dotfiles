@@ -52,7 +52,9 @@
      (message "tryna set the theme...")))
 (add-hook 'after-init-hook
 	  (lambda () (if (display-graphic-p)
-			 (color-theme-deep-blue)
+			 '(progn
+			    (color-theme-deep-blue)
+			    (global-hl-line-mode))
 		       (color-theme-tty-dark))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
@@ -119,7 +121,7 @@
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 (define-key org-mode-map (kbd "C-M-u") 'org-up-element)
 (define-key org-mode-map (kbd "C-M-d") 'org-down-element)
-(define-key org-mode-map (kbd "M-d") 'org-table-kill-row)
+(define-key org-mode-map (kbd "M-d") 'org-table-kill-row-or-word)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 
@@ -169,3 +171,5 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+(load "keybindings")

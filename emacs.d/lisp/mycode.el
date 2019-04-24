@@ -99,61 +99,49 @@
 ;;   (interactive)
 ;;   )
 
-;; (defun golden-rebalance (&optional horiz)
-;;   (interactive "P")
-;;   (let ((dir1 (if horiz 'right 'down))
-;; 	(dir2 (if horiz 'left 'up))
-;; 	(dir3 (if horiz 'down 'right))
-;; 	(dir4 (if horiz 'up 'left)))
-;;     ;body
-;;     ((let ((win1 (window-in-direction dir1))
-;; 	   (win2 (window-in-direction dir2)))
-;;        ;body
-;;        (
-;;	
-;; 	)))
-;;     )
-;;   )
-
 (defun golden-cycle ()
+  "Rotates the height of the current window through (phi, 1 - phi) as
+  a percentage of the frame height"
   (interactive)
-  (setq gold1 0.618)
-  (setq gold2 (- 1 gold1))
-  (setq cur-dim (window-height))
-  (setq top-dim (floor (* (frame-height) gold1)))
-  (setq mid-dim (floor (* (frame-height) 0.5)))
-  (setq bot-dim (floor (* (frame-height) gold2)))
-  (if (= cur-dim bot-dim)
-      (set-window-dim mid-dim)
-      (if (= cur-dim mid-dim)
-	  (set-window-dim top-dim)
-	(if (= cur-dim top-dim)
-	    (set-window-dim bot-dim)
-	  (set-window-dim mid-dim)))))
+  (let*
+      ((gold-ratio 0.618)
+       (gold-ratios (list gold-ratio (- 1 gold-ratio)))
+       (gold-heights
+	(mapcar
+	 (lambda (rt) (floor (* rt (frame-height))))
+	 gold-ratios))
+       (dists
+	(mapcar
+	 (lambda (ht) (abs (- ht (window-height))))
+	 gold-heights))
+       (minimum (apply 'min dists))
+       (argmin (position minimum dists))
+       (ratio
+	(if (= minimum 0)
+	    (nth (mod (+ 1 argmin) (length gold-ratios)) gold-ratios)
+	  (nth argmin gold-ratios))))
+	(resize-to-fraction ratio)))
 
 (defun set-window-dim (dim &optional horiz)
   (interactive "P")
   (if horiz
       (progn
 	(setq dim-fun 'enlarge-window-horizontally)
-       (setq cur-dim (window-width)))
+	(setq cur-dim (window-width)))
     (progn
       (setq dim-fun 'enlarge-window)
       (setq cur-dim (window-height))))
-    (funcall dim-fun (- dim cur-dim)))
+  (funcall dim-fun (- dim cur-dim)))
 
-(defun resize-to-fraction (&optional frac horiz)
+(defun resize-to-fraction (&optional (frac 0.5) horiz)
   (interactive "P")
-  (if (equal frac nil)
-      (setq frac 0.5))
-  (if horiz
-      (progn
-	(setq dim (frame-width))
-	(setq cur-dim (window-width))
-	(setq dim-fun 'enlarge-window-horizontally))
-    (progn
-	(setq dim (frame-height))
-	(setq cur-dim (window-height))
-	(setq dim-fun 'enlarge-window)))
-  (setq target-dim (floor (* frac dim)))
-  (funcall dim-fun (- target-dim cur-dim)))
+  (multiple-value-bind (dim cur-dim dim-fun)
+      (if horiz
+	  ((frame-width)
+	   (window-width)
+	   'enlarge-window-horizontally)
+	((frame-height)
+	   (window-height)
+	   'enlarge-window))
+    (let ((target-dim (floor (* frac dim))))
+      (funcall dim-fun (- target-dim cur-dim)))))
