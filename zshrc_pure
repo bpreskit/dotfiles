@@ -3,8 +3,8 @@
 # Just a handful of commands that are only for when I'm on my work computer
 
 gvm pkgset use storreduce > /dev/null
--# Want to set up a few named directories to get into the git repos
--purity=~/purity
--storreduce=~/Development/storreduce/src/code.storreduce.com
--: ~purity ~storreduce
+# Want to set up a few named directories to get into the git repos
+purity=~/purity
+storreduce=~/Development/storreduce/src/code.storreduce.com
+: ~purity ~storreduce
 /usr/bin/ssh-add ~/.ssh/id_pure_root
