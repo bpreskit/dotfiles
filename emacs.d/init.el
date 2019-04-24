@@ -53,18 +53,11 @@
 
 (load-library "mycode.el")
 (load-library "keybindings.el")
-(require 'color-theme)
-(message "Loading color-themes from init.el")
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (message "tryna set the theme...")))
+(global-hl-line-mode)
 (add-hook 'after-init-hook
 	  (lambda () (if (display-graphic-p)
-			 '(progn
-			    (color-theme-deep-blue)
-			    (global-hl-line-mode))
-		       (color-theme-tty-dark))))
+			 (load-theme 'my-blue t)
+		       (load-theme tty-dark))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
 ;; Global modes
