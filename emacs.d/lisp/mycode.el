@@ -101,20 +101,26 @@
 ;;   (interactive)
 ;;   )
 
-(defun golden-cycle ()
+(defun golden-cycle (&optional horiz)
   "Rotates the height of the current window through (phi, 1 - phi) as
   a percentage of the frame height"
-  (interactive)
+  (interactive "P")
   (let*
-      ((gold-ratio 0.618)
+      ((frame-dim (if horiz
+                      (frame-width)
+                    (frame-height)))
+       (window-dim (if horiz
+                       (window-width)
+                     (window-height)))
+       (gold-ratio 0.618)
        (gold-ratios (list gold-ratio (- 1 gold-ratio)))
        (gold-heights
 	(mapcar
-	 (lambda (rt) (floor (* rt (frame-height))))
+	 (lambda (rt) (floor (* rt frame-dim)))
 	 gold-ratios))
        (dists
 	(mapcar
-	 (lambda (ht) (abs (- ht (window-height))))
+	 (lambda (ht) (abs (- ht window-dim)))
 	 gold-heights))
        (minimum (apply 'min dists))
        (argmin (position minimum dists))
@@ -122,7 +128,7 @@
 	(if (= minimum 0)
 	    (nth (mod (+ 1 argmin) (length gold-ratios)) gold-ratios)
 	  (nth argmin gold-ratios))))
-	(resize-to-fraction ratio)))
+	(resize-to-fraction ratio horiz)))
 
 (defun set-window-dim (dim &optional horiz)
   (interactive "P")
@@ -135,16 +141,18 @@
       (setq cur-dim (window-height))))
   (funcall dim-fun (- dim cur-dim)))
 
-(defun resize-to-fraction (&optional (frac 0.5) horiz)
+(defun resize-to-fraction (&optional frac horiz)
   (interactive "P")
+  (if (null frac)
+      (setq frac 0.5))
   (multiple-value-bind (dim cur-dim dim-fun)
       (if horiz
-	  ((frame-width)
-	   (window-width)
-	   'enlarge-window-horizontally)
-	((frame-height)
-	   (window-height)
-	   'enlarge-window))
+	  (list (frame-width)
+                (window-width)
+                'enlarge-window-horizontally)
+	(list (frame-height)
+              (window-height)
+              'enlarge-window))
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
 
