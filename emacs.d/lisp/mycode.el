@@ -148,7 +148,7 @@
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
 
-(let (win-conf)
+(let (win-conf linum-mode-state)
   (defun delete-other-windows-or-restore ()
     "Basically does (delete-other-windows), but saves your window config.  If you run it while there's only one window open, it restores from the saved config."
     (interactive)
@@ -157,11 +157,14 @@
       (catch 'done
 	(if (and one-window saved-conf)
 	    (progn
+              (linum-mode linum-mode-state)
 	      (set-window-configuration win-conf)
 	      (setq win-conf nil)
 	      (throw 'done nil)))
 	(if (not one-window)
 	    (progn
 	      (setq win-conf (current-window-configuration))
+              (setq linum-mode-state (if linum-mode t -1))
 	      (delete-other-windows)
+              (linum-mode -1)
 	      (throw 'done nil)))))))
