@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defun copy-line-to-end (&optional arg)
   "Copies from point to the end of the current line"
   (interactive "P")
@@ -146,7 +148,7 @@
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
 
-(lexical-let (win-conf)
+(let (win-conf)
   (defun delete-other-windows-or-restore ()
     "Basically does (delete-other-windows), but saves your window config.  If you run it while there's only one window open, it restores from the saved config."
     (interactive)
