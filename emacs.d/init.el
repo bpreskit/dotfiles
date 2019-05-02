@@ -104,14 +104,14 @@
 (define-key jedi-mode-map (kbd "C-c ,") nil)
 (define-key jedi-mode-map (kbd "C-c ?") nil)
 (define-key jedi-mode-map (kbd "C-c C-d") 'jedi:show-doc)
+(define-key jedi-mode-map (kbd "C-M-i") 'jedi:complete)
 (setq jedi:complete-on-dot t)
 (add-hook 'python-mode-hook
 	  (lambda () (progn
 		       (jedi:setup)
-		       (jedi-mode)
-		       (define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)
-		       (define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
-		       (define-key python-mode-map (kbd "C-M-i") 'jedi:complete))))
+		       (jedi-mode))))
+(define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)
+(define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
 
 ;; Org mode stuff.
 (require 'org)
