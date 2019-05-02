@@ -97,6 +97,7 @@
 
 ;; Set up python autocomplete
 (require 'jedi)
+(require 'python)
 (define-key jedi-mode-map (kbd "M-.") 'jedi:goto-definition)
 (define-key jedi-mode-map (kbd "C-x 4 M-.") (lambda () (interactive) (jedi:goto-definition t)))
 (define-key jedi-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
