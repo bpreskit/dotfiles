@@ -15,7 +15,7 @@ alias gloh='git log --oneline --decorate | head'
 # alias grbr5='git rebase release-5.0.0'
 # alias gcor5='git checkout release-5.0.0'
 # alias gcofs='git checkout feature/storreduce'
-alias gcom
+alias gcom='git checkout master'
 
 function gbdrm {
     local branch=$1
