@@ -95,6 +95,7 @@
 ;; openwith the appropriate utilities
 (require 'openwith)
 (openwith-mode)
+(setq-default indent-tabs-mode nil)
 
 ;; Some random hooks.
 (linum-mode nil)
