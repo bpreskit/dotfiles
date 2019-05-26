@@ -21,6 +21,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(org-emphasis-alist
+   (quote
+    (("*" bold)
+     ("_" italic)
+     ("/" underline verbatim)
+     ("=" org-verbatim verbatim)
+     ("`" org-code verbatim)
+     ("~"
+      (:strike-through t)))))
  '(package-selected-packages
    (quote
     (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case))))
