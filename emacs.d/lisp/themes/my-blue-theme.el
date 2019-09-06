@@ -21,12 +21,12 @@
 
 ;;; Code:
 
-(deftheme deeper-blue
+(deftheme my-blue
   "Face colors using a deep blue background.")
 
 (let ((class '((class color) (min-colors 89))))
   (custom-theme-set-faces
-   'deeper-blue
+   'my-blue
    `(Info-title-1-face ((,class (:family "helv" :weight bold :height 1.728))))
    `(Info-title-2-face ((,class (:family "helv" :weight bold :height 1.44))))
    `(Info-title-3-face ((,class (:family "helv" :weight bold :height 1.2))))
@@ -109,10 +109,10 @@
    `(warning ((,class (:foreground "Yellow"))))
    `(hl-line-face ((,class (:background "#202434"))))))
 
-(provide-theme 'deeper-blue)
+(provide-theme 'my-blue)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
 
-;;; deeper-blue-theme.el ends here
+;;; my-blue-theme.el ends here
