@@ -17,7 +17,7 @@
   file:
     path: /usr/local/share/py3.5-venv
     state: directory
-    owner: root
+    owner: "{{ ansible_user_id }}"
   
 - name: Python | Create virtual environment
   shell: python3.5 -m venv /usr/local/share/py3.5-venv

@@ -1,7 +1,7 @@
 ---
 pythons:
   - python3
-  - "{{ 'python3.8' if at_home else 'python3.5' }}"
+  - "{{ 'python3.8' if at_home|bool else 'python3.5' }}"
 
 _always_pips:
   - pytest
@@ -9,4 +9,4 @@ _home_pips:
   - numpy
   - scipy
   - pandas
-pips: "{{ _always_pips if not at_home else _always_pips|union(_home_pips) }}"
+pips: "{{ _always_pips if not at_home|bool else _always_pips|union(_home_pips) }}"

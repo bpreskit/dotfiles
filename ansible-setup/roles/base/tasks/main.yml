@@ -52,7 +52,7 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
-    name: "{{ 'emacs26' if at_home else 'emacs25' }}"
+    name: "{{ 'emacs26' if at_home|bool else 'emacs25' }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Add latest melpa key

@@ -7,12 +7,12 @@ _all_copy:
   - emacs.d/
 _dev_copy:
   - zshrc_pure
-copy_items: "{{ _all_copy | union(_dev_copy if on_pure_vm else []) }}"
+copy_items: "{{ _all_copy | union(_dev_copy if on_pure_vm|bool else []) }}"
 
 git_config_items:
   - name: user.name
     value: "Brian Preskitt"
   - name: user.email
-    value: "{{ 'bppresk@outlook.com' if at_home else 'bpreskitt@purestorage.com' }}"
+    value: "{{ 'bppresk@outlook.com' if at_home|bool else 'bpreskitt@purestorage.com' }}"
   - name: core.excludesfile
     value: "{{ ansible_user_dir }}/.gitignore_global"
