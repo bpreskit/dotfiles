@@ -58,7 +58,7 @@ ENABLE_CORRECTION="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Options for `less`
-LESS="-i"
+LESS="$LESS -i -R"
 export LESS
 
 # Which plugins would you like to load?
