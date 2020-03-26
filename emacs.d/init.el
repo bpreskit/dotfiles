@@ -9,8 +9,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "Bits" :slant normal :weight normal :height 105 :width normal))))
- '(magit-hash ((t (:foreground "yellow"))))
- '(italic ((t (:slant italic)))))
+ '(italic ((t (:slant italic))))
+ '(magit-hash ((t (:foreground "yellow")))))
 
 (let ((default-directory "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
@@ -32,16 +32,19 @@
       (:strike-through t)))))
  '(package-selected-packages
    (quote
-    (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case))))
+    (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+ '(projectile-completion-system (quote ivy)))
 
 ;; Setup package archives.  Install anything that is missing.
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("elpa" . "http://elpa.gnu.org/packages/") t)
 (if (not
      (string= (package-install-selected-packages) "All your packages are already installed"))
     (progn (package-refresh-contents)
@@ -53,11 +56,20 @@
 
 (load-library "mycode.el")
 (load-library "keybindings.el")
-(global-hl-line-mode)
+
+(defun after-init-graphical ()
+  (progn
+    (load-theme 'my-blue t)
+    (global-hl-line-mode)))
+
+(defun after-init-terminal ()
+  (progn
+    (load-theme 'manoj-dark t)))
+
 (add-hook 'after-init-hook
 	  (lambda () (if (display-graphic-p)
-			 (load-theme 'my-blue t)
-		       (load-theme tty-dark))))
+			 (after-init-graphical)
+		       (after-init-terminal))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
 ;; Global modes
@@ -115,6 +127,10 @@
 		       (jedi-mode))))
 (define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)
 (define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
+
+;; ediff setup
+(add-hook 'ediff-before-setup-hook 'save-ediff-before-windows)
+(add-hook 'ediff-quit-hook 'restore-ediff-before-windows)
 
 ;; Org mode stuff.
 (require 'org)

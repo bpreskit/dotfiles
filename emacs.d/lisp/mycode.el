@@ -176,3 +176,11 @@
 	      (delete-other-windows)
               (linum-mode -1)
 	      (throw 'done nil)))))))
+
+(defvar ediff-before-windows)
+
+(defun save-ediff-before-windows ()
+  (setq ediff-before-windows (current-window-configuration)))
+
+(defun restore-ediff-before-windows ()
+  (set-window-configuration ediff-before-windows))
