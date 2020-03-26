@@ -58,7 +58,12 @@ ENABLE_CORRECTION="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Options for `less`
-LESS="$LESS -i -R"
+less_options=("i" "R" "X" "F")
+for flag in "${less_options[@]}"; do
+  if ! grep -q "${flag}" <<<"${LESS}"; then
+      LESS="${LESS} -${flag}"
+  fi
+done
 export LESS
 
 # Which plugins would you like to load?
