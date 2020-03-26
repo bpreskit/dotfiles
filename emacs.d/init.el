@@ -32,19 +32,17 @@
       (:strike-through t)))))
  '(package-selected-packages
    (quote
-    (golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
- '(projectile-completion-system (quote ivy)))
+    (load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+ '(projectile-completion-system (quote ivy))
+ '(shell-prompt-pattern "^[^#$%>
+]*[#$%>⇒] *"))
 
 ;; Setup package archives.  Install anything that is missing.
 (require 'package)
-;; (add-to-list 'package-archives
-;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives
-	     '("elpa" . "http://elpa.gnu.org/packages/") t)
 (if (not
      (string= (package-install-selected-packages) "All your packages are already installed"))
     (progn (package-refresh-contents)
@@ -53,9 +51,9 @@
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . ansible))
 
 (load-library "mycode.el")
-(load-library "keybindings.el")
 
 (defun after-init-graphical ()
   (progn
@@ -184,11 +182,22 @@
 		       (company-mode)
 		       (flycheck-mode))))
 
+;; Initialize ivy mode
 (require 'ivy)
 (ivy-mode)
+
+;; ansible
+(require 'ansible)
+(require 'ansible-doc)
+(define-key ansible-key-map (kbd "C-h d") 'ansible-doc)
+(define-key ansible-doc-module-mode-map (kbd "m") 'ansible-doc)
+(define-key ansible-doc-module-mode-map (kbd "d") 'ansible-doc)
+
+;; projectile
+(require 'projectile)
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-(load "keybindings")
+(load-library "keybindings.el")
