@@ -1,0 +1,4 @@
+---
+on_pure_vm: ansible_domain == "dev.purestorage.com" and ansible_product_name == "KVM"
+at_home: ansible_distribution == 'Linux Mint'
+

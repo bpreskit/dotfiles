@@ -1,0 +1,59 @@
+---
+- name: Install home packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ home_debs }}"
+  when: at_home|bool
+
+- name: Install universal packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ always_debs }}"
+
+- name: Install oh my zsh
+  command: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  args:
+    creates: "{{ ansible_user_dir }}/.oh-my-zsh"  
+  
+- name: Set default shell as zsh
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh    
+
+- name: Add special repos
+  become: yes
+  apt_repository:
+    repo: "{{ item }}"
+  with_items: "{{ special_repos }}"
+  when: at_home|bool
+
+- name: Add emacs repo
+  become: yes
+  vars:
+    release: "{{ 'bionic' if ansible_distribution_release == 'tricia' else ansible_distribution_release }}"
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu {{ release }} main"
+    filename: kelleyk_emacs
+
+- name: Add special keys
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+  with_items: "{{ apt_keys }}"
+  when: at_home|bool
+
+- name: Install emacs
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ 'emacs26' if at_home else 'emacs25' }}"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Add latest melpa key
+  shell: gpg --keyserver keys.gnupg.net --homedir ~/.emacs.d/elpa/gnupg --recv-keys 066DAFCB81E42C40

@@ -1,0 +1,18 @@
+---
+_all_copy:
+  - zshrc
+  - zsh_aliases
+  - gitignore_global
+  - tmux.conf
+  - emacs.d/
+_dev_copy:
+  - zshrc_pure
+copy_items: "{{ _all_copy | union(_dev_copy if on_pure_vm else []) }}"
+
+git_config_items:
+  - name: user.name
+    value: "Brian Preskitt"
+  - name: user.email
+    value: "{{ 'bppresk@outlook.com' if at_home else 'bpreskitt@purestorage.com' }}"
+  - name: core.excludesfile
+    value: "{{ ansible_user_dir }}/.gitignore_global"

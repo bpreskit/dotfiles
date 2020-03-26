@@ -1,0 +1,21 @@
+#
+#
+# Ignores for emacs.
+
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+TAGS
+
+# projectiles files
+.projectile
+
+#
+#
+# Other ignores?
+brian-special
