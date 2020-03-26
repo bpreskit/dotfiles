@@ -6,5 +6,6 @@ gvm pkgset use storreduce > /dev/null
 # Want to set up a few named directories to get into the git repos
 purity=~/purity
 storreduce=~/Development/storreduce/src/code.storreduce.com
-: ~purity ~storreduce
+ir=~/ir-bpreskitt
+: ~purity ~storreduce ~ir
 /usr/bin/ssh-add ~/.ssh/id_pure_root
