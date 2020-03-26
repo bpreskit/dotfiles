@@ -19,8 +19,10 @@ home_debs:
   - zoom
 always_debs:
   - git
+  - gnupg
   - jq
   - openssh-server
+  - tmux
 
 special_repos:
   - deb http://repository.spotify.com stable non-free
@@ -31,4 +33,3 @@ apt_keys:
   - https://download.spotify.com/debian/pubkey.gpg
   - https://syncthing.net/release-key.txt
   - https://updates.signal.org/desktop/apt/keys.asc
-
