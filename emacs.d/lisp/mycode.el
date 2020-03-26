@@ -184,3 +184,10 @@
 
 (defun restore-ediff-before-windows ()
   (set-window-configuration ediff-before-windows))
+
+(defun pwd (&optional kill-pwd)
+  "Print current directory.  With optional prefix argument, yank to kill ring as well."
+  (interactive "P")
+  (message "%s" default-directory)
+  (if kill-pwd
+      (kill-new default-directory)))
