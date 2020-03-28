@@ -16,3 +16,5 @@ git_config_items:
     value: "{{ 'bppresk@outlook.com' if at_home|bool else 'bpreskitt@purestorage.com' }}"
   - name: core.excludesfile
     value: "{{ ansible_user_dir }}/.gitignore_global"
+  - name: core.editor
+    value: "emacs -nw"
