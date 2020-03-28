@@ -8,7 +8,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "Bits" :slant normal :weight normal :height 105 :width normal))))
+ '(default ((t (:inherit nil :stipple nil :background "#181a26" :foreground "gray80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 128 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(italic ((t (:slant italic))))
  '(magit-hash ((t (:foreground "yellow")))))
 
@@ -34,9 +34,9 @@
    (quote
     (markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
+ '(sh-basic-offset 2)
  '(shell-prompt-pattern "^[^#$%>
-]*[#$%>⇒] *")
- '(sh-basic-offset 2))
+]*[#$%>⇒] *"))
 
 ;; Setup package archives.  Install anything that is missing.
 (require 'package)

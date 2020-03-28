@@ -3,6 +3,7 @@
   copy:
     src: "../{{ item }}"
     dest: "{{ ansible_user_dir }}/.{{ item }}"
+    backup: true
   with_items: "{{ copy_items }}"
 
 - name: Configure git a bit
