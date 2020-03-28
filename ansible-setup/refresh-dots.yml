@@ -1,0 +1,7 @@
+---
+- name: Unpack dots
+  hosts: all
+  become_method: sudo
+  gather_facts: yes
+  roles:
+    - role: unpack_dots
