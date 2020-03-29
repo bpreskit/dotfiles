@@ -1,4 +1,8 @@
 ---
+- name: Gather package facts
+  package_facts:
+    manager: auto
+
 - name: Install home packages
   become: yes
   apt:
@@ -14,6 +18,26 @@
     cache_valid_time: 3600
     name: "{{ always_debs }}"
 
+- name: Download downloaded packages
+  get_url:
+    url: "{{ item.url }}"
+    dest: "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+  when: at_home|bool and not item.name in ansible_facts.packages
+
+- name: Install downloaded packages
+  become: yes
+  command: apt install -y --fix-broken "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+  when: at_home|bool and not item.name in ansible_facts.packages
+
+- name: Remove downloaded packages
+  when: at_home|bool
+  file:
+    state: absent
+    path: "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+
 - name: Install oh my zsh
   command: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
@@ -25,6 +49,13 @@
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh    
 
+- name: Add special keys
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+  with_items: "{{ apt_keys }}"
+  when: at_home|bool
+
 - name: Add special repos
   become: yes
   apt_repository:
@@ -35,17 +66,10 @@
 - name: Add emacs repo
   become: yes
   vars:
-    release: "{{ 'bionic' if ansible_distribution_release == 'tricia' else ansible_distribution_release }}"
+    release: "{{ 'bionic' if ansible_distribution == 'Linux Mint' else ansible_distribution_release }}"
   apt_repository:
     repo: "deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu {{ release }} main"
     filename: kelleyk_emacs
-
-- name: Add special keys
-  become: yes
-  apt_key:
-    url: "{{ item }}"
-  with_items: "{{ apt_keys }}"
-  when: at_home|bool
 
 - name: Install emacs
   become: yes
