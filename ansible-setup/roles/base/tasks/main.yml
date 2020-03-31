@@ -52,16 +52,24 @@
 - name: Add special keys
   become: yes
   apt_key:
-    url: "{{ item }}"
-  with_items: "{{ apt_keys }}"
+    url: "{{ item.key }}"
+  with_items: "{{ special_packages }}"
   when: at_home|bool
 
 - name: Add special repos
   become: yes
   apt_repository:
-    repo: "{{ item }}"
-  with_items: "{{ special_repos }}"
+    repo: "{{ item.repo }}"
+  with_items: "{{ special_packages }}"
   when: at_home|bool
+
+- name: Install special-repo packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ item.name }}"
+  with_items: "{{ special_packages }}"
 
 - name: Add emacs repo
   become: yes

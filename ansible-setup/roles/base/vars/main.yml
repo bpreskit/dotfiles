@@ -32,12 +32,16 @@ downloaded_debs:
   - name: zoom
     url: "https://zoom.us/client/latest/zoom_amd64.deb"
 
-special_repos:
-  - deb http://repository.spotify.com stable non-free
-  - deb https://apt.syncthing.net/ syncthing stable
-  - deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
-
-apt_keys:
-  - https://download.spotify.com/debian/pubkey.gpg
-  - https://syncthing.net/release-key.txt
-  - https://updates.signal.org/desktop/apt/keys.asc
+special_packages:
+  - syncthing:
+    name: syncthing
+    repo: deb https://apt.syncthing.net/ syncthing stable
+    key: https://syncthing.net/release-key.txt
+  - spotify:
+    name: spotify-client
+    repo: deb http://repository.spotify.com stable non-free
+    key: https://download.spotify.com/debian/pubkey.gpg
+  - signal:
+    name: signal-desktop
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    key: https://updates.signal.org/desktop/apt/keys.asc
