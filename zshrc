@@ -80,8 +80,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # PATH changes
-export PATH=$PATH:$HOME/work/phtest/phtest
-export PATH=$PATH:/usr/lib/llvm-3.8/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

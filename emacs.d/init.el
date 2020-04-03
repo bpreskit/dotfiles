@@ -32,7 +32,7 @@
       (:strike-through t)))))
  '(package-selected-packages
    (quote
-    (load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(shell-prompt-pattern "^[^#$%>
 ]*[#$%>⇒] *")
@@ -80,6 +80,7 @@
 (setq sp-autoescape-string-quote nil)
 (sp-pair "\"" nil :actions :rem)
 (sp-pair "'" nil :actions :rem)
+(sp-pair "`" nil :actions :rem)
 (sp-pair "\\\"" nil :actions :rem)
 
 ;; Auto-complete
