@@ -191,3 +191,8 @@
   (message "%s" default-directory)
   (if kill-pwd
       (kill-new default-directory)))
+
+(defun ansi-python ()
+  "Runs ansi-term but opens up a python3 shell instead."
+  (interactive)
+  (ansi-term "/usr/bin/python3" "ansi-python"))
