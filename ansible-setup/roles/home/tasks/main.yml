@@ -1,0 +1,26 @@
+---
+- name: Disable and stop systemd-resolved
+  become: yes
+  systemd:
+    name: systemd-resolved
+    enabled: false
+    state: stopped
+    
+- name: Enable and start dnsmasq
+  become: yes
+  systemd:
+    name: dnsmasq
+    enabled: true
+    state: started
+
+- name: Add DNS servers to dnsmasq
+  become: yes
+  lineinfile:
+    path: /etc/dnsmasq.conf
+    create: true
+    state: present
+    line: server="{{ item }}"
+  with_items:
+    - 1.1.1.1
+    - 1.0.0.1
+  

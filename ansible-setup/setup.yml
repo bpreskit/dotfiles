@@ -7,6 +7,8 @@
     - role: base
     - role: python
     - role: unpack_dots
+    - role: home
+      when: at_home|bool
     - role: get_code
       when: on_pure_vm
     

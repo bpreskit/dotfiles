@@ -1,8 +1,7 @@
 ---
 home_debs:
   - adb
-  - discord
-  - encryptr
+  - dnsmasq
   - ffmpeg
   - firefox
   - gimp
