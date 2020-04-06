@@ -5,7 +5,7 @@
     name: systemd-resolved
     enabled: false
     state: stopped
-    
+
 - name: Enable and start dnsmasq
   become: yes
   systemd:
@@ -23,4 +23,3 @@
   with_items:
     - 1.1.1.1
     - 1.0.0.1
-  
