@@ -101,7 +101,7 @@ fi
 # your SSH connections.
 SSH_ENV="$HOME/.ssh/environment"
 
-if [[ -f "~/.ssh/brian_home" ]]; then
+if [[ -f ~/.ssh/brian_home ]]; then
   ssh-add ~/.ssh/brian_home
 fi
 
