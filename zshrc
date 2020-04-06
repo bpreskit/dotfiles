@@ -101,10 +101,6 @@ fi
 # your SSH connections.
 SSH_ENV="$HOME/.ssh/environment"
 
-if [[ -f ~/.ssh/brian_home ]]; then
-  ssh-add ~/.ssh/brian_home
-fi
-
 function start_agent {
     echo "Initialising new SSH agent..."
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
@@ -123,6 +119,11 @@ then
 }
 else
     start_agent;
+fi
+
+
+if [[ -f ~/.ssh/brian_home ]]; then
+  ssh-add ~/.ssh/brian_home
 fi
 
 # Some setting
