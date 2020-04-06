@@ -108,9 +108,12 @@ function start_agent {
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
     /usr/bin/ssh-add;
+    if [[ -f ~/.ssh/brian_home ]]; then
+      ssh-add ~/.ssh/brian_home
+    fi
 }
 
-if [ -f "${SSH_ENV}" ]
+if [ -f "${SSH_ENV}" ] && [[ ! $TERM == "dumb" ]]
 then
     . "${SSH_ENV}" > /dev/null
     #ps ${SSH_AGENT_PID} doesn't work under cywgin
@@ -119,11 +122,6 @@ then
 }
 else
     start_agent;
-fi
-
-
-if [[ -f ~/.ssh/brian_home ]]; then
-  ssh-add ~/.ssh/brian_home
 fi
 
 # Some setting
@@ -138,4 +136,14 @@ fi
 # Username on VM at work is "ir"
 if [[ $(whoami) = "ir" ]]; then
     source ~/.zshrc_pure
+fi
+
+# Inside emacs, take autocorrection out
+# (otherwise, this can trip tramp)
+if [[ $TERM == "dumb" ]]; then
+  unset RPROMPT
+  unset RPS1
+  PS1="$ "
+  unsetopt correct_all
+  unsetopt rcs
 fi
