@@ -75,7 +75,7 @@
 (define-key ansible-doc-module-mode-map (kbd "m") 'ansible-doc)
 (define-key ansible-doc-module-mode-map (kbd "d") 'ansible-doc)
 
-;; (require 'octave)
+(require 'octave)
 (define-key inferior-octave-mode-map (kbd "C-M-n") 'forward-sexp)
 (define-key inferior-octave-mode-map (kbd "C-M-p") 'backward-sexp)
 

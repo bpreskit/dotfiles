@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t -*-
+(require 'cl)
 
 (defun copy-line-to-end (&optional arg)
   "Copies from point to the end of the current line"
@@ -45,7 +45,7 @@
     (let ((start-pos (point)))
       (beginning-of-visual-line)
       (if (= start-pos (point))
-	  (move-beginning-of-line nil)
+    (move-beginning-of-line nil)
 	nil))))
 
 (defun end-of-line-dwim ()
@@ -126,8 +126,8 @@
        (argmin (position minimum dists))
        (ratio
 	(if (= minimum 0)
-	    (nth (mod (+ 1 argmin) (length gold-ratios)) gold-ratios)
-	  (nth argmin gold-ratios))))
+      (nth (mod (+ 1 argmin) (length gold-ratios)) gold-ratios)
+    (nth argmin gold-ratios))))
 	(resize-to-fraction ratio horiz)))
 
 (defun set-window-dim (dim &optional horiz)
@@ -147,7 +147,7 @@
       (setq frac 0.5))
   (multiple-value-bind (dim cur-dim dim-fun)
       (if horiz
-	  (list (frame-width)
+    (list (frame-width)
                 (window-width)
                 'enlarge-window-horizontally)
 	(list (frame-height)
@@ -156,26 +156,26 @@
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
 
-(let (win-conf linum-mode-state)
+(lexical-let (win-conf linum-mode-state)
   (defun delete-other-windows-or-restore ()
     "Basically does (delete-other-windows), but saves your window config.  If you run it while there's only one window open, it restores from the saved config."
     (interactive)
     (let ((one-window (= 1 (count-windows)))
-	  (saved-conf (not (null win-conf))))
+    (saved-conf (not (null win-conf))))
       (catch 'done
 	(if (and one-window saved-conf)
-	    (progn
+      (progn
               (linum-mode linum-mode-state)
-	      (set-window-configuration win-conf)
-	      (setq win-conf nil)
-	      (throw 'done nil)))
+        (set-window-configuration win-conf)
+        (setq win-conf nil)
+        (throw 'done nil)))
 	(if (not one-window)
-	    (progn
-	      (setq win-conf (current-window-configuration))
+      (progn
+        (setq win-conf (current-window-configuration))
               (setq linum-mode-state (if linum-mode t -1))
-	      (delete-other-windows)
+        (delete-other-windows)
               (linum-mode -1)
-	      (throw 'done nil)))))))
+        (throw 'done nil)))))))
 
 (defvar ediff-before-windows)
 
@@ -210,5 +210,5 @@ get opened with `browse-url`."
 															 :follow follow))))
 ;; Make man: and slack:// links parseable in org-mode.
 (setq prefix-list '("man" "slack"))
-(loop for prefix in prefix-list
+(cl-loop for prefix in prefix-list
 			do (add-prefix-to-links prefix))
