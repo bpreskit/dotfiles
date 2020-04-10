@@ -21,6 +21,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(indent-tabs-mode nil)
  '(org-emphasis-alist
    (quote
     (("*" bold)
@@ -44,13 +45,13 @@
 ;; Setup package archives.  Install anything that is missing.
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+       '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+       '("melpa" . "http://melpa.org/packages/") t)
 (if (not
      (string= (package-install-selected-packages) "All your packages are already installed"))
     (progn (package-refresh-contents)
-	   (package-install-selected-packages)))
+     (package-install-selected-packages)))
 
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
@@ -69,9 +70,9 @@
     (load-theme 'manoj-dark t)))
 
 (add-hook 'after-init-hook
-	  (lambda () (if (display-graphic-p)
-			 (after-init-graphical)
-		       (after-init-terminal))))
+		(lambda () (if (display-graphic-p)
+       (after-init-graphical)
+           (after-init-terminal))))
 (remove-hook 'after-init-hook 'color-theme-backup-original-values)
 
 ;; Global modes
@@ -92,44 +93,29 @@
 ;; Monitor whitespace problems
 (require 'whitespace)
 (setq whitespace-style '(face trailing empty space-after-tab space-before-tab))
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; Some random hooks.
 (add-hook 'find-file-hook (lambda () (linum-mode 1)))
 (add-hook 'octave-mode-hook
-	  (lambda () (progn (setq octave-comment-char ?%)
-			    (setq comment-start "% ")
-			    (setq comment-add 0))))
-(add-hook 'inferior-octave-mode-hook
-	  (lambda ()
-	    (progn
-	      (define-key inferior-octave-mode-map (kbd "C-M-n") 'forward-sexp)
-	      (define-key inferior-octave-mode-map
-		(kbd "C-M-p") 'backward-sexp))))
+		(lambda () (progn (setq octave-comment-char ?%)
+					(setq comment-start "% ")
+					(setq comment-add 0))))
 
 (setq hide-ifdef-lines t)
 (setq hide-ifdef-initially t)
 (add-hook 'shell-mode-hook
-	  (lambda () (setq comint-process-echoes t)))
+		(lambda () (setq comint-process-echoes t)))
 (remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
 ;; Set up python autocomplete
 (require 'jedi)
 (require 'python)
-(define-key jedi-mode-map (kbd "M-.") 'jedi:goto-definition)
-(define-key jedi-mode-map (kbd "C-x 4 M-.") (lambda () (interactive) (jedi:goto-definition t)))
-(define-key jedi-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
-(define-key jedi-mode-map (kbd "C-c .") nil)
-(define-key jedi-mode-map (kbd "C-c ,") nil)
-(define-key jedi-mode-map (kbd "C-c ?") nil)
-(define-key jedi-mode-map (kbd "C-c C-d") 'jedi:show-doc)
-(define-key jedi-mode-map (kbd "C-M-i") 'jedi:complete)
 (setq jedi:complete-on-dot t)
 (add-hook 'python-mode-hook
-	  (lambda () (progn
-		       (jedi:setup)
-		       (jedi-mode))))
-(define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)
-(define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
+		(lambda () (progn
+           (jedi:setup)
+           (jedi-mode))))
 
 ;; ediff setup
 (add-hook 'ediff-before-setup-hook 'save-ediff-before-windows)
@@ -138,14 +124,6 @@
 ;; Org mode stuff.
 (require 'org)
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
-(define-key org-mode-map (kbd "M-j") 'org-meta-return)
-(define-key org-mode-map (kbd "M-J") 'org-insert-todo-heading)
-(define-key org-mode-map (kbd "C-c a") 'org-agenda)
-(define-key org-mode-map (kbd "C-M-u") 'org-up-element)
-(define-key org-mode-map (kbd "C-M-d") 'org-down-element)
-(define-key org-mode-map (kbd "M-d") 'org-table-kill-row-or-word)
-(define-key org-mode-map (kbd "M-n") 'org-next-item)
-(define-key org-mode-map (kbd "M-p") 'org-previous-item)
 
 ;;;; JIRA
 (setq jiralib-url "https://jira.purestorage.com/")
@@ -168,25 +146,21 @@
 (add-to-list 'exec-path (getenv "GOPATH"))
 (add-hook 'completion-at-point-functions 'go-complete-at-point)
 (add-hook 'go-mode-hook
-	  (lambda () (progn
-		       (auto-complete-mode))))
-(define-key go-mode-map (kbd "M-.") 'godef-jump)
-(define-key go-mode-map (kbd "C-x 4 M-.") '(lambda () (interactive) (godef-jump 'point t)))
-(define-key go-mode-map (kbd "C-h d") 'godoc)
+		(lambda () (progn
+           (auto-complete-mode))))
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook #'gofmt-before-save)
 (add-hook 'before-save-hook 'executable-make-buffer-file-executable-if-script-p)
-(define-key go-playground-mode-map (kbd "C-c RET") 'go-playground-exec)
 
 ;; Set up C++ stuff
 (add-hook 'c-mode-hook
-	  (lambda () (progn
-		       (company-mode)
-		       (flycheck-mode))))
+		(lambda () (progn
+           (company-mode)
+           (flycheck-mode))))
 (add-hook 'c++-mode-hook
-	  (lambda () (progn
-		       (company-mode)
-		       (flycheck-mode))))
+		(lambda () (progn
+           (company-mode)
+           (flycheck-mode))))
 
 ;; Initialize ivy mode
 (require 'ivy)
@@ -195,9 +169,6 @@
 ;; ansible
 (require 'ansible)
 (require 'ansible-doc)
-(define-key ansible-key-map (kbd "C-h d") 'ansible-doc)
-(define-key ansible-doc-module-mode-map (kbd "m") 'ansible-doc)
-(define-key ansible-doc-module-mode-map (kbd "d") 'ansible-doc)
 
 ;; projectile
 (require 'projectile)
