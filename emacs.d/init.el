@@ -35,9 +35,11 @@
     (markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(sh-basic-offset 2)
- '(tab-width 2)
  '(shell-prompt-pattern "^[^#$%>
-]*[#$%>⇒] *"))
+]*[#$%>⇒] *")
+ '(tab-width 2)
+ '(tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>
+]*#?[]#$%>⇒] *\\(\\[.*\\)*"))
 
 ;; Setup package archives.  Install anything that is missing.
 (require 'package)
