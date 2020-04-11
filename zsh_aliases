@@ -3,7 +3,8 @@ alias gs="git status"
 which gcm >/dev/null && unalias gcm
 alias gcm="git commit -m"
 which gl >/dev/null && unalias gl
-alias gl="git log"
+alias gl="git log --decorate"
+alias gmb="git merge-base"
 which gst >/dev/null && unalias gst
 which gsta >/dev/null && unalias gsta
 alias gst="git stash"
@@ -41,11 +42,11 @@ function gcog {
     elif [[ "$branch_lines" -gt 1 ]]; then
 	i=0
 	echo $branch | while read line; do
-	    echo "$i) $line"
-	    i=$(( $i + 1 ))
+      echo "$i) $line"
+      i=$(( $i + 1 ))
 	done
 	readint "Which branch? " 0 $branch_lines
-	n=$(( $? + 1 ))	
+	n=$(( $? + 1 ))
 	script="$n p"
 	branch=$(echo $branch | sed -n $script)
     fi
@@ -58,22 +59,22 @@ function gbc {
 
 function readint {
     if [[ $# -ne 3 ]]; then
-    	return
+      return
     fi
     if [[ ! $3 -ge $2 ]]; then
-    	return
+      return
     fi
 
     a=$2
     end_loop=""
     while [[ -z $end_loop ]]; do
-    	vared -p $1 -c a
-    	if [[ $a -ge $2 ]] && [[ $a -le $3 ]]; then
-    	    end_loop="end"
-	    return $a
-    	else
-	    echo "Should be between $2 and $3!"
-	    a=$2
-	fi	
+      vared -p $1 -c a
+      if [[ $a -ge $2 ]] && [[ $a -le $3 ]]; then
+          end_loop="end"
+      return $a
+      else
+      echo "Should be between $2 and $3!"
+      a=$2
+	fi
     done
 }
