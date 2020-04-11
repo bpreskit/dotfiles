@@ -34,7 +34,7 @@
 (global-set-key (kbd "M-%") 'query-replace-regexp)
 
 (require 'projectile)
-(define-key projectile-mode-map (kbd "C-c .") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
 
 (require 'jedi)
 (define-key jedi-mode-map (kbd "M-.") 'jedi:goto-definition)
