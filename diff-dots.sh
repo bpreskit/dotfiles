@@ -12,7 +12,7 @@ dotfiles=(
 )
 
 for src in "${!dotfiles[@]}"; do
-  diff_command="diff -s $src ${dotfiles[$src]}"
+  diff_command="diff -bs $src ${dotfiles[$src]}"
   echo $diff_command
   eval $diff_command
   echo "========================================================="
