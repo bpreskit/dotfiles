@@ -21,10 +21,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(fill-column 100)
  '(indent-tabs-mode nil)
+ '(org-default-notes-file "~/notes/captures.org")
+ '(org-directory "~/notes")
+ '(org-log-done (quote time))
+ '(org-log-into-drawer t)
+ '(org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
  '(package-selected-packages
    (quote
-    (markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(org-log-into-drawer t)
  '(projectile-completion-system (quote ivy))
  '(sh-basic-offset 2)
@@ -116,7 +122,11 @@
 
 ;; Org mode stuff.
 (require 'org)
+(require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;; load lisp/local-org.el if it exists.
+(load "local-org" t)
 
 ;;;; JIRA
 (setq jiralib-url "https://jira.purestorage.com/")
