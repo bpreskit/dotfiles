@@ -23,3 +23,11 @@
   with_items:
     - 1.1.1.1
     - 1.0.0.1
+
+- name: Use /etc/resolv.conf, rather than output of resolvconf
+  become: yes
+  lineinfile:
+    path: /etc/default/dnsmasq
+    regexp: '^#?IGNORE_RESOLVCONF='
+    state: present
+    line: 'IGNORE_RESOLVCONF=yes'
