@@ -20,6 +20,7 @@ always_debs:
   - jq
   - openssh-server
   - tmux
+  - w3m
 
 downloaded_debs:
   - name: discord

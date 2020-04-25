@@ -19,7 +19,7 @@
     path: /etc/dnsmasq.conf
     create: true
     state: present
-    line: server="{{ item }}"
+    line: server={{ item }}
   with_items:
     - 1.1.1.1
     - 1.0.0.1
@@ -31,3 +31,9 @@
     regexp: '^#?IGNORE_RESOLVCONF='
     state: present
     line: 'IGNORE_RESOLVCONF=yes'
+
+- name: Restart dnsmasq
+  become: yes
+  service:
+    name: dnsmasq
+    state: restarted

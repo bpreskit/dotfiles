@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Search results for '0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367'</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href='/assets/css/pks.min.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+ 
+ .uid { color: green; text-decoration: underline; }
+ .warn { color: red; font-weight: bold; }
+ 
+</style></head><body><h1>Search results for '0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367'</h1><pre>Type bits/keyID            cr. time   exp time   key expir
+</pre>
+
+
+<hr /><pre><strong>pub</strong> <a href="/pks/lookup?op=get&search=0x6125e2a8c77f2818fb7bd15b93c4a3fd7bb9c367">rsa4096/6125e2a8c77f2818fb7bd15b93c4a3fd7bb9c367</a> 2014-06-10T20:40:16Z
+	 Hash=<a href="/pks/lookup?op=hget&search=4b942e858190839367207187125737bf">4b942e858190839367207187125737bf</a>
+
+<strong>uid</strong> <span class="uid">Launchpad PPA for Ansible, Inc.</span>
+sig  sig  <a href="/pks/lookup?op=get&search=0x93c4a3fd7bb9c367">93c4a3fd7bb9c367</a> 2014-06-10T20:40:16Z ____________________ ____________________ <a href="/pks/lookup?op=vindex&search=0x93c4a3fd7bb9c367">[selfsig]</a>
+
+
+
+
+</pre>
+
+</body></html>
+
