@@ -30,6 +30,7 @@
 (global-set-key (kbd "C-c +") 'golden-cycle)
 (global-set-key (kbd "C-M-i") 'auto-complete)
 (global-set-key (kbd "C-x 1") 'delete-other-windows-or-restore)
+(global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "M-g r") 'vc-git-grep)
 (global-set-key (kbd "M-%") 'query-replace-regexp)
 
