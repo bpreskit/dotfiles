@@ -70,6 +70,7 @@ export LESS
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  my-emacs
 )
 
 source $ZSH/oh-my-zsh.sh
