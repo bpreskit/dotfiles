@@ -212,3 +212,11 @@ get opened with `browse-url`."
 (setq prefix-list '("man" "slack"))
 (cl-loop for prefix in prefix-list
 			do (add-prefix-to-links prefix))
+
+(defun toggle-dedicated-window ()
+  "Toggle whether this window is both dedicated to its buffer.  Uses `set-window-dedicated-p'."
+  (interactive)
+  (let ((window (selected-window))
+        (buffer (current-buffer)))
+    (let ((protected (window-dedicated-p window)))
+    (set-window-dedicated-p window (not protected)))))
