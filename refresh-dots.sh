@@ -51,7 +51,7 @@ repo_dir=$(git rev-parse --show-toplevel)
 
 if [[ -z "${no_ansible}" ]]; then
   pushd "${script_dir}/ansible-setup"
-  ansible-playbook "${ansible_args}" -i local-machine refresh-dots.yml
+  ansible-playbook ${ansible_args} -i local-machine refresh-dots.yml
   popd
 fi
 

@@ -16,4 +16,4 @@ git_config_items:
   - name: core.excludesfile
     value: "{{ ansible_user_dir }}/.gitignore_global"
   - name: core.editor
-    value: "emacsclient -a='emacs -nw'"
+    value: "emacsclient -a=\"emacs -nw\""
