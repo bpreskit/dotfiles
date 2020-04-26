@@ -9,6 +9,7 @@ dotfiles=(
   ["$SRC_DIR/emacs.d/init.el"]="$HOME/.emacs.d/init.el"
   ["$SRC_DIR/emacs.d/lisp/mycode.el"]="$HOME/.emacs.d/lisp/mycode.el"
   ["$SRC_DIR/emacs.d/lisp/keybindings.el"]="$HOME/.emacs.d/lisp/keybindings.el"
+  ["$SRC_DIR/emacs.d/lisp/local-org.el"]="$HOME/.emacs.d/lisp/local-org.el"
 )
 
 for src in "${!dotfiles[@]}"; do
