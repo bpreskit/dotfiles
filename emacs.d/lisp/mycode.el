@@ -197,22 +197,6 @@
   (interactive)
   (ansi-term "/usr/bin/python3" "ansi-python"))
 
-(require 'org)
-
-(defun add-prefix-to-links (prefix)
-	"Use org-link-set-parameters to make links prefixed by `prefix`
-get opened with `browse-url`."
-	(lexical-let ((prefix prefix))
-		(let
-				((follow
-					(lambda (path) (browse-url (concat prefix ":" path)))))
-			(org-link-set-parameters prefix
-															 :follow follow))))
-;; Make man: and slack:// links parseable in org-mode.
-(setq prefix-list '("man" "slack"))
-(cl-loop for prefix in prefix-list
-			do (add-prefix-to-links prefix))
-
 (defun toggle-dedicated-window ()
   "Toggle whether this window is both dedicated to its buffer.  Uses `set-window-dedicated-p'."
   (interactive)
