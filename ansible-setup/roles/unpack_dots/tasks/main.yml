@@ -1,4 +1,10 @@
 ---
+- name: Ensure appropriate directories exist
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items: "{{ dirs_to_create }}"
+
 - name: Copy contents of dotfiles to machine
   copy:
     src: "../{{ item }}"

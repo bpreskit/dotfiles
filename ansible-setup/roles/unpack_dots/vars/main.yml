@@ -9,6 +9,10 @@ _dev_copy:
   - zshrc_pure
 copy_items: "{{ _all_copy | union(_dev_copy if on_pure_vm|bool else []) }}"
 
+dirs_to_create:
+  - "{{ ansible_user_dir }}/.emacs.d/lisp/themes"
+  - "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/my-emacs"
+
 git_config_items:
   - name: user.name
     value: "Brian Preskitt"
