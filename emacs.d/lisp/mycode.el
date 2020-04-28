@@ -116,12 +116,12 @@
        (gold-ratios (list gold-ratio (- 1 gold-ratio)))
        (gold-heights
 	(mapcar
-	 (lambda (rt) (floor (* rt frame-dim)))
-	 gold-ratios))
+   (lambda (rt) (floor (* rt frame-dim)))
+   gold-ratios))
        (dists
 	(mapcar
-	 (lambda (ht) (abs (- ht window-dim)))
-	 gold-heights))
+   (lambda (ht) (abs (- ht window-dim)))
+   gold-heights))
        (minimum (apply 'min dists))
        (argmin (position minimum dists))
        (ratio
@@ -204,3 +204,8 @@
         (buffer (current-buffer)))
     (let ((protected (window-dedicated-p window)))
     (set-window-dedicated-p window (not protected)))))
+
+(require 'ansi-color)
+(defun display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
