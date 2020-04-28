@@ -61,12 +61,12 @@
 
 (defun after-init-graphical ()
   (progn
-    (load-theme 'my-blue t)
+    (load-theme 'my-wombat t)
     (global-hl-line-mode)))
 
 (defun after-init-terminal ()
   (progn
-    (load-theme 'manoj-dark t)))
+    (load-theme 'my-wombat t)))
 
 (add-hook 'after-init-hook
 		(lambda () (if (display-graphic-p)
