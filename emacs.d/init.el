@@ -24,6 +24,16 @@
  '(fill-column 100)
  '(custom-theme-directory "~/.emacs.d/lisp/themes")
  '(indent-tabs-mode nil)
+ '(openwith-associations
+   (quote
+    (("\\.pdf\\'" "xreader"
+      (file))
+     ("\\.mp3\\'" "rhythmbox"
+      (file))
+     ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer"
+      ("-idx" file))
+     ("\\.\\(?:jp?g\\|png\\)\\'" "xviewer"
+      (file)))))
  '(org-default-notes-file "~/notes/captures.org")
  '(org-directory "~/notes")
  '(org-log-done (quote time))
@@ -31,7 +41,7 @@
  '(org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
  '(package-selected-packages
    (quote
-    (ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(server-mode t)
  '(sh-basic-offset 2)
@@ -93,6 +103,10 @@
 (require 'whitespace)
 (setq whitespace-style '(face trailing empty space-after-tab space-before-tab))
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; openwith the appropriate utilities
+(require 'openwith)
+(openwith-mode)
 
 ;; Some random hooks.
 (linum-mode nil)
