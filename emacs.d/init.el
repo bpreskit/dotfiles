@@ -34,6 +34,7 @@
       ("-idx" file))
      ("\\.\\(?:jp?g\\|png\\)\\'" "xviewer"
       (file)))))
+ '(org-ellipsis "⤵")
  '(org-default-notes-file "~/notes/captures.org")
  '(org-directory "~/notes")
  '(org-log-done (quote time))

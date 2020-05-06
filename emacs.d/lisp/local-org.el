@@ -131,9 +131,9 @@ get opened with `browse-url`."
 
 (defun slack-format-ts (ts)
   "E.g., 'p1556311700001200' -> '1556311700.001200'"
-  (let
-      ((no-p-ts (s-chop-prefix "p" ts)))
-    (s-join "." (list (subseq no-p-ts 0 -6) (subseq no-p-ts -6)))))
+  (if ts (let
+             ((no-p-ts (s-chop-prefix "p" ts)))
+           (s-join "." (list (subseq no-p-ts 0 -6) (subseq no-p-ts -6))))))
 
 ;; Transform https:// link into slack:// link.
 (defun process-slack-link (link)
