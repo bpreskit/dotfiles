@@ -75,7 +75,7 @@
           (todo "" ((org-agenda-overriding-header "Work todo items"))))
          ((org-agenda-files (get-work-files))))))
 
-(setq org-agenda-custom-commands (append org-agenda-custom-commands custom-org-agenda-commands))
+(setq org-agenda-custom-commands custom-org-agenda-commands)
 
 ;; Map special link types `org-link-abbrev-alist'.
 (setq custom-org-link-abbrevs
@@ -112,7 +112,7 @@ get opened with `browse-url`."
 				((follow
 					(lambda (path) (browse-url (concat prefix ":" path)))))
 			(org-link-set-parameters prefix
-															 :follow follow))))
+                               :follow follow))))
 
 (cl-loop for prefix in prefix-list
          do (add-prefix-to-links prefix))

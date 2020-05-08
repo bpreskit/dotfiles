@@ -10,12 +10,10 @@
 # - Configuration changes made at runtime are applied to all frames.
 
 if "$ZSH/tools/require_tool.sh" emacsclient 24 2>/dev/null ; then
-    export EMACS_PLUGIN_LAUNCHER="$ZSH/plugins/emacs/emacsclient.sh"
+
 
     # set EDITOR if not already defined.
-    export EDITOR="${EDITOR:-${EMACS_PLUGIN_LAUNCHER}}"
-
-    alias emacs="$EMACS_PLUGIN_LAUNCHER --no-wait"
+    export EDITOR='emacsclient -nw --alternate-editor="emacs -nw" --no-wait'
 
     function ediff {
       if [[ "$#" != 2 ]]; then
@@ -33,7 +31,7 @@ if "$ZSH/tools/require_tool.sh" emacsclient 24 2>/dev/null ; then
       done
 
       cmd="(ediff \"${file1}\" \"${file2}\")"
-      "$EMACS_PLUGIN_LAUNCHER" -nw --eval "$cmd"
+      emacsclient -nw --alternate-editor="emacs -nw" --eval "$cmd"
     }
 fi
 
