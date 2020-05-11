@@ -70,6 +70,7 @@
     cache_valid_time: 3600
     name: "{{ item.name }}"
   with_items: "{{ special_packages }}"
+  ignore_errors: "{{ansible_check_mode}}"
 
 # For the emacs stuff, I'm using a special emacs repo at
 # https://launchpad.net/~kelleyk/+archive/ubuntu/emacs Key id is under
