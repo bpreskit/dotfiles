@@ -70,21 +70,6 @@
 
 (load-library "mycode.el")
 
-(defun after-init-graphical ()
-  (progn
-    (load-theme 'my-wombat t)
-    (global-hl-line-mode)))
-
-(defun after-init-terminal ()
-  (progn
-    (load-theme 'my-wombat t)))
-
-(add-hook 'after-init-hook
-		(lambda () (if (display-graphic-p)
-       (after-init-graphical)
-           (after-init-terminal))))
-(remove-hook 'after-init-hook 'color-theme-backup-original-values)
-
 ;; Global modes
 ;; Do some stuff to set up smartparens.
 (require 'smartparens)
@@ -198,3 +183,4 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (load-library "keybindings.el")
+(load "local-init.el" t)
