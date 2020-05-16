@@ -126,7 +126,8 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-;; load lisp/local-org.el if it exists.
+;; load lisp/custom-org.el, and local-org.el if it exists.
+(load "custom-org" t)
 (load "local-org" t)
 
 ;;;; JIRA
