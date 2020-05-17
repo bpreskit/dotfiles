@@ -10,14 +10,11 @@
 
 - name: Additional packages and config for home computers
   hosts: home
+  gather_facts: yes
+  tags: try_now
   roles:
     - role: home_comfort
     - role: server_config
       hosts: home_servers
     - role: client_config
       hosts: home_clients
-
-- name: Download repos to work vm
-  hosts: work
-  roles:
-    - role: get_code
