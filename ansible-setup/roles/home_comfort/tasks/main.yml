@@ -1,0 +1,48 @@
+---
+- name: Install home packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ home_debs }}"
+
+- name: Download downloaded packages
+  get_url:
+    url: "{{ item.url }}"
+    dest: "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+  when: not item.name in ansible_facts.packages
+
+- name: Install downloaded packages
+  become: yes
+  command: apt install -y --fix-broken "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+  when: not item.name in ansible_facts.packages
+
+- name: Remove downloaded packages
+  when: at_home|bool
+  file:
+    state: absent
+    path: "/tmp/{{ item.name }}.deb"
+  with_items: "{{ downloaded_debs }}"
+
+- name: Add keys for special repos
+  become: yes
+  apt_key:
+    url: "{{ item.key }}"
+  with_items: "{{ special_packages }}"
+
+- name: Add special repos
+  become: yes
+  apt_repository:
+    repo: "{{ item.repo }}"
+  with_items: "{{ special_packages }}"
+
+- name: Install special-repo packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ item.name }}"
+  with_items: "{{ special_packages }}"
+  ignore_errors: "{{ ansible_check_mode }}"

@@ -14,19 +14,10 @@ home_debs:
   - transmission
   - vpnc
   - xkcdpass
-always_debs:
-  - git
-  - gnupg
-  - jq
-  - openssh-server
-  - tmux
-  - w3m
 
 downloaded_debs:
   - name: discord
     url: "https://discordapp.com/api/download?platform=linux&format=deb"
-  - name: encryptr
-    url: "http://www.spideroak.com/release/Encryptr/deb_x64"
   - name: slack-desktop
     url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb"
   - name: zoom

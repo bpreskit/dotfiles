@@ -1,0 +1,10 @@
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    eno1:
+      dhcp4: no
+      addresses:
+        - {{ server_ip_address }}/24
+      gateway4: {{ server_ip_address | regex_search('(([0-9]+\.){3})') }}1

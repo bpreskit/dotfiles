@@ -1,14 +1,23 @@
 ---
-- name: Configure machine
+- name: Common packages and configuration
   hosts: all
   become_method: sudo
   gather_facts: yes
   roles:
-    - role: base
+    - role: common_packages
     - role: python
     - role: unpack_dots
-    - role: home
-      when: at_home|bool
+
+- name: Additional packages and config for home computers
+  hosts: home
+  roles:
+    - role: home_comfort
+    - role: server_config
+      hosts: home_servers
+    - role: client_config
+      hosts: home_clients
+
+- name: Download repos to work vm
+  hosts: work
+  roles:
     - role: get_code
-      when: on_pure_vm
-    

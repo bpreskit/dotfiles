@@ -13,17 +13,6 @@
     enabled: true
     state: started
 
-- name: Add DNS servers to dnsmasq
-  become: yes
-  lineinfile:
-    path: /etc/dnsmasq.conf
-    create: true
-    state: present
-    line: server={{ item }}
-  with_items:
-    - 1.1.1.1
-    - 1.0.0.1
-
 - name: Use /etc/resolv.conf, rather than output of resolvconf
   become: yes
   lineinfile:
@@ -31,9 +20,15 @@
     regexp: '^#?IGNORE_RESOLVCONF='
     state: present
     line: 'IGNORE_RESOLVCONF=yes'
+  notify: Restart dnsmasq
 
-- name: Restart dnsmasq
+- name: Turn off the vpn
   become: yes
-  service:
-    name: dnsmasq
-    state: restarted
+  command: pkill vpn
+
+- name: Add local nameserver to /etc/resolv.conf
+  become: yes
+  lineinfile:
+    path: /etc/resolv.conf
+    line: "nameserver 127.0.0.53"
+    state: present

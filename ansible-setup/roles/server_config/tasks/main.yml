@@ -1,0 +1,6 @@
+---
+- name: Setup the netplan entry for the main server
+  become: yes
+  template:
+    src: templates/netplan.yaml
+    dest: /etc/netplan/1-network-manager-all.yaml

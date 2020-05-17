@@ -1,0 +1,10 @@
+---
+- name: Add main server to dnsmasq.conf
+  become: yes
+  lineinfile:
+    path: /etc/dnsmasq.conf
+    create: true
+    state: present
+    line: server="{{ item }}"
+  with_items:
+    - "{{ server_ip_address }}"
