@@ -1,4 +1,10 @@
 ---
+- name: Gather package facts
+  become: yes
+  package_facts:
+    manager: "auto"
+  check_mode: false
+
 - name: Install home packages
   become: yes
   apt:

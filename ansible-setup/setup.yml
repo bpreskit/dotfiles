@@ -1,7 +1,6 @@
 ---
 - name: Common packages and configuration
   hosts: all
-  become_method: sudo
   gather_facts: yes
   roles:
     - role: common_packages
@@ -11,10 +10,15 @@
 - name: Additional packages and config for home computers
   hosts: home
   gather_facts: yes
-  tags: try_now
   roles:
     - role: home_comfort
+
+- name: Configure the dnsmasq base server
+  hosts: home_servers
+  roles:
     - role: server_config
-      hosts: home_servers
+
+- name: Configure the non-server computers
+  hosts: home_clients
+  roles:
     - role: client_config
-      hosts: home_clients

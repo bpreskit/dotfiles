@@ -42,4 +42,8 @@
     name: "{{ 'emacs26' if at_home|bool else 'emacs25' }}"
 
 - name: Add latest melpa key
-  shell: gpg --keyserver keys.gnupg.net --homedir ~/.emacs.d/elpa/gnupg --recv-keys 066DAFCB81E42C40
+  command: gpg --keyserver keyserver.ubuntu.com --homedir ~/.emacs.d/elpa/gnupg --recv-keys 066DAFCB81E42C40
+  register: output
+  # The first line of output (which goes to stderr) says "not changed"
+  # if the key was already there.
+  changed_when: not output.stderr | regex_search('not changed')
