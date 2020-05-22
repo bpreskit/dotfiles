@@ -5,6 +5,7 @@ _all_copy:
   - gitignore_global
   - tmux.conf
   - oh-my-zsh/custom/plugins/my-emacs/my-emacs.plugin.zsh
+  - emacs.d/
 _dev_copy:
   - zshrc_pure
 copy_items: "{{ _all_copy | union(_dev_copy if on_pure_vm|bool else []) }}"
