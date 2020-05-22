@@ -15,8 +15,10 @@
             "/tmp/webdav/current_todo.org"
             "/tmp/webdav/work/interviews.org"
             org-default-notes-file))
-(setq org-refile-targets (append org-refile-targets custom-org-refile-targets))
-(setq org-agenda-files (append org-agenda-files custom-org-agenda-files))
+(loop for file in custom-org-agenda-files
+      do (add-to-list 'org-agenda-files file))
+(loop for target in custom-org-refile-targets
+      do (add-to-list 'org-refile-targets target))
 
 ;; Org capture templates. `org-capture-templates'
 (setq org-capture-templates
