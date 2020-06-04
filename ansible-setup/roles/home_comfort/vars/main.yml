@@ -10,6 +10,7 @@ home_debs:
   - skypeforlinux
   - steam
   - telegram-desktop
+  - texlive-full
   - thunderbird
   - transmission
   - vpnc
