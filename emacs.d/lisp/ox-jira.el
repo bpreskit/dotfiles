@@ -13,13 +13,16 @@
                      (link . jira-link)
                      (verbatim . jira-verbatim)
                      (inline-src-block . jira-verbatim)
-                     (code . jira-verbatim))
+                     (code . jira-verbatim)
+                     (horizontal-rule . jira-horizontal-rule)
+                     (quote-block . jira-quote))
   :options-alist '((:with-toc nil)))
 
 (defun org-export-jira ()
   (interactive)
   (org-export-to-buffer 'jira "*Org Jira*" nil t))
 
+;; Straightforward "markdown syntax" functions.
 (defun jira-bold (bold text info)
   (s-concat "*" text "*"))
 (defun jira-italic (_italic contents _info)
@@ -28,15 +31,32 @@
   (format "+%s+" contents))
 (defun jira-strikethrough (_strikethrough contents _info)
   (format "-%s-" contents))
+(defun jira-quote (_quote contents _info)
+  (format "{quote} %s {quote}" (s-trim contents)))
 (defun jira-plain (text info)
   (replace-regexp-in-string "\\(\.\\)\n\\(\.\\)" "\\1 \\2" text))
+(defun jira-horizontal-rule (_rule _contents _info)
+  "----")
 (defun jira-verbatim (verbatim _contents _info)
   (let ((value (org-element-property :value verbatim)))
     (format "{{%s}}" value)))
+
+;; Adapted from org-md-example-block in ox-md.el.
+(defun jira-code (code-block _contents _info)
+  (let* ((code (car (org-export-unravel-code code-block)))
+         (name (org-element-property :name code-block))
+         (title (if name (format ":title=%s" name) "")))
+    (format "{noformat%s}\n%s\n{noformat}" title code)))
+
+;; Process org headlines into h<k>, where k is the heading depth.  Note that the root heading (where
+;; you invoke org-export-jira) is ignored, and subheadings will be processed as if they start from
+;; level 1.
 (defun jira-headline (headline contents info)
   (let* ((level (org-export-get-relative-level headline info))
          (title (org-export-data (org-element-property :title headline) info)))
     (s-concat "h" (number-to-string level) ". " title "\n\n" contents)))
+
+;; Process links.  This function is adapted from org-md-link in ox-md.el.
 (defun jira-link (link contents info)
   (let ((link-org-files-as-md
 	 (lambda (raw-path)
@@ -113,20 +133,18 @@
 (defun jira-list (_plain-list contents _info)
   (jira-process-list-contents contents))
 
-(defun jira-process-list-line (line)
-  (let* ((leading-ws (car (s-match "^\s+" line)))
-         (len-leading-ws (length leading-ws))
-         (level (+ 1 (/ len-leading-ws 4))))
-    (s-replace-regexp "^[-\s]+" (s-concat (make-string level ?-) " ") line)))
-
+;; Loop through the lines in contents, process them, and join them back together.
 (defun jira-process-list-contents (contents)
   (let (processed-lines)
     (dolist (line (s-lines contents))
       (setq processed-lines (append processed-lines (list (jira-process-list-line line)))))
     (s-join "\n" processed-lines)))
 
-(defun jira-code (code-block _contents _info)
-  (let* ((code (car (org-export-unravel-code code-block)))
-         (name (org-element-property :name code-block))
-         (title (if name (format ":title=%s" name) "")))
-    (format "{noformat%s}\n%s\n{noformat}" title code)))
+;; This cheats a little bit: the contents come in processed in a markdown-like format, where the
+;; depth is expressed by four leading spaces.  This, therefore, replaces each group of four spaces
+;; with a dash (in Atlassian, number of leading dashes is the depth of the item).
+(defun jira-process-list-line (line)
+  (let* ((leading-ws (car (s-match "^\s+" line)))
+         (len-leading-ws (length leading-ws))
+         (level (+ 1 (/ len-leading-ws 4))))
+    (s-replace-regexp "^[-\s]+" (s-concat (make-string level ?-) " ") line)))
