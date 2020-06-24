@@ -26,7 +26,7 @@ This theme avoids subtle color variations, while avoiding the
 jarring angry fruit salad look to reduce eye fatigue.")
 
 (custom-theme-set-faces
- 'manoj-dark
+ 'my-manoj
  '(default ((t (:background "black" :foreground "WhiteSmoke"))))
  ;; Font lock faces
  '(font-lock-builtin-face       ((t (:foreground "LightSteelBlue"))))
@@ -653,7 +653,7 @@ jarring angry fruit salad look to reduce eye fatigue.")
  '(woman-italic-face ((t (:foreground "beige"))))
  '(woman-unknown-face ((t (:foreground "LightSalmon")))))
 
-(provide-theme 'manoj-dark)
+(provide-theme 'my-manoj)
 
 ;; Local Variables:
 ;; no-byte-compile: t
