@@ -167,3 +167,5 @@ get opened with `browse-url`."
 (let ((follow
        (lambda (uri) (follow-spotify-link uri))))
   (org-link-set-parameters "spotify" :follow follow))
+
+(load "ox-jira" t)
