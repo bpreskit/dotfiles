@@ -169,3 +169,8 @@ get opened with `browse-url`."
   (org-link-set-parameters "spotify" :follow follow))
 
 (load "ox-jira" t)
+
+(require 'ox-slimhtml)
+(defun ox-slimhtml-default ()
+  "Export the subtree as html."
+  (ox-slimhtml-export-as-html nil t))
