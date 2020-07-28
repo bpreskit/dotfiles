@@ -171,6 +171,7 @@ get opened with `browse-url`."
 (load "ox-jira" t)
 
 (require 'ox-slimhtml)
-(defun ox-slimhtml-default ()
+(defun org-slimhtml ()
+  (interactive)
   "Export the subtree as html."
   (ox-slimhtml-export-as-html nil t))
