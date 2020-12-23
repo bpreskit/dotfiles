@@ -37,3 +37,9 @@ special_packages:
     name: signal-desktop
     repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
     key: https://updates.signal.org/desktop/apt/keys.asc
+
+misc_home_dir: "../misc-home"
+
+misc_copy_items:
+  - usr/local/bin
+  - usr/local/share

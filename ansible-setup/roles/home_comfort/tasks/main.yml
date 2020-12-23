@@ -52,3 +52,10 @@
     name: "{{ item.name }}"
   with_items: "{{ special_packages }}"
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Copy home misc files
+  copy:
+    src: "{{ misc_home_dir }}/{{ item }}"
+    dest: "{{ item }}"
+    backup: true
+  with_items: "{{ misc_copy_items }}"
