@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Feem
+GenericName=File Sharing
+Comment=Share files offline
+Exec=feem
+Icon=feem
+Type=Application
+Terminal=false
+Keywords=File;Share;Sharing;
