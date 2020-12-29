@@ -54,8 +54,9 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Copy home misc files
+  become: yes
   copy:
     src: "{{ misc_home_dir }}/{{ item }}"
-    dest: "{{ item }}"
+    dest: "/{{ item | dirname }}"
     backup: true
   with_items: "{{ misc_copy_items }}"

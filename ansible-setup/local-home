@@ -1,2 +1,2 @@
-[dev-machines]
+[home]
 localhost ansible_connection=local

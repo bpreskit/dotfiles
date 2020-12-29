@@ -1,7 +1,8 @@
 ---
 - name: Copy common misc files
+  become: yes
   copy:
     src: "{{ misc_all_dir }}/{{ item }}"
-    dest: "{{ item }}"
+    dest: "/{{ item | dirname }}"
     backup: true
   with_items: "{{ misc_copy_items }}"
