@@ -1,1 +1,91 @@
 * How to replicate my homebrew server business
+** Get online
+   These steps are what allow you to host things in such a way that they are accessible anywhere in
+   the world over the public internet.
+*** Get a hostname
+    I got mine from [[https:namecheap.com][namecheap.com]]. It was something like $10 for a year or two, but it turns out you
+    can get a hostname for free from [[https://www.noip.com/][noip.com]] (I think). It doesn't matter where you get a hostname,
+    and technically you don't need one if you're happy remembering the IP address of your home and
+    accessing it from there.
+
+    Caveat: I remember having to futz around with the DNS settings on my namecheap account to get
+    subdomains (like ~webdav.example.com~) to work.
+*** Forward the ports on your home router
+    Log into your router in a web browser. You'll have to find the IP address for it: it might be
+    printed on the router itself, but a trusty way is to use ~route -n~ and go to the address listed
+    as the "gateway".  Mine is ~192.168.91.1~:
+    #+begin_src
+    owlfrog :: ~/dotfiles » route -n
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+    0.0.0.0         192.168.91.1    0.0.0.0         UG    600    0        0 wlp1s0
+    169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 wlp1s0
+    192.168.91.0    0.0.0.0         255.255.255.0   U     600    0        0 wlp1s0
+    #+end_src
+    Routers are all different, but click around for something along the lines of "port forwarding"
+    and open up ports 443 and 80, on the IP address of the machine you intend to use to host your stuff.
+*** Prove to yourself that it works
+    Just to make sure that you can see inside from the outside world, you could, for example, do
+    ~python3 -m http.server 80~ from the command line -- this runs a tiny python program that hosts
+    a simple HTTP server on port 80; see if you can access it via http://your-hostname.xyz
+** Let's Encrypt
+   If you wanna be official at all, you need an SSL certificate.  This is what allows you to have
+   https://example.com instead of http://example.com, with that sweet, sweet lock icon at the top.
+
+   [[https://letsencrypt.org/][Let's Encrypt]] is a non-profit that tries to make it easier for people to use the internet
+   securely by providing free, automatically-renewable encryption certificates.  I recommend just
+   following [[https://letsencrypt.org/getting-started/][their docs]], though you will need to have a basic server up and running on either
+   [[https://httpd.apache.org/docs/2.4/getting-started.html][apache2]] or [[https://nginx.org/en/docs/beginners_guide.html][nginx]] to first get a cert.
+** WebDAV
+   This gives you the open-source, self-hosted dropbox.
+*** Acquire the requisite packages
+    - ~apt update~
+    - ~apt install davfs2 apache2 apache2-utils~
+      - ~apache2~ is a suite of basic webserver software.  The ~apache2~ process will be what is
+        literally listening on ports and creating connections. Among other things, it can host a
+        webdav server!
+      - ~apache2-utils~ is needed for the ~htpasswd~ program, which you'll use to setup basic
+        authentication to password protect the webdav server.
+      - ~davfs2~ provides ~mount.davfs2~, which you use to mount the webdav server as a
+        filesystem. This means that the remotely hosted, everywhere-editable files will appear as a
+        directory on your device.
+*** Set up the server directives for apache2
+    Apache2 needs you to tell it where (which ports) it should be listening for connections, and
+    what to do with those connections. I can't pretend to make an apache tutorial, but [[https://httpd.apache.org/][here]] are
+    their docs. For our purposes:
+    1. ~cp this-repo/server/etc/apache2/sites/webdav.conf /etc/apache2/sites-available/webdav.conf~
+    2. Go into ~webdav.conf~ with an editor and change the following:
+       1. Replace ~${APACHE_USER}~ with a unix username that you'd like to use to own the server
+          stuff. I use ~apache~.
+       2. Replace ~${PUBLIC_HOSTNAME}~ with your hostname (e.g., http://your-hostname.xyz)
+       3. Replace ~${LOC_OF_WEBDAV_FILES}~ with a directory that you want to expose to the outside
+          world (e.g., ~/srv/webdav/~).
+    3. Use ~a2ensite webdav~ to enable the site (this creates a symlink from
+       ~/etc/apache2/sites-enabled/webdav.conf~ to the ~sites-available~ copy).
+*** Set up basic authentication
+    You'll make a small authentication database to manage password-protection for the webdav
+    server. Choose whatever username you want to get into it.
+    1. ~mkdir /home/${APACHE_USER}/htpasswd~
+    2. ~htpasswd -c /home/${APACHE_USER}/htpasswd/webdav.passwd ${username}~
+    3. ~/home/${APACHE_USER}/htpasswd~ needs to be owned by ~${APACHE_USER}:${APACHE_USER}~; on my
+       machine it has ~655~ permissions.
+*** Set up the davlock database
+    I'm fairly certain this is as simple as making a directory ~/home/${APACHE_USER}/davlock~, and
+    the ~apache2~ server process will create everything else on its own.
+*** Bonus steps if you want to do a minimal working example
+    I have a few bells and whistles here, where somehow I decided a nice workaround for having
+    subdomains (multiple services hosted at https://foo.example.com and https://bar.example.com)
+    would be to use ~nginx~ as a proxy: it catches requests from the outside and forwards them to
+    ~apache2~ on the inside.
+
+    If you don't want to deal with that, make just a couple edits to ~webdav.conf~:
+    1. Delete the first ~VirtualHost~ block
+    2. Switch ~*:8443~ to ~*:80~ on the second block (so it listens on port 80, the real HTTP port,
+       instead of the made up internal port of ~8443~).
+    3. Change ~ServerName webdav.${PUBLIC_HOSTNAME}~ to ~ServerName ${PUBLIC_HOSTNAME}~.
+
+    At this point, I think you can just let 'er rip!
+** Bitwarden
+   For this, I literally just used and followed bitwarden's own [[https://bitwarden.com/help/article/install-on-premise/][on-prem]] implementation. I put their
+   ~bitwarden.sh~ script into ~/home/apache/bitwarden/~ and went from there; the files in
+   ~server/etc/nginx/sites~ are what I used to proxy around with ~nginx~.
