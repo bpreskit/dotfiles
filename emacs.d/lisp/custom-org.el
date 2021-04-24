@@ -6,7 +6,6 @@
 (setq custom-org-refile-targets
       '((org-agenda-files . (:maxlevel . 2))
         (nil . (:level . 2))))
-(setq org-refile-targets (append org-refile-targets custom-org-refile-targets))
 
 ;; Set up my webdavs as agenda-files
 (setq custom-org-agenda-files
@@ -14,6 +13,7 @@
             "/tmp/webdav/stray-thoughts.org"
             "/tmp/webdav/current_todo.org"
             "/tmp/webdav/work/interviews.org"
+            "/tmp/webdav/bike/svbc.org"
             org-default-notes-file))
 (loop for file in custom-org-agenda-files
       do (add-to-list 'org-agenda-files file))
