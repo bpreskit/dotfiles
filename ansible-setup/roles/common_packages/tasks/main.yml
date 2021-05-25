@@ -41,6 +41,12 @@
     update_cache: yes
     name: "{{ 'emacs26' if at_home|bool else 'emacs25' }}"
 
+- name: Create melpa keyring directory
+  file:
+    path: "{{ ansible_user_dir }}/.emacs.d/elpa/gnupg"
+    state: directory
+    mode: '0700'
+
 - name: Add latest melpa key
   command: gpg --keyserver keyserver.ubuntu.com --homedir ~/.emacs.d/elpa/gnupg --recv-keys 066DAFCB81E42C40
   register: output

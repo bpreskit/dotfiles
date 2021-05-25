@@ -6,3 +6,4 @@ always_debs:
   - openssh-server
   - tmux
   - w3m
+  - zsh

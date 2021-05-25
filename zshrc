@@ -5,7 +5,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME moved to ~/.zshrc_local
-source ~/.zshrc_local
+if [[ -r ~/.zshrc_local ]]; then
+  source ~/.zshrc_local &>/dev/null
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

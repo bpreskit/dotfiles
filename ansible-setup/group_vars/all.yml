@@ -1,4 +1,3 @@
 ---
-on_pure_vm: "{{ (ansible_domain == 'dev.purestorage.com') and (ansible_product_name == 'KVM') }}"
-at_home: "{{ ansible_distribution == 'Linux Mint' }}"
-
+at_home: "{{ 'home' in group_names }}"
+on_pure_vm: "{{ 'work' in group_names }}"
