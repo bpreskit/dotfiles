@@ -1,0 +1,23 @@
+---
+all:
+  children:
+    home:
+      children:
+        home_servers:
+        home_clients:
+    work:
+      children:
+        work_vms:
+    home_servers:
+      hosts:
+        bristream:
+    home_clients:
+      hosts:
+        owlfrog:
+        math-blaster:
+    work_vms:
+      hosts:
+        irvm-bpreskitt3:
+        irdv-bpreskitt:
+      vars:
+        ansible_user: ir
