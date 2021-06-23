@@ -6,4 +6,6 @@
 # Want to set up a few named directories to get into the git repos
 ir=~/ir-bpreskitt
 : ~ir
-#/usr/bin/ssh-add ~/.ssh/id_pure_root
+/usr/bin/ssh-add ~/.ssh/id_pure_root
+
+export PYTHONDONTWRITEBYTECODE=1

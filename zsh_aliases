@@ -12,10 +12,6 @@ alias gpl="git pull"
 which gg >/dev/null && unalias gg
 alias ggrep="git grep"
 alias gloh='git log --oneline --decorate | head'
-# alias grbfs='git rebase feature/storreduce'
-# alias grbr5='git rebase release-5.0.0'
-# alias gcor5='git checkout release-5.0.0'
-# alias gcofs='git checkout feature/storreduce'
 alias gcom='git checkout master'
 
 function gbdrm {
@@ -27,6 +23,13 @@ function gbdrm {
 	git push --delete $remote $branch
     fi
     git branch -d $branch
+}
+
+function grbo {
+  local branch=$1
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+  git rebase --onto ${branch} $(git merge-base ${branch} HEAD)
 }
 
 function gbg {
