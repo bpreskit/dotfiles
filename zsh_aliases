@@ -12,6 +12,7 @@ alias gpl="git pull"
 which gg >/dev/null && unalias gg
 alias ggrep="git grep"
 alias gloh='git log --oneline --decorate | head'
+alias ghash='git log -n 1 --pretty="%H"'
 alias gcom='git checkout master'
 
 function gbdrm {
