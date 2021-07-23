@@ -65,8 +65,8 @@
 
 (require 'go-mode)
 (require 'go-playground)
-(define-key go-mode-map (kbd "M-.") 'godef-jump)
-(define-key go-mode-map (kbd "C-x 4 M-.") '(lambda () (interactive) (godef-jump 'point t)))
+(define-key go-mode-map (kbd "M-.") 'go-guru-definition)
+(define-key go-mode-map (kbd "C-x 4 M-.") 'go-guru-definition-other-window)
 (define-key go-mode-map (kbd "C-h d") 'godoc)
 (define-key go-playground-mode-map (kbd "C-c RET") 'go-playground-exec)
 
