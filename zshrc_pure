@@ -9,3 +9,11 @@ ir=~/ir-bpreskitt
 /usr/bin/ssh-add ~/.ssh/id_pure_root
 
 export PYTHONDONTWRITEBYTECODE=1
+
+triage-get () {
+  local WHEREVER_YOU_TRIAGE="/tmp"
+  pushd ${WHEREVER_YOU_TRIAGE}
+  triage build $1 artifacts --fetch --no-all-blades --no-binary
+  echo "(Subdirectory of ${WHEREVER_YOU_TRIAGE})"
+  popd
+}
