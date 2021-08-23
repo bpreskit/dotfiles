@@ -6,6 +6,7 @@
 (setq custom-org-refile-targets
       '((org-agenda-files . (:maxlevel . 2))
         (nil . (:level . 2))))
+(setq org-refile-targets (append org-refile-targets custom-org-refile-targets))
 
 ;; Set up my webdavs as agenda-files
 (setq custom-org-agenda-files

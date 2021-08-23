@@ -44,7 +44,7 @@
  '(org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
  '(package-selected-packages
    (quote
-    (openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(server-mode t)
  '(sh-basic-offset 2)
@@ -117,7 +117,8 @@
 (add-hook 'python-mode-hook
 		(lambda () (progn
            (jedi:setup)
-           (jedi-mode))))
+           (jedi-mode)
+           (set-fill-column 99))))
 
 ;; ediff setup
 (add-hook 'ediff-before-setup-hook 'save-ediff-before-windows)
