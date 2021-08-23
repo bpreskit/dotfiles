@@ -55,6 +55,7 @@
 
 (require 'org)
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
+(define-key org-mode-map (kbd "C-c RET") 'org-insert-heading-respect-content)
 (define-key org-mode-map (kbd "M-J") 'org-insert-todo-heading)
 (define-key org-mode-map (kbd "C-M-u") 'org-up-element)
 (define-key org-mode-map (kbd "C-M-d") 'org-down-element)
