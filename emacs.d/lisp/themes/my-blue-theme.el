@@ -1,4 +1,4 @@
-;;; deeper-blue-theme.el --- Custom theme for faces
+;;; my-blue-theme.el --- Custom theme for faces
 
 ;; Copyright (C) 2011-2019 Free Software Foundation, Inc.
 
