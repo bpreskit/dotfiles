@@ -99,7 +99,7 @@
 
 ;; Some random hooks.
 (linum-mode nil)
-(add-hook 'find-file-hook (lambda () (linum-mode 1)))
+(add-hook 'find-file-hook 'linum-mode-ifnt-log)
 (add-hook 'octave-mode-hook
 		(lambda () (progn (setq octave-comment-char ?%)
 					(setq comment-start "% ")

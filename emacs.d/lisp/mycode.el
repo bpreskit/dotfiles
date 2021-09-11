@@ -205,6 +205,12 @@
     (let ((protected (window-dedicated-p window)))
     (set-window-dedicated-p window (not protected)))))
 
+(defun linum-mode-ifnt-log ()
+  (if (not (and
+           (stringp (buffer-file-name))
+           (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
+      (linum-mode 1)))
+
 (require 'ansi-color)
 (defun display-ansi-colors ()
   (interactive)
