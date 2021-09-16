@@ -2,6 +2,17 @@
 (require 'org)
 (require 'org-agenda)
 
+;; Misc org variables
+(setq org-ellipsis "⤵")
+(setq org-directory
+      (if (and (f-writable? "/tmp/webdav") (f-dir-p "/tmp/webdav"))
+          "/tmp/webdav"
+        "~/notes"))
+(setq org-default-notes-file (s-join "/" (list org-directory "captures.org")))
+(setq org-log-done (quote time))
+(setq org-log-into-drawer t)
+(setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
+
 ;; Make agenda files refileable
 (setq custom-org-refile-targets
       '((org-agenda-files . (:maxlevel . 2))
@@ -36,6 +47,17 @@
          entry
          (file+headline "" "Captures")
          "** %?\n   :PROPERTIES:\n   :CAPTURE_TIME: %U\n   :CAPTURE_CONTEXT: %a\n   :END:"
+         :jump-to-captured t)
+        ("l"
+         "Thing to look up later"
+         entry
+         (file+headline "/tmp/webdav/current_todo.org" "Lookups")
+         "* TODO %^{Search term}
+   :PROPERTIES:
+   :CAPTURE_TIME: %U
+   :CAPTURE_CONTEXT: %a
+   :END:
+   - [[ddg:%\\1][%\\1]]%?"
          :jump-to-captured t)
        (
         "w"

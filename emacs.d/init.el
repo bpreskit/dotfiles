@@ -36,12 +36,6 @@
       ("-idx" file))
      ("\\.\\(?:jp?g\\|png\\)\\'" "xviewer"
       (file)))))
- '(org-ellipsis "⤵")
- '(org-default-notes-file "~/notes/captures.org")
- '(org-directory "~/notes")
- '(org-log-done (quote time))
- '(org-log-into-drawer t)
- '(org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
  '(package-selected-packages
    (quote
     (groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
