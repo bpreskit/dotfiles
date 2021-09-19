@@ -1,7 +1,7 @@
 ---
 pythons:
   - python
-  - python-pip
+  - python-pip-whl
   - python3
   - python3-pip
   - "{{ 'python3.8' if at_home|bool else 'python3.5' }}"

@@ -1,6 +1,8 @@
 (require 'cl)
+(require 'f)
 (require 'org)
 (require 'org-agenda)
+(require 's)
 
 ;; Misc org variables
 (setq org-ellipsis "⤵")
@@ -193,8 +195,8 @@ get opened with `browse-url`."
 
 (load "ox-jira" t)
 
-(require 'ox-slimhtml)
-(defun org-slimhtml ()
-  (interactive)
-  "Export the subtree as html."
-  (ox-slimhtml-export-as-html nil t))
+;; (require 'ox-slimhtml)
+;; (defun org-slimhtml ()
+;;   (interactive)
+;;   "Export the subtree as html."
+;;   (ox-slimhtml-export-as-html nil t))

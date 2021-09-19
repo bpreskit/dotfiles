@@ -17,30 +17,6 @@
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
 
-# For the emacs stuff, I'm using a special emacs repo at
-# https://launchpad.net/~kelleyk/+archive/ubuntu/emacs Key id is under
-# "Adding this PPA to your system"
-- name: Add emacs key
-  become: yes
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 873503A090750CDAEB0754D93FF0E01EEAAFC9CD
-
-- name: Add emacs repo
-  become: yes
-  vars:
-    release: "{{ 'bionic' if ansible_distribution == 'Linux Mint' else ansible_distribution_release }}"
-  apt_repository:
-    repo: "deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu {{ release }} main"
-    filename: kelleyk_emacs
-
-- name: Install emacs
-  become: yes
-  ignore_errors: "{{ ansible_check_mode }}"
-  apt:
-    update_cache: yes
-    name: "{{ 'emacs26' if at_home|bool else 'emacs25' }}"
-
 - name: Create melpa keyring directory
   file:
     path: "{{ ansible_user_dir }}/.emacs.d/elpa/gnupg"

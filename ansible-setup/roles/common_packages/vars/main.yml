@@ -1,5 +1,6 @@
 ---
 always_debs:
+  - emacs
   - git
   - gnupg
   - jq
