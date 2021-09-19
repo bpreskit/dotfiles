@@ -32,3 +32,11 @@
     path: /etc/resolv.conf
     line: "nameserver 127.0.0.53"
     state: present
+
+- name: Make syncthing start automatically
+  become: yes
+  systemd:
+    name: syncthing
+    scope: user
+    enabled: yes
+    state: started

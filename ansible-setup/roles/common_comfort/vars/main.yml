@@ -2,3 +2,6 @@
 misc_all_dir: "../misc-all"
 misc_copy_items:
   - usr/local/bin
+
+webdav_url: "https://webdav.phaseretriever.xyz"
+webdav_path: "/tmp/webdav"

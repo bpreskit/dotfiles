@@ -1,5 +1,6 @@
 ---
 always_debs:
+  - davfs2
   - emacs
   - git
   - gnupg

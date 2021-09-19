@@ -6,3 +6,9 @@
     dest: "/{{ item | dirname }}"
     backup: true
   with_items: "{{ misc_copy_items }}"
+
+- name: Add webdav to /etc/fstab
+  become: yes
+  lineinfile:
+    path: /etc/fstab
+    line: "{{ webdav_url }} {{ webdav_path }} davfs rw,auto,user,uid={{ ansible_user_id }},gid={{ ansible_user_id }},_netdev 0 0"
