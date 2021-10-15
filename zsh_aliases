@@ -26,6 +26,8 @@ function gbdrm {
     git branch -d $branch
 }
 
+unalias grbo
+
 function grbo {
   local branch=$1
   local current_branch=$(git rev-parse --abbrev-ref HEAD)
