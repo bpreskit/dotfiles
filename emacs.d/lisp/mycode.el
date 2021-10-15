@@ -211,6 +211,12 @@
            (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
       (linum-mode 1)))
 
+(defun copy-file-name ()
+  (interactive)
+  (if (buffer-file-name)
+    (kill-append (buffer-file-name))
+  (message "%s is not in a file" (buffer-name))))
+
 (require 'ansi-color)
 (defun display-ansi-colors ()
   (interactive)
