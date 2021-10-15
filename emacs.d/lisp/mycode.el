@@ -214,7 +214,8 @@
 (defun copy-file-name ()
   (interactive)
   (if (buffer-file-name)
-    (kill-append (buffer-file-name))
+      (progn (kill-new (buffer-file-name))
+             (message (buffer-file-name)))
   (message "%s is not in a file" (buffer-name))))
 
 (require 'ansi-color)
