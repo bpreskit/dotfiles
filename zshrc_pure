@@ -17,3 +17,10 @@ triage-get () {
   echo "(Subdirectory of ${WHEREVER_YOU_TRIAGE})"
   popd
 }
+
+function git-remote-add {
+  local username="$1"
+  git remote add ${username} ssh://git@stash-ir.dev.purestorage.com:7999/ir/${username}.git
+  git remote set-url --push ${username} NO_PUSHING_ALLOWED
+  git fetch ${username}
+}
