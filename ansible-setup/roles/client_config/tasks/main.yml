@@ -7,4 +7,4 @@
     state: present
     line: server="{{ item }}"
   with_items:
-    - "{{ server_ip_address }}"
+    - "{{ server_ips }}"
