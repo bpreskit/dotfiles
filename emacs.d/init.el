@@ -38,7 +38,7 @@
       (file)))))
  '(package-selected-packages
    (quote
-    (groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(server-mode t)
  '(sh-basic-offset 2)
@@ -63,6 +63,9 @@
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . ansible))
+;; Use json-mode on json files.
+(setq auto-mode-alist (remove '("\\.json\\'" . javascript-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 
 (load-library "mycode.el")
 
