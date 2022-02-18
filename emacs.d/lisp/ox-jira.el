@@ -15,7 +15,8 @@
                      (inline-src-block . jira-verbatim)
                      (code . jira-verbatim)
                      (horizontal-rule . jira-horizontal-rule)
-                     (quote-block . jira-quote))
+                     (quote-block . jira-quote)
+                     (subscript . jira-subscript))
   :options-alist '((:with-toc nil)))
 
 (defun org-export-jira ()
@@ -23,7 +24,7 @@
   (org-export-to-buffer 'jira "*Org Jira*" nil t))
 
 ;; Straightforward "markdown syntax" functions.
-(defun jira-bold (bold text info)
+(defun jira-bold (_bold text info)
   (s-concat "*" text "*"))
 (defun jira-italic (_italic contents _info)
   (format "_%s_" contents))
@@ -40,6 +41,8 @@
 (defun jira-verbatim (verbatim _contents _info)
   (let ((value (org-element-property :value verbatim)))
     (format "{{%s}}" value)))
+(defun jira-subscript (_subscript contents _info)
+  (format "_%s" contents))
 
 ;; Adapted from org-md-example-block in ox-md.el.
 (defun jira-code (code-block _contents _info)
@@ -59,7 +62,7 @@
 ;; Process links.  This function is adapted from org-md-link in ox-md.el.
 (defun jira-link (link contents info)
   (let ((link-org-files-as-md
-	 (lambda (raw-path)
+   (lambda (raw-path)
      ;; Treat links to `file.org' as links to `file.md'.
      (if (string= ".org" (downcase (file-name-extension raw-path ".")))
          (concat (file-name-sans-extension raw-path) ".md")
@@ -96,9 +99,9 @@
       (or (org-string-nw-p contents)
           (let ((number (org-export-get-ordinal destination info)))
 			(cond
-			 ((not number) nil)
-			 ((atom number) (number-to-string number))
-			 (t (mapconcat #'number-to-string number ".")))))))
+       ((not number) nil)
+       ((atom number) (number-to-string number))
+       (t (mapconcat #'number-to-string number ".")))))))
        (when description
          (format "[%s|#%s]"
            description
@@ -122,11 +125,11 @@
      (t (let* ((raw-path (org-element-property :path link))
          (path
 		(cond
-		 ((member type '("http" "https" "ftp" "mailto"))
+     ((member type '("http" "https" "ftp" "mailto"))
       (concat type ":" raw-path))
-		 ((string= type "file")
+     ((string= type "file")
       (org-export-file-uri (funcall link-org-files-as-md raw-path)))
-		 (t raw-path))))
+     (t raw-path))))
           (if (not contents) (format "[%s]" path)
       (format "[%s|%s]" contents path)))))))
 
