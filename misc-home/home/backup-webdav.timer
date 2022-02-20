@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer to start backup of /tmp/webdav
+BindsTo=tmp-webdav.mount
+After=tmp-webdav.mount
+Wants=backup-webdav.service
+
+[Timer]
+OnActiveSec=1h
+
+[Install]
+WantedBy=tmp-webdav.mount

@@ -84,3 +84,6 @@
 (require 'w3m)
 (define-key w3m-mode-map (kbd "C-c >") 'w3m-tab-next-buffer)
 (define-key w3m-mode-map (kbd "C-c <") 'w3m-tab-previous-buffer)
+
+(require 'man)
+(define-key Man-mode-map (kbd "l") 'recenter-top-bottom)

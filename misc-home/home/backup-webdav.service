@@ -1,0 +1,6 @@
+[Unit]
+Description=Backup of /tmp/webdav
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/backup-webdav.sh

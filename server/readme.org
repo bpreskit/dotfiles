@@ -57,6 +57,8 @@
     2. Go into ~webdav.conf~ with an editor and change the following:
        1. Replace ~${APACHE_USER}~ with a unix username that you'd like to use to own the server
           stuff. I use ~apache~.
+          - Caveat: this user will need to comport with the user that's actually using files in
+            ~/home/${APACHE_USER}~, so check ~APACHE_RUN_USER~ in ~/etc/apache2/envvars~.
        2. Replace ~${PUBLIC_HOSTNAME}~ with your hostname (e.g., http://your-hostname.xyz)
        3. Replace ~${LOC_OF_WEBDAV_FILES}~ with a directory that you want to expose to the outside
           world (e.g., ~/srv/webdav/~).
