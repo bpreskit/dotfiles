@@ -36,12 +36,14 @@
       ("-idx" file))
      ("\\.\\(?:jp?g\\|png\\)\\'" "xviewer"
       (file))
-     ("\\.ods\\'" "libreoffice" (file)))))
+     ("\\.ods\\'" "libreoffice"
+      (file))
+     ("\\.odt\\'" "libreoffice"
+      (file)))))
  '(package-selected-packages
    (quote
-    (json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (systemd json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
- '(server-mode t)
  '(sh-basic-offset 2)
  '(shell-prompt-pattern "^[^#$%>
 ]*[#$%>⇒] *")
@@ -54,7 +56,8 @@
 (add-to-list 'package-archives
        '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
-       '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (if (not
      (string= (package-install-selected-packages) "All your packages are already installed"))
     (progn (package-refresh-contents)
