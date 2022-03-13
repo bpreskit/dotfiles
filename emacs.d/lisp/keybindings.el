@@ -33,6 +33,7 @@
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "M-g r") 'vc-git-grep)
 (global-set-key (kbd "M-%") 'query-replace-regexp)
+(global-set-key (kbd "C-<delete>") 'delete-region)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
