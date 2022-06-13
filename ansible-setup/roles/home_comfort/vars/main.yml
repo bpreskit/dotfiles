@@ -28,10 +28,10 @@ special_packages:
     name: syncthing
     repo: deb https://apt.syncthing.net/ syncthing stable
     key: https://syncthing.net/release-key.txt
-  - spotify:
-    name: spotify-client
-    repo: deb http://repository.spotify.com stable non-free
-    key: https://download.spotify.com/debian/pubkey_0D811D58.gpg
+  # - spotify:
+  #   name: spotify-client
+  #   repo: deb http://repository.spotify.com stable non-free
+  #   key: https://download.spotify.com/debian/pubkey_0D811D58.gpg
   - signal:
     name: signal-desktop
     repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
