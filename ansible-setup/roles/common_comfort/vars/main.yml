@@ -2,6 +2,7 @@
 misc_all_dir: "../misc-all"
 misc_copy_items:
   - usr/local/bin
+  - usr/lib/systemd/user/
 
 emacs_apps:
   - /usr/share/applications/emacs.desktop
