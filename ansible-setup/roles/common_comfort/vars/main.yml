@@ -3,5 +3,9 @@ misc_all_dir: "../misc-all"
 misc_copy_items:
   - usr/local/bin
 
+emacs_apps:
+  - /usr/share/applications/emacs.desktop
+  - /usr/share/applications/emacs-term.desktop
+
 webdav_url: "https://webdav.phaseretriever.xyz"
 webdav_path: "/tmp/webdav"
