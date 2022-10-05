@@ -13,16 +13,10 @@
     path: /etc/fstab
     line: "{{ webdav_url }} {{ webdav_path }} davfs rw,auto,user,uid={{ ansible_user_id }},gid={{ ansible_user_id }},_netdev 0 0"
 
-- name: Deprecate plain emacs apps
+- name: Deprecate plain emacs desktop buttons
   become: yes
-  copy:
-    src: "{{ item }}"
-    dest: "{{ item }}.disable"
-   with_items: "{{ emacs_apps }}"
-
-- name: Delete plain emacs apps
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: absent
+  command:
+    cmd: mv "{{ item }}" "{{ item }}.disable"
+    creates: "{{ item }}.disable"
+    removes: "{{ item }}"
   with_items: "{{ emacs_apps }}"
