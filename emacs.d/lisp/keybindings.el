@@ -88,3 +88,6 @@
 
 (require 'man)
 (define-key Man-mode-map (kbd "l") 'recenter-top-bottom)
+
+(require 'magit)
+(define-key magit-blob-mode-map (kbd "RET") 'magit-blob-visit-file)
