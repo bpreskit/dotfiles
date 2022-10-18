@@ -1,4 +1,5 @@
 (require 'cl)
+(require 'find-file)
 
 (defun copy-line-to-end (&optional arg)
   "Copies from point to the end of the current line"
@@ -211,15 +212,32 @@
            (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
       (linum-mode 1)))
 
-(defun copy-file-name (&optional basename-only)
+(defun copy-file-name (&optional basename-p)
+  "Copy name of file pointed to by this buffer as kill.
+With optional prefix argument, copy only the basename."
   (interactive "P")
+
   (if (buffer-file-name)
-      (let ((file-name (if basename-only
-                            (ff-basename (buffer-file-name))
-                          (buffer-file-name))))
+      (let ((file-name
+             (if basename-p
+                 (ff-basename (buffer-file-name))
+               (buffer-file-name))))
         (progn (kill-new file-name)
                (message file-name)))
     (message "%s is not in a file" (buffer-name))))
+
+(defun prev-defun (&optional arg)
+  (interactive "p")
+  (let ((defun-count (if arg arg 1))
+        (start-pos (point)))
+    (progn
+      (beginning-of-defun defun-count)
+      (if (= (point) start-pos)
+          (forward-line (* -1 arg))))))
+
+(defun next-defun (&optional arg)
+  (interactive "p")
+  (prev-defun (* -1 arg)))
 
 (require 'ansi-color)
 (defun display-ansi-colors ()

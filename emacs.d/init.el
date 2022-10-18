@@ -42,7 +42,7 @@
       (file)))))
  '(package-selected-packages
    (quote
-    (systemd json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
+    (rust-mode lsp-java cmake-mode lsp-jedi lsp-pyright lsp-mode systemd json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio sr-speedbar ivy go-guru counsel-etags ansible rtags elpy flycheck company neotree flymake-go go-autocomplete tern-auto-complete tern go-complete jedi company-ycmd flycheck-ycmd ycmd rjsx-mode jsx-mode magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
  '(projectile-completion-system (quote ivy))
  '(sh-basic-offset 2)
  '(shell-prompt-pattern "^[^#$%>
@@ -112,16 +112,6 @@
 		(lambda () (setq comint-process-echoes t)))
 (remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
-;; Set up python autocomplete
-(require 'jedi)
-(require 'python)
-(setq jedi:complete-on-dot t)
-(add-hook 'python-mode-hook
-		(lambda () (progn
-           (jedi:setup)
-           (jedi-mode)
-           (set-fill-column 99))))
-
 ;; ediff setup
 (add-hook 'ediff-before-setup-hook 'save-ediff-before-windows)
 (add-hook 'ediff-quit-hook 'restore-ediff-before-windows)
@@ -149,28 +139,8 @@
 (setq js2-strict-missing-semi-warning nil)
 (setq js2-missing-semi-one-line-override t)
 
-;; Set up go completion
-(require 'go-complete)
-(require 'go-mode)
-(require 'go-playground)
-(add-to-list 'exec-path (getenv "GOPATH"))
-(add-hook 'completion-at-point-functions 'go-complete-at-point)
-(add-hook 'go-mode-hook
-		(lambda () (progn
-           (auto-complete-mode))))
-(setq gofmt-command "goimports")
-(add-hook 'before-save-hook #'gofmt-before-save)
 (add-hook 'before-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; Set up C++ stuff
-(add-hook 'c-mode-hook
-		(lambda () (progn
-           (company-mode)
-           (flycheck-mode))))
-(add-hook 'c++-mode-hook
-		(lambda () (progn
-           (company-mode)
-           (flycheck-mode))))
 
 ;; Initialize ivy mode
 (require 'ivy)
