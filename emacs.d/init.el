@@ -125,9 +125,6 @@
 (load "custom-org" t)
 (load "local-org" t)
 
-;;;; JIRA
-(setq jiralib-url "https://jira.purestorage.com/")
-
 ;; Set up JS(X) autocomplete
 (add-to-list 'load-path "/path/to/tern/emacs/")
 (autoload 'tern-mode "tern.el" nil t)

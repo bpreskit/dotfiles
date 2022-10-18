@@ -193,6 +193,10 @@ get opened with `browse-url`."
        (lambda (uri) (follow-spotify-link uri))))
   (org-link-set-parameters "spotify" :follow follow))
 
+(defun org-source ()
+  (interactive)
+  (org-insert-structure-template "src"))
+
 (load "ox-jira" t)
 
 ;; (require 'ox-slimhtml)
