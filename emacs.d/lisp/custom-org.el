@@ -5,21 +5,22 @@
 (require 's)
 
 ;; Misc org variables
-(setq org-ellipsis "⤵")
-(setq org-directory
+(setq org-ellipsis "⤵"
+      org-directory
       (if (and (f-writable? "/tmp/webdav") (f-dir-p "/tmp/webdav"))
           "/tmp/webdav"
-        "~/notes"))
-(setq org-default-notes-file (s-join "/" (list org-directory "captures.org")))
-(setq org-log-done (quote time))
-(setq org-log-into-drawer t)
-(setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)"))))
+        "~/notes")
+      org-default-notes-file (s-join "/" (list org-directory "captures.org"))
+      org-log-done (quote time)
+      org-log-into-drawer t
+      org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)")))
+      org-adapt-indentation nil)
 
 ;; Make agenda files refileable
 (setq custom-org-refile-targets
       '((org-agenda-files . (:maxlevel . 2))
-        (nil . (:level . 2))))
-(setq org-refile-targets (append org-refile-targets custom-org-refile-targets))
+        (nil . (:level . 2)))
+      org-refile-targets (append org-refile-targets custom-org-refile-targets))
 
 ;; Set up my webdavs as agenda-files
 (setq custom-org-agenda-files

@@ -56,6 +56,9 @@
 (define-key python-mode-map (kbd "M-n") 'python-nav-forward-defun)
 (define-key python-mode-map (kbd "M-p") 'python-nav-backward-defun)
 
+(require 'lsp-mode)
+(define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
+
 (require 'org)
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
 (define-key org-mode-map (kbd "C-c RET") 'org-insert-heading-respect-content)
