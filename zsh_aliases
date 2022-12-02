@@ -9,6 +9,7 @@ which gst >/dev/null && unalias gst
 which gsta >/dev/null && unalias gsta
 alias gst="git stash"
 alias gpl="git pull"
+alias gplrb="git pull --rebase"
 which gg >/dev/null && unalias gg
 alias ggrep="git grep"
 alias gloh='git log --oneline --decorate | head'
