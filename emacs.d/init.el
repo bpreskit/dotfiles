@@ -142,6 +142,7 @@
 ;; Initialize ivy mode
 (require 'ivy)
 (ivy-mode)
+(setq ivy-use-selectable-prompt t)
 
 ;; ansible
 (require 'ansible)
