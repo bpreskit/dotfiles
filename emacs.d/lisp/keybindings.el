@@ -58,6 +58,10 @@
 
 (require 'lsp-mode)
 (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
+(define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
+(define-key lsp-signature-mode-map (kbd "M-n") nil)
+(define-key lsp-signature-mode-map (kbd "M-p") nil)
+
 
 (require 'org)
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
@@ -74,6 +78,9 @@
 (require 'go-playground)
 (define-key go-mode-map (kbd "C-h d") 'godoc)
 (define-key go-playground-mode-map (kbd "C-c RET") 'go-playground-exec)
+
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "C-c C-d") nil)
 
 (require 'ansible)
 (require 'ansible-doc)

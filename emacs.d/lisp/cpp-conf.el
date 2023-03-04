@@ -1,6 +1,5 @@
 ;; Set up C++ stuff
-(require 'c++-mode)
-(require 'c-mode)
+(require 'cc-mode)
 (require 'lsp-mode)
 (require 'company)
 (require 'flycheck)
