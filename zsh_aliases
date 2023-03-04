@@ -9,6 +9,7 @@ which gst >/dev/null && unalias gst
 which gsta >/dev/null && unalias gsta
 alias gst="git stash"
 alias gpl="git pull"
+alias gplrb="git pull --rebase"
 which gg >/dev/null && unalias gg
 alias ggrep="git grep"
 alias gloh='git log --oneline --decorate | head'
@@ -83,4 +84,31 @@ function readint {
       a=$2
     fi
   done
+}
+
+function git-is-ancestor {
+  if [[ $# -ne 2 ]]; then
+    echo "usage: ${FUNCNAME[0]} <patch_sha> <other_sha>"
+  fi
+
+  local patch_sha="$1"
+  local other_sha="$2"
+
+  local short_patch=${patch_sha:0:8}
+  local short_other=${other_sha:0:8}
+
+  local either_ancestor=0
+
+  if git merge-base --is-ancestor $patch_sha $other_sha; then
+    echo "${short_patch} is an ancestor of ${short_other}."
+    either_ancestor=1
+  fi
+  if git merge-base --is-ancestor $other_sha $patch_sha; then
+    echo "${short_other} is an ancestor of ${short_patch}."
+    either_ancestor=1
+  fi
+
+  if [[ "${either_ancestor}" == 0 ]]; then
+    echo "Neither is an ancestor of the other."
+  fi
 }
