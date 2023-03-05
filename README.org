@@ -12,4 +12,5 @@
    - This repo.
    - Ansible (gotten with ~sudo apt install ansible~).
 2. Go to the ~ansible-setup~ directory.
-3. Run ~ansible-playbook -K -i local-machine setup.yml~ and give it your ~sudo~ password.
+3. Use ~sudo add-apt-repository~ to add the PPAs listed in ~roles/common_packages/vars/main.yml~.
+4. Run ~ansible-playbook -K -i local-machine setup.yml~ and give it your ~sudo~ password.

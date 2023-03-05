@@ -1,9 +1,9 @@
 ---
-- name: Add PPA repos
-  become: yes
-  apt_repository:
-    repo: "{{ item }}"
-  with_items: "{{ new_repos }}"
+# - name: Add PPA repos
+#   become: yes
+#   apt_repository:
+#     repo: "{{ item }}"
+#   with_items: "{{ new_repos }}"
 
 - name: Install universal packages
   become: yes

@@ -3,6 +3,7 @@
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . ansible))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 ;; Use json-mode on json files.
 (setq auto-mode-alist (remove '("\\.json\\'" . javascript-mode) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
