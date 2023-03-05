@@ -34,8 +34,10 @@
 
 - name: Add keys for special repos
   become: yes
-  apt_key:
-    url: "{{ item.key }}"
+  get_url:
+    url: "{{ item.key_url }}"
+    dest: "/etc/apt/trusted.gpg.d/{{ item.name }}.asc"
+    mode: 0644
   with_items: "{{ special_packages }}"
 
 - name: Add special repos

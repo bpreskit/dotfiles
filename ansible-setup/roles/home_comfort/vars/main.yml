@@ -27,15 +27,15 @@ special_packages:
   - syncthing:
     name: syncthing
     repo: deb https://apt.syncthing.net/ syncthing stable
-    key: https://syncthing.net/release-key.txt
-  # - spotify:
-  #   name: spotify-client
-  #   repo: deb http://repository.spotify.com stable non-free
-  #   key: https://download.spotify.com/debian/pubkey_0D811D58.gpg
-  - signal:
-    name: signal-desktop
-    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
-    key: https://updates.signal.org/desktop/apt/keys.asc
+    key_url: https://syncthing.net/release-key.txt
+  - vscodium:
+    name: codium
+    repo: deb https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main
+    key_url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+  - vscode:
+    name: code
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    key_url: https://packages.microsoft.com/keys/microsoft.asc
 
 misc_home_dir: "../misc-home"
 

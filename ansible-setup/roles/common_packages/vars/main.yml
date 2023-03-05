@@ -1,7 +1,7 @@
 ---
 always_debs:
   - davfs2
-  - emacs
+#  - emacs
   - git
   - gnupg
   - jq
@@ -9,3 +9,8 @@ always_debs:
   - tmux
   - w3m
   - zsh
+
+new_repos:
+  - ppa:mozillateam/firefox-next
+  - ppa:kelleyk/emacs
+  # - ppa:deadsnakes/ppa

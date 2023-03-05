@@ -1,4 +1,10 @@
 ---
+- name: Add PPA repos
+  become: yes
+  apt_repository:
+    repo: "{{ item }}"
+  with_items: "{{ new_repos }}"
+
 - name: Install universal packages
   become: yes
   apt:
@@ -6,8 +12,14 @@
     cache_valid_time: 3600
     name: "{{ always_debs }}"
 
+- name: Get zsh install script
+  get_url:
+    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install.sh
+    mode: 0777
+
 - name: Install oh my zsh
-  command: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  command: /tmp/install.sh
   args:
     creates: "{{ ansible_user_dir }}/.oh-my-zsh"
 
