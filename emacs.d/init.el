@@ -57,6 +57,7 @@
       "install-packages"
       "mycode"
       "setup-misc"
+      "setup-lsp"
       "setup-org"
       "keybindings"))
   (load-library lib))

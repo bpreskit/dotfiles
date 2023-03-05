@@ -1,0 +1,15 @@
+* How to use this repo's contents
+** Refresh emacs dotfiles
+#+begin_src
+./refresh-dots.sh --no-ansible
+#+end_src
+** Refresh all dotfiles
+#+begin_src
+./refresh-dots.sh --ansible-copy
+#+end_src
+** Setup new system
+1. You will need
+   - This repo.
+   - Ansible (gotten with ~sudo apt install ansible~).
+2. Go to the ~ansible-setup~ directory.
+3. Run ~ansible-playbook -K -i local-machine setup.yml~ and give it your ~sudo~ password.
