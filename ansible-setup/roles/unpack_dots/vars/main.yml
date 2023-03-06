@@ -1,10 +1,9 @@
 ---
 _all_copy:
   - zshrc
-  - zsh_aliases
   - gitignore_global
   - tmux.conf
-  - oh-my-zsh/custom/plugins/my-emacs/my-emacs.plugin.zsh
+  - oh-my-zsh/
   - emacs.d/
 _dev_copy:
   - zshrc_pure

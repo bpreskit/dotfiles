@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Start Webcam
-GenericName=
-Comment=Start webcam from phone
-Exec=gnome-terminal -- bash -c 'start-webcam.sh || sleep 4'
-Type=Application
-Terminal=false
-Keywords=Media;Camera;Video;

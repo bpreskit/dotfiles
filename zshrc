@@ -73,6 +73,7 @@ export LESS
 plugins=(
   git
   my-emacs
+  my-git
 )
 
 source $ZSH/oh-my-zsh.sh

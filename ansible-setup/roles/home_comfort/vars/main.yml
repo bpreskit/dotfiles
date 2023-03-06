@@ -1,18 +1,14 @@
 ---
 home_debs:
-  - adb
   - dnsmasq
   - ffmpeg
   - firefox
   - gimp
   - octave
-  - openvpn
+  - pandoc
   - steam
-  - telegram-desktop
-  - texlive-full
   - thunderbird
   - transmission
-  - vpnc
   - xkcdpass
 
 downloaded_debs:

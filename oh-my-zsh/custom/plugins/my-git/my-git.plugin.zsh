@@ -1,4 +1,3 @@
-alias em="emacs -nw"
 alias gs="git status"
 which gcm >/dev/null && unalias gcm
 alias gcm="git commit -m"
@@ -27,7 +26,7 @@ function gbdrm {
   git branch -d $branch
 }
 
-unalias grbo
+which grbo >/dev/null && unalias grbo
 
 function grbo {
   local branch=$1
