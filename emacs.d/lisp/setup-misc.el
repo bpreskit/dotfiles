@@ -36,6 +36,9 @@
 ;; Some random hooks.
 (linum-mode nil)
 (add-hook 'find-file-hook 'linum-mode-ifnt-log)
+(require 'all-the-icons)
+(require 'all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 ;; Octave stuff.
 (add-hook 'octave-mode-hook
