@@ -75,9 +75,7 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (require 'go-mode)
-(require 'go-playground)
 (define-key go-mode-map (kbd "C-h d") 'godoc)
-(define-key go-playground-mode-map (kbd "C-c RET") 'go-playground-exec)
 
 (require 'rust-mode)
 (define-key rust-mode-map (kbd "C-c C-d") nil)

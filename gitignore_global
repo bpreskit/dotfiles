@@ -15,6 +15,10 @@ TAGS
 # projectiles files
 .projectile
 
+# Python stuff
+__pycache__
+*.pyc
+
 #
 #
 # Other ignores?
