@@ -4,11 +4,20 @@
 # Grab the current date (%W) and time (%t):
 BPRESKITT_TIME_="%{$fg_bold[red]%}#%{$fg_bold[white]%}( %{$fg_bold[yellow]%}%W%{$reset_color%}@%{$fg_bold[white]%}%t )( %{$reset_color%}"
 
-# Grab the current machine name
-BPRESKITT_MACHINE_="%{$fg_bold[blue]%}%m%{$fg[white]%} ):%{$reset_color%}"
-
 # Grab the current username
 BPRESKITT_CURRENT_USER_="%{$fg_bold[green]%}%n%{$reset_color%}"
+
+# Grab the current machine name
+BPRESKITT_MACHINE_="%{$fg_bold[blue]%}%m%{$fg[white]%} )%{$reset_color%}"
+
+# Grab a random emoji
+random_emoji() {
+  local emojim=(🤠 🤓 🤖 😺 🦝 🐯 🦀 🪺 🍂 🥕 🍟 🍿 ☕️ 🌇 🚈 🪐 ⭐️ 🌌 ⚾️ 🎮 📚 🔰 🆒️ 🆗️ 🆙️)
+  local index=$((( $(date +%N | grep -Po "[0-9]{2}$") % 25)))
+
+  echo ${emojim[${index}]}
+}
+BPRESKITT_EMO_=" $(random_emoji) "
 
 # Grab the current filepath, use shortcuts: ~/Desktop
 # Append the current git branch, if in a git repository: ~aw@master
@@ -27,5 +36,5 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗✗✗"
 
 # Put it all together!
-PROMPT="$BPRESKITT_TIME_$BPRESKITT_CURRENT_USER_@$BPRESKITT_MACHINE_$BPRESKITT_LOCA_
+PROMPT="$BPRESKITT_TIME_$BPRESKITT_CURRENT_USER_@$BPRESKITT_MACHINE_$BPRESKITT_EMO_$BPRESKITT_LOCA_
  🥎 "
