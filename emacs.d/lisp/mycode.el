@@ -1,4 +1,4 @@
-(require 'cl)
+;; -*- mode: Lisp; lexical-binding: t; -*-
 (require 'find-file)
 
 (defun copy-line-to-end (&optional arg)
@@ -157,7 +157,7 @@
     (let ((target-dim (floor (* frac dim))))
       (funcall dim-fun (- target-dim cur-dim)))))
 
-(lexical-let (win-conf linum-mode-state)
+(let (win-conf linum-mode-state)
   (defun delete-other-windows-or-restore ()
     "Basically does (delete-other-windows), but saves your window config.  If you run it while there's only one window open, it restores from the saved config."
     (interactive)

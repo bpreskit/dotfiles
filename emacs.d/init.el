@@ -23,12 +23,11 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(column-number-mode t)
- '(fill-column 100)
  '(custom-theme-directory "~/.emacs.d/lisp/themes")
+ '(fill-column 100)
  '(indent-tabs-mode nil)
  '(openwith-associations
-   (quote
-    (("\\.pdf\\'" "xreader"
+   '(("\\.pdf\\'" "xreader"
       (file))
      ("\\.mp3\\'" "rhythmbox"
       (file))
@@ -39,11 +38,10 @@
      ("\\.ods\\'" "libreoffice"
       (file))
      ("\\.odt\\'" "libreoffice"
-      (file)))))
+      (file))))
  '(package-selected-packages
-   (quote
-    (blacken rust-mode cmake-mode lsp-jedi lsp-mode systemd json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio ivy counsel-etags ansible elpy flycheck company neotree flymake-go go-autocomplete go-complete jedi company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile)))
- '(projectile-completion-system (quote ivy))
+   '(lsp-pyright blacken rust-mode cmake-mode lsp-jedi lsp-mode systemd json-mode groovy-mode tide openwith ox-slimhtml nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode w3m load-theme-buffer-local ansible-doc yaml-mode golden-ratio ivy counsel-etags ansible elpy flycheck company neotree flymake-go go-autocomplete go-complete jedi company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode go-playground electric-case projectile))
+ '(projectile-completion-system 'ivy)
  '(sh-basic-offset 2)
  '(shell-prompt-pattern "^[^#$%>
 ]*[#$%>⇒] *")

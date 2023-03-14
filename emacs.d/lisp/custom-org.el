@@ -1,4 +1,4 @@
-(require 'cl)
+;; -*- mode: Lisp; lexical-binding: t; -*-
 (require 'f)
 (require 'org)
 (require 'org-agenda)
@@ -30,10 +30,8 @@
             "/tmp/webdav/work/interviews.org"
             "/tmp/webdav/bike/svbc.org"
             org-default-notes-file))
-(loop for file in custom-org-agenda-files
-      do (add-to-list 'org-agenda-files file))
-(loop for target in custom-org-refile-targets
-      do (add-to-list 'org-refile-targets target))
+(dolist (file custom-org-agenda-files) (add-to-list 'org-agenda-files file))
+(dolist (target custom-org-refile-targets) (add-to-list 'org-refile-targets target))
 
 ;; Org capture templates. `org-capture-templates'
 (setq org-capture-templates
@@ -135,15 +133,14 @@ a description by cutting off the '<type>:' prefix from `link'."
 (defun add-prefix-to-links (prefix)
 	"Use org-link-set-parameters to make links prefixed by `prefix`
 get opened with `browse-url`."
-	(lexical-let ((prefix prefix))
+	(let ((prefix prefix))
 		(let
 				((follow
 					(lambda (path) (browse-url (concat prefix ":" path)))))
 			(org-link-set-parameters prefix
                                :follow follow))))
 
-(cl-loop for prefix in prefix-list
-         do (add-prefix-to-links prefix))
+(dolist (prefix prefix-list) (add-prefix-to-links prefix))
 
 ;; Make slack:// style links go straight into desktop,
 ;; even if they were specified with https://.
