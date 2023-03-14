@@ -1,20 +1,26 @@
-alias gs="git status"
+# De-alias things we want to overwrite.
 which gcm >/dev/null && unalias gcm
-alias gcm="git commit -m"
+which gg >/dev/null && unalias gg
 which gl >/dev/null && unalias gl
-alias gl="git log --decorate"
-alias gmb="git merge-base"
+which gsh >/dev/null && unalias gsh
 which gst >/dev/null && unalias gst
 which gsta >/dev/null && unalias gsta
-alias gst="git stash"
+
+# Aliases.
+alias gcm="git commit -m"
+alias gcom='git checkout master'
+alias ggrep="git grep"
+alias ghash='git log -n 1 --pretty="%H"'
+alias gl="git log --decorate"
+alias gloh='git log --oneline --decorate | head'
+alias gmb="git merge-base"
 alias gpl="git pull"
 alias gplrb="git pull --rebase"
-which gg >/dev/null && unalias gg
-alias ggrep="git grep"
-alias gloh='git log --oneline --decorate | head'
-alias ghash='git log -n 1 --pretty="%H"'
-alias gcom='git checkout master'
+alias gs="git status"
+alias gsh="git show --decorate --no-patch"
+alias gst="git stash"
 
+# Functions
 function gbdrm {
   local branch=$1
   local remote_branch=$(git branch -r | grep $branch | tr -d "\*[:blank:]")
