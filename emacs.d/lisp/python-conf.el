@@ -1,6 +1,9 @@
 (require 'python)
 (require 'lsp-mode)
 (require 'lsp-jedi)
+(require 'lsp-pyright)
+
+(add-to-list 'exec-path (concat (getenv "HOME") "/.local/bin"))
 
 (lsp-register-client
  (make-lsp-client

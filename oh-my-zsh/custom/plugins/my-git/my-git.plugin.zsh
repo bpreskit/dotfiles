@@ -1,4 +1,5 @@
 # De-alias things we want to overwrite.
+which gbg >/dev/null && unalias gbg
 which gcm >/dev/null && unalias gcm
 which gg >/dev/null && unalias gg
 which gl >/dev/null && unalias gl
