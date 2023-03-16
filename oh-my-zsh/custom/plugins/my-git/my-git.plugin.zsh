@@ -13,7 +13,7 @@ alias gcom='git checkout master'
 alias ggrep="git grep"
 alias ghash='git log -n 1 --pretty="%H"'
 alias gl="git log --decorate"
-alias gloh='git log --oneline --decorate | head'
+alias gloh='git log -n10 --oneline --decorate'
 alias gmb="git merge-base"
 alias gpl="git pull"
 alias gplrb="git pull --rebase"
