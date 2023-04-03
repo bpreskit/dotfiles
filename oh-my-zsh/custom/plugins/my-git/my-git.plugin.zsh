@@ -100,8 +100,17 @@ function git-is-ancestor {
   local patch_sha="$1"
   local other_sha="$2"
 
-  local short_patch=${patch_sha:0:8}
-  local short_other=${other_sha:0:8}
+  # Shorten if it's a hex sha.
+  if grep -Pq "^[0-9a-fA-F]+$" <<< $patch_sha; then
+    local short_patch=${patch_sha:0:8}
+  else
+    local short_patch=${patch_sha}
+  fi
+  if grep -Pq "^[0-9a-fA-F]+$" <<< $other_sha; then
+    local short_other=${other_sha:0:8}
+  else
+    local short_other=${other_sha}
+  fi
 
   local either_ancestor=0
 
