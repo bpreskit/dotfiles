@@ -2,8 +2,10 @@
 (require 'lsp-mode)
 (require 'lsp-jedi)
 (require 'lsp-pyright)
+(require 'blacken)
 
 (add-to-list 'exec-path (concat (getenv "HOME") "/.local/bin"))
+(setq blacken-line-length "fill")
 
 (lsp-register-client
  (make-lsp-client
