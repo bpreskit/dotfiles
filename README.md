@@ -20,5 +20,6 @@ Setup new system
 2.  Go to the `ansible-setup` directory.
 3.  Use `sudo add-apt-repository` to add the PPAs listed in
     `roles/common_packages/vars/main.yml`.
-4.  Run `ansible-playbook -K -i local-machine setup.yml` and give it
+4.  Copy `ansible.cfg` to `/etc/ansible`.
+5.  Run `ansible-playbook -K -i local-machine setup.yml` and give it
     your `sudo` password.
