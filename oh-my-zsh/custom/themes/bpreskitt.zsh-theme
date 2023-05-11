@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Totally ripped off Dallas theme
 
 # Grab the current date (%W) and time (%t):
