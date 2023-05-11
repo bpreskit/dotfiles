@@ -120,7 +120,7 @@
 one of the special types in `auto-desc-link-prefixes', then form
 a description by cutting off the '<type>:' prefix from `link'."
   (if (and (s-blank-p desc)
-           (seq-find '(lambda (x) (s-prefix-p x link)) auto-desc-link-prefixes))
+           (seq-find (lambda (x) (s-prefix-p x link)) auto-desc-link-prefixes))
       (s-trim-right (s-chop-prefix (car (s-match ".*?:" link)) link))
     desc))
 
