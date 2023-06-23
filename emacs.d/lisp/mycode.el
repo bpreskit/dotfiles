@@ -243,3 +243,17 @@ With optional prefix argument, copy only the basename."
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
+
+(defun open-as-sudo (&optional remove-buffer-p)
+  "Open the file pointed to by this buffer as sudo.
+With optional prefix argument, also kill this buffer."
+
+  (interactive "P")
+  (let ((this-file (buffer-file-name)))
+    (if
+     (and
+      this-file
+      (not (tramp-tramp-file-p this-file)))
+     (progn
+       (if remove-buffer-p (kill-buffer))
+       (find-file (concat "/sudo::" this-file))))))
