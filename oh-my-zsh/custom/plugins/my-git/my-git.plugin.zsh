@@ -9,7 +9,7 @@ which gsta >/dev/null && unalias gsta
 
 # Aliases.
 alias gcm="git commit -m"
-alias gcom='git checkout master'
+alias gcom='git checkout master || git checkout main'
 alias ggrep="git grep"
 alias ghash='git log -n 1 --pretty="%H"'
 alias gl="git log --decorate"
