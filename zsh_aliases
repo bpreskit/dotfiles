@@ -1,4 +1,4 @@
-ZSH_THEME=bpreskitt
+alias ssh="nocorrect ssh"
 
 # Local variables:
 # mode: shell-script

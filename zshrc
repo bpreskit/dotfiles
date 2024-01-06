@@ -149,3 +149,7 @@ if [[ $TERM == "dumb" ]]; then
   unsetopt correct_all
   unsetopt rcs
 fi
+
+# Local variables:
+# mode: shell-script
+# End:
