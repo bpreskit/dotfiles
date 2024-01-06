@@ -6,6 +6,7 @@ which gl >/dev/null && unalias gl
 which gsh >/dev/null && unalias gsh
 which gst >/dev/null && unalias gst
 which gsta >/dev/null && unalias gsta
+which gwtls >/dev/null && unalias gwtls
 
 # Aliases.
 alias gcm="git commit -m"
@@ -20,6 +21,7 @@ alias gplrb="git pull --rebase"
 alias gs="git status"
 alias gsh="git show --decorate --no-patch"
 alias gst="git stash"
+alias gwtl="git worktree list"
 
 # Functions
 function gbdrm {
@@ -115,11 +117,11 @@ function git-is-ancestor {
   local either_ancestor=0
 
   if git merge-base --is-ancestor $patch_sha $other_sha; then
-    echo "${short_patch} is an ancestor of ${short_other}."
+    echo "${short_patch} (left) is an ancestor of ${short_other} (right)."
     either_ancestor=1
   fi
   if git merge-base --is-ancestor $other_sha $patch_sha; then
-    echo "${short_other} is an ancestor of ${short_patch}."
+    echo "${short_other} (right) is an ancestor of ${short_patch} (left)."
     either_ancestor=1
   fi
 
