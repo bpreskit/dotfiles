@@ -7,6 +7,7 @@
 ;; Use json-mode on json files.
 (setq auto-mode-alist (remove '("\\.json\\'" . javascript-mode) auto-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(setq js-indent-level 2)
 
 ;; Global modes
 ;; Do some stuff to set up smartparens.
