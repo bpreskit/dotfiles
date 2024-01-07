@@ -1,6 +1,7 @@
 ---
 copy_items:
   - zshrc
+  - zsh_aliases
   - gitignore_global
   - tmux.conf
   - oh-my-zsh/
