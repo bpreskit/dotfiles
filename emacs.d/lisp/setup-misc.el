@@ -21,7 +21,7 @@
 (sp-pair "\\\"" nil :actions :rem)
 
 ;; Auto-complete
-(global-auto-complete-mode)
+(global-company-mode)
 
 ;; Monitor whitespace problems
 (require 'whitespace)

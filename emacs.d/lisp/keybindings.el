@@ -1,5 +1,6 @@
 ;; Set my key shortcuts.
 
+(global-set-key (kbd "C-x x w") 'copy-file-name)
 (global-set-key (kbd "C-x ;") 'copy-line-to-end)
 (global-set-key (kbd "C-x :") 'copy-line-to-beginning)
 (global-set-key (kbd "C-x p") 'my-previous-window)
@@ -28,7 +29,6 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c l") 'windmove-right)
 (global-set-key (kbd "C-c +") 'golden-cycle)
-(global-set-key (kbd "C-M-i") 'auto-complete)
 (global-set-key (kbd "C-x 1") 'delete-other-windows-or-restore)
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "M-g r") 'vc-git-grep)
@@ -57,11 +57,14 @@
 (define-key python-mode-map (kbd "M-p") 'python-nav-backward-defun)
 
 (require 'lsp-mode)
+(setq lsp-keymap-prefix (kbd "C-x n"))
 (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
 (define-key lsp-signature-mode-map (kbd "M-n") nil)
 (define-key lsp-signature-mode-map (kbd "M-p") nil)
-
+(define-key lsp-signature-mode-map (kbd "M-<right>") #'lsp-signature-next)
+(define-key lsp-signature-mode-map (kbd "M-<left>") #'lsp-signature-previous)
+(define-key lsp-command-map (kbd "a r") 'lsp-rename)
 
 (require 'org)
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
@@ -90,12 +93,12 @@
 (define-key inferior-octave-mode-map (kbd "C-M-n") 'forward-sexp)
 (define-key inferior-octave-mode-map (kbd "C-M-p") 'backward-sexp)
 
-(require 'w3m)
-(define-key w3m-mode-map (kbd "C-c >") 'w3m-tab-next-buffer)
-(define-key w3m-mode-map (kbd "C-c <") 'w3m-tab-previous-buffer)
-
 (require 'man)
 (define-key Man-mode-map (kbd "l") 'recenter-top-bottom)
 
 (require 'magit)
 (define-key magit-blob-mode-map (kbd "RET") 'magit-blob-visit-file)
+(define-key magit-diff-mode-map (kbd "C-RET") 'magit-diff-visit-worktree-file)
+
+(require 'company)
+(define-key company-mode-map (kbd "C-M-i") 'company-complete-common)
