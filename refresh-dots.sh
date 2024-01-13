@@ -71,7 +71,7 @@ if [[ -z "${no_emacs}" ]]; then
         read -p "${repo_file} differs between repo and local. Ediff them? (y/N) " -N 1 resp
         if grep -qPi "^y$" <<<$resp; then
           ediff_cmd="(ediff \"${repo_file}\" \"${local_file}\")"
-          ALTERNATE_EDITOR="emacs -nw" emacsclient -nw --eval "$ediff_cmd"
+          ALTERNATE_EDITOR="emacs" emacsclient --eval "$ediff_cmd"
         else
           echo "Skipping ediff of ${repo_file} and ${local_file}."
         fi

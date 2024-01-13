@@ -1,5 +1,6 @@
+alias ip6="ip -6"
 alias ssh="nocorrect ssh"
 
-# Local variables:
-# mode: shell-script
-# End:
+## Local variables:
+## mode: shell-script
+## End:
