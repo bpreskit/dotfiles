@@ -181,24 +181,26 @@ get opened with `browse-url`."
        (lambda (url) (browse-url (insert-or-process-slack-link url)))))
   (org-link-set-parameters "slack" :follow follow))
 
-;; Make spotify URIs go into spotify.
-(defun follow-spotify-link (uri)
-  (start-process "spotify" nil "spotify"
-                 (s-concat "--uri="
-                           (if (not (s-prefix-p "spotify:" uri)) "spotify:")
-                           uri)))
-(let ((follow
-       (lambda (uri) (follow-spotify-link uri))))
-  (org-link-set-parameters "spotify" :follow follow))
-
 (defun org-source ()
   (interactive)
   (org-insert-structure-template "src"))
 
 (load "ox-jira" t)
 
-;; (require 'ox-slimhtml)
-;; (defun org-slimhtml ()
-;;   (interactive)
-;;   "Export the subtree as html."
-;;   (ox-slimhtml-export-as-html nil t))
+;; Sort by todo status and priority
+(defun my-org-get-priority (S)
+  "Get priority, but use 1 instead of 1000 for unlabeled headings."
+  (if (s-matches-p org-priority-regexp S)
+      (org-get-priority S)
+      1))
+
+(defun my-get-priority-key ()
+  "Get the sorting key (based on custom priority) for the heading at point."
+  (my-org-get-priority (org-get-heading)))
+
+(defun my-org-sort ()
+  "Sort by priority and todo order."
+  (interactive)
+  (progn
+    (org-sort-entries nil ?f 'my-get-key '>= nil nil)
+    (org-sort-entries nil ?o nil nil nil nil)))

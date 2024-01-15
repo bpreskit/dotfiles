@@ -40,16 +40,6 @@
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
 
-;; (require 'jedi)
-;; (define-key jedi-mode-map (kbd "M-.") 'jedi:goto-definition)
-;; (define-key jedi-mode-map (kbd "C-x 4 M-.") (lambda () (interactive) (jedi:goto-definition t)))
-;; (define-key jedi-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
-;; (define-key jedi-mode-map (kbd "C-c .") nil)
-;; (define-key jedi-mode-map (kbd "C-c ,") nil)
-;; (define-key jedi-mode-map (kbd "C-c ?") nil)
-;; (define-key jedi-mode-map (kbd "C-c C-d") 'jedi:show-doc)
-;; (define-key jedi-mode-map (kbd "C-M-i") 'jedi:complete)
-
 (require 'python)
 (define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)
 (define-key python-mode-map (kbd "C-c d") 'python-nav-up-list)
@@ -74,6 +64,7 @@
 (define-key org-mode-map (kbd "C-M-d") 'org-down-element)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
+(define-key org-mode-map (kbd "C-c ^") 'my-org-sort)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
@@ -102,3 +93,9 @@
 
 (require 'company)
 (define-key company-mode-map (kbd "C-M-i") 'company-complete-common)
+
+(require 'swiper)
+(define-prefix-command 'my-swiper-map)
+(define-key my-swiper-map (kbd "s") 'swiper-isearch)
+(define-key my-swiper-map (kbd "r") 'swiper-isearch-backward)
+(global-set-key (kbd "C-x w") 'my-swiper-map)
