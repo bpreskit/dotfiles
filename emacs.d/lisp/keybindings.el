@@ -93,6 +93,8 @@
 
 (require 'company)
 (define-key company-mode-map (kbd "C-M-i") 'company-complete-common)
+(define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+(define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 
 (require 'swiper)
 (define-prefix-command 'my-swiper-map)

@@ -3,6 +3,10 @@
 (require 'org)
 (require 'org-agenda)
 (require 's)
+(require 'company)
+
+;; No completion, since it's plain text.
+(add-hook 'org-mode-hook (lambda () (progn (company-mode -1))))
 
 ;; Misc org variables
 (setq org-ellipsis "⤵"
