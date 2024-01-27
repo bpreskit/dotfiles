@@ -202,9 +202,9 @@ get opened with `browse-url`."
   "Get the sorting key (based on custom priority) for the heading at point."
   (my-org-get-priority (org-get-heading)))
 
-(defun my-org-sort ()
-  "Sort by priority and todo order."
-  (interactive)
-  (progn
-    (org-sort-entries nil ?f 'my-get-key '>= nil nil)
-    (org-sort-entries nil ?o nil nil nil nil)))
+(defun my-org-sort (&optional arg)
+  "Sort by priority and todo order. With prefix argument, sorts parent of this subtree."
+  (interactive "P")
+  (if arg (org-up-element))
+  (org-sort-entries nil ?f 'my-get-priority-key '>= nil nil)
+  (org-sort-entries nil ?o nil nil nil nil))
