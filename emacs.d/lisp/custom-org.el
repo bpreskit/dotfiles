@@ -10,13 +10,9 @@
 
 ;; Misc org variables
 (setq org-ellipsis "⤵"
-      org-directory
-      (if (and (f-writable? "/tmp/webdav") (f-dir-p "/tmp/webdav"))
-          "/tmp/webdav"
-        "~/notes")
-      org-default-notes-file (s-join "/" (list org-directory "captures.org"))
       org-log-done (quote time)
       org-log-into-drawer t
+      org-default-notes-file "~/notes.org"
       org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "DONE(d)")))
       org-adapt-indentation nil)
 
@@ -26,15 +22,6 @@
         (nil . (:level . 2)))
       org-refile-targets (append org-refile-targets custom-org-refile-targets))
 
-;; Set up my webdavs as agenda-files
-(setq custom-org-agenda-files
-      (list "/tmp/webdav/work/work-todo.org"
-            "/tmp/webdav/stray-thoughts.org"
-            "/tmp/webdav/current_todo.org"
-            "/tmp/webdav/work/interviews.org"
-            "/tmp/webdav/bike/svbc.org"
-            org-default-notes-file))
-(dolist (file custom-org-agenda-files) (add-to-list 'org-agenda-files file))
 (dolist (target custom-org-refile-targets) (add-to-list 'org-refile-targets target))
 
 ;; Org capture templates. `org-capture-templates'
@@ -63,49 +50,7 @@
    :CAPTURE_CONTEXT: %a
    :END:
    - [[ddg:%\\1][%\\1]]%?"
-         :jump-to-captured t)
-       (
-        "w"
-        "Work item"
-        entry
-        (file+headline "/tmp/webdav/work/work-todo.org" "Unsorted")
-        "** %^{Todo state|TODO|NEXT|WAITING} %?\n   :PROPERTIES:\n   :CAPTURE_TIME: %U\n   :CAPTURE_CONTEXT: %a\n   :END:"
-        :jump-to-captured t)))
-
-;; Some helper functions that can filter agenda files
-(defun get-non-work-files ()
-  (seq-filter '(lambda (x) (not (s-match "work" x))) (org-agenda-files)))
-
-(defun get-work-files ()
-  (seq-filter '(lambda (x) (s-match "work" x)) (org-agenda-files)))
-
-;; Create my agenda views. See `org-agenda-custom-commands'.
-(setq custom-org-agenda-commands
-      '(("n" "Next items" todo "NEXT")
-        ("h" . "Home agendas")
-        ("ht" todo "" ((org-agenda-files (get-non-work-files))))
-        ("hn" todo "NEXT" ((org-agenda-files (get-non-work-files))))
-        ("ha" "Home agenda and next"
-         ((agenda "")
-          (todo "NEXT" ((org-agenda-overriding-header "Home next items"))))
-         ((org-agenda-files (get-non-work-files))))
-        ("hA" "Home agenda and all todo"
-         ((agenda "")
-          (todo "" ((org-agenda-overriding-header "Home todo items"))))
-         ((org-agenda-files (get-non-work-files))))
-        ("w" . "Work agendas")
-        ("wt" "All work todo's" todo "" ((org-agenda-files (get-work-files))))
-        ("wn" "All work NEXT" todo "NEXT" ((org-agenda-files (get-work-files))))
-        ("wa" "Work agenda and NEXT"
-         ((agenda "")
-          (todo "NEXT" ((org-agenda-overriding-header "Work next items"))))
-         ((org-agenda-files (get-work-files))))
-        ("wA" "Work agenda and all todo"
-         ((agenda "")
-          (todo "" ((org-agenda-overriding-header "Work todo items"))))
-         ((org-agenda-files (get-work-files))))))
-
-(setq org-agenda-custom-commands custom-org-agenda-commands)
+         :jump-to-captured t)))
 
 ;; Map special link types `org-link-abbrev-alist'.
 (setq custom-org-link-abbrevs
@@ -192,6 +137,7 @@ get opened with `browse-url`."
 (load "ox-jira" t)
 
 ;; Sort by todo status and priority
+(setq org-lowest-priority ?F)
 (defun my-org-get-priority (S)
   "Get priority, but use 1 instead of 1000 for unlabeled headings."
   (if (s-matches-p org-priority-regexp S)
@@ -201,6 +147,15 @@ get opened with `browse-url`."
 (defun my-get-priority-key ()
   "Get the sorting key (based on custom priority) for the heading at point."
   (my-org-get-priority (org-get-heading)))
+
+(defun my-cmp-priority (a b)
+  "Compare priority of two strings."
+  (let ((a-priority (my-org-get-priority a))
+        (b-priority (my-org-get-priority b)))
+
+     (if (= a-priority b-priority)
+         nil
+       (if (> a-priority b-priority) 1 -1))))
 
 (defun my-org-sort (&optional arg)
   "Sort by priority and todo order. With prefix argument, sorts parent of this subtree."
