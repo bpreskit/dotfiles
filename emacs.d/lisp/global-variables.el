@@ -1,4 +1,11 @@
 ;; Bunch of variables.
+(setq custom-file "~/.emacs/global-variables.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(lsp-keymap-prefix "n"))
 
 (setq
  ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"]
@@ -16,4 +23,5 @@
  tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>
 ]*#?[]#$%>⇒] *\\(\\[.*\\)*"
  ediff-window-setup-function 'ediff-setup-windows-plain
+ calendar-date-style "iso"
 )
