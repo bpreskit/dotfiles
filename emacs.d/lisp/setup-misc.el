@@ -38,9 +38,11 @@
 ;; Some random hooks.
 (linum-mode nil)
 (add-hook 'find-file-hook 'linum-mode-ifnt-log)
-(require 'all-the-icons)
-(require 'all-the-icons-dired)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(if (display-graphic-p)
+    (progn
+      (require 'all-the-icons)
+      (require 'all-the-icons-dired)
+      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
 
 ;; Octave stuff.
 (add-hook 'octave-mode-hook
@@ -51,11 +53,6 @@
 ;; Not sure what hide-ifdef is for.
 (setq hide-ifdef-lines t)
 (setq hide-ifdef-initially t)
-
-;; Prefer ansi-term to shell-mode.
-;; (add-hook 'shell-mode-hook
-;;    (lambda () (setq comint-process-echoes t)))
-;; (remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
 ;; ediff setup
 (add-hook 'ediff-before-setup-hook 'save-ediff-before-windows)
