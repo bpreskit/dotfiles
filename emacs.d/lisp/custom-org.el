@@ -24,6 +24,12 @@
 
 (dolist (target custom-org-refile-targets) (add-to-list 'org-refile-targets target))
 
+;; Enable plantuml
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml-1.2024.3.jar")
+
 ;; Org capture templates. `org-capture-templates'
 (setq org-capture-templates
       '((

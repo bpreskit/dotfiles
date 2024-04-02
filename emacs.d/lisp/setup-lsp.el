@@ -18,3 +18,6 @@
       "rust-conf"
       ))
   (load-library lib))
+
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]site-packages\\'")
