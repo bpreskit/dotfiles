@@ -47,7 +47,6 @@
 (define-key python-mode-map (kbd "M-p") 'python-nav-backward-defun)
 
 (require 'lsp-mode)
-(setq lsp-keymap-prefix (kbd "C-x n"))
 (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
 (define-key lsp-signature-mode-map (kbd "M-n") nil)
