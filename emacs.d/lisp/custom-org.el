@@ -25,10 +25,13 @@
 (dolist (target custom-org-refile-targets) (add-to-list 'org-refile-targets target))
 
 ;; Enable plantuml
+;; You'll need the plantuml apt package for this
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((plantuml . t)))
-(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml-1.2024.3.jar")
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+;; Customize the jar file like so, if you want new features.
+;; (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml-1.2024.3.jar")
 
 ;; Org capture templates. `org-capture-templates'
 (setq org-capture-templates
