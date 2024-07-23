@@ -130,12 +130,6 @@ fi
 # Some setting
 export IGNOREEOF=42
 
-if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
-   source "$HOME/.gvm/scripts/gvm"
-   LATEST_GO=$(gvm list | grep -E "go[0-9\.]+" | cut -d "o" -f 2 | sort -Vr | head -n 1)
-   gvm use "go${LATEST_GO}" > /dev/null
-fi
-
 # Username on VM at work is "ir"
 if [[ $(whoami) = "ir" ]]; then
     source ~/.zshrc_pure
@@ -150,6 +144,9 @@ if [[ $TERM == "dumb" ]]; then
   unsetopt correct_all
   unsetopt rcs
 fi
+
+# Use ripgrep.conf
+export RIPGREP_CONFIG_PATH=${HOME}/.config/ripgrep.conf
 
 # Local variables:
 # mode: shell-script
