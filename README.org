@@ -7,6 +7,15 @@
 #+begin_src
 ./refresh-dots.sh --ansible-copy
 #+end_src
+** Store and restore debian packages
+- Store:
+  #+begin_src
+dpkg --get-selections > dpkg-selections
+  #+end_src
+- Restore:
+  #+begin_src
+sudo dpkg --set-selections < dpkg-selections
+  #+end_src
 ** Setup new system
 1. You will need
    - This repo.
