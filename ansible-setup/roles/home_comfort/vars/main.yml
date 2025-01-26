@@ -17,6 +17,8 @@ downloaded_debs:
     url: "https://discordapp.com/api/download?platform=linux&format=deb"
   - name: zoom
     url: "https://zoom.us/client/latest/zoom_amd64.deb"
+  - name: obsidian
+    url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.7.7/obsidian_1.7.7_amd64.deb"
 
 special_packages:
   - syncthing:
