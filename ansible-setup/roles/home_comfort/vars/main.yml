@@ -3,6 +3,7 @@ home_debs:
   - dnsmasq
   - ffmpeg
   - firefox
+  - flameshot
   - gimp
   - octave
   - pandoc
@@ -14,8 +15,6 @@ home_debs:
 downloaded_debs:
   - name: discord
     url: "https://discordapp.com/api/download?platform=linux&format=deb"
-  - name: slack-desktop
-    url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb"
   - name: zoom
     url: "https://zoom.us/client/latest/zoom_amd64.deb"
 

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Obsidian
+MimeType=text/english;text/markdown;
+Exec=obsidian
+Icon=obsidian
+Terminal=false
+Type=Application
+Categories=TextEditor;
+StartupNotify=true
+StartupWMClass=Obsidian
+Keywords=obsidian;
+Actions=new-window;new-instance;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=/usr/local/bin/obsidian
+
+[Desktop Action new-instance]
+Name=New Instance
+Exec=/usr/local/bin/obsidian
