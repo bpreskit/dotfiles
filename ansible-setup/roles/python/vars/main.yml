@@ -2,7 +2,7 @@
 pythons:
   - python3
   - python3-pip
-  - python3.10
+  - python3.12
 
 _always_pips:
   - pytest

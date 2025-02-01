@@ -38,4 +38,3 @@ misc_home_dir: "../misc-home"
 
 misc_copy_items:
   - usr/local/bin
-  - usr/local/share

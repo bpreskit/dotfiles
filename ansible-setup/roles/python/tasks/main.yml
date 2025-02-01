@@ -7,6 +7,7 @@
     name: "{{ pythons }}"
 
 - name: Python | Install python packages
+  when: false
   become: yes
   pip:
     executable: pip3
