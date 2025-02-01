@@ -1,5 +1,6 @@
 ;; Set my key shortcuts.
 
+;; Global shortcuts
 (global-set-key (kbd "C-x x w") 'copy-file-name)
 (global-set-key (kbd "C-x ;") 'copy-line-to-end)
 (global-set-key (kbd "C-x :") 'copy-line-to-beginning)
@@ -39,6 +40,9 @@
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
+(require 'counsel)
+(if (counsel-require-program counsel-fzf-cmd t)
+    (define-key projectile-command-map (kbd "f") 'fzf-or-projectile))
 
 (require 'python)
 (define-key python-mode-map (kbd "C-c u") 'python-nav-backward-up-list)

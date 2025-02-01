@@ -257,3 +257,17 @@ With optional prefix argument, also kill this buffer."
      (progn
        (if remove-buffer-p (kill-buffer))
        (find-file (concat "/sudo::" this-file))))))
+
+(require 'counsel)
+(defun fzf-or-projectile (&optional prefix-p)
+    (interactive "P")
+    (if (projectile-project-root) (projectile-find-file)
+        (let ((fzf-basename (car (split-string counsel-fzf-cmd))))
+          (let
+              ((initial-directory
+                (if current-prefix-arg
+                    (counsel-read-directory-name (concat
+                                                  fzf-basename
+                                                  " in directory:"))
+                    nil)))
+          (counsel-fzf nil initial-directory)))))

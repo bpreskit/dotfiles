@@ -3,7 +3,8 @@
 (require 'lsp-pyright)
 (require 'blacken)
 
-(add-to-list 'exec-path (concat (getenv "HOME") "/.local/bin"))
+(add-to-list 'exec-path (concat "~/.local/bin"))
+(add-to-list 'exec-path (concat "~/.local/venvs/my_venv/bin"))
 (setq blacken-line-length 'fill)
 
 (add-hook 'python-mode-hook 'lsp-deferred)
