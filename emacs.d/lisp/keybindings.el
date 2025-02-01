@@ -37,6 +37,9 @@
 (global-set-key (kbd "C-<delete>") 'delete-region)
 (global-set-key (kbd "M-n") 'next-defun)
 (global-set-key (kbd "M-p") 'prev-defun)
+(global-set-key (kbd "C-x C-z") nil)
+(global-set-key (kbd "C-z") nil)
+(global-set-key (kbd "M-z") nil)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
