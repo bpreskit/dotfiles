@@ -1,6 +1,7 @@
 (require 'ox-md)
 (org-export-define-derived-backend 'jira 'md
   :translate-alist '((bold . jira-bold)
+                     (table . jira-table)
                      (italic . jira-italic)
                      (underline . jira-underline)
                      (strike-through . jira-strikethrough)
@@ -43,6 +44,8 @@
     (format "{{%s}}" value)))
 (defun jira-subscript (_subscript contents _info)
   (format "_%s" contents))
+(defun jira-table (_table contents _info)
+  "{{EXPORT TABLE}}")
 
 ;; Adapted from org-md-example-block in ox-md.el.
 (defun jira-code (code-block _contents _info)
