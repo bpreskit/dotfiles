@@ -170,5 +170,11 @@ get opened with `browse-url`."
   "Sort by priority and todo order. With prefix argument, sorts parent of this subtree."
   (interactive "P")
   (if arg (org-up-element))
+  (org-sort-entries nil ?A nil nil nil nil)
   (org-sort-entries nil ?f 'my-get-priority-key '>= nil nil)
   (org-sort-entries nil ?o nil nil nil nil))
+
+(setq org-after-refile-insert-hook
+      '(lambda () (org-up-heading-safe) (my-org-sort)))
+(setq org-after-sorting-entries-or-items-hook
+      '(lambda () (progn (org-overview) (org-reveal) (org-show-children))))
