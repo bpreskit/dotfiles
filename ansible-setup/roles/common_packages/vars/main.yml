@@ -1,16 +1,18 @@
 ---
 always_debs:
+  - bat
   - davfs2
-#  - emacs
+  - emacs
+  - fzf
   - git
+  - git-delta
   - gnupg
   - jq
   - openssh-server
+  - ripgrep
   - tmux
   - w3m
   - zsh
 
 new_repos:
   - ppa:mozillateam/firefox-next
-  - ppa:kelleyk/emacs
-  # - ppa:deadsnakes/ppa

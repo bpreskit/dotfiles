@@ -166,16 +166,16 @@
       (catch 'done
 	(if (and one-window saved-conf)
       (progn
-              (linum-mode linum-mode-state)
+              (display-line-numbers-mode linum-mode-state)
         (set-window-configuration win-conf)
         (setq win-conf nil)
         (throw 'done nil)))
 	(if (not one-window)
       (progn
         (setq win-conf (current-window-configuration))
-              (setq linum-mode-state (if linum-mode t -1))
+              (setq linum-mode-state (if display-line-numbers-mode t -1))
         (delete-other-windows)
-              (linum-mode -1)
+              (display-line-numbers-mode -1)
         (throw 'done nil)))))))
 
 (defvar ediff-before-windows)
@@ -210,7 +210,7 @@
   (if (not (and
            (stringp (buffer-file-name))
            (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
-      (linum-mode 1)))
+      (display-line-numbers-mode 1)))
 
 (defun copy-file-name (&optional basename-p)
   "Copy name of file pointed to by this buffer as kill.

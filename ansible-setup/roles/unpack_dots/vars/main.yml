@@ -20,3 +20,7 @@ git_config_items:
     value: "{{ ansible_user_dir }}/.gitignore_global"
   - name: core.editor
     value: "emacsclient -a=\"emacs -nw\""
+  - name: core.pager
+    value: "delta"
+  - name: interactive.diffFilter
+    value: "delta --color-only"

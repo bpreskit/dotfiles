@@ -29,20 +29,16 @@
 (require 'whitespace)
 (setq whitespace-style '(face trailing empty space-after-tab space-before-tab))
 (add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; openwith the appropriate utilities
-(require 'openwith)
-(openwith-mode)
 (setq-default indent-tabs-mode nil)
 
 ;; Some random hooks.
-(linum-mode nil)
+(display-line-numbers-mode nil)
 (add-hook 'find-file-hook 'linum-mode-ifnt-log)
-(if (display-graphic-p)
-    (progn
-      (require 'all-the-icons)
-      (require 'all-the-icons-dired)
-      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
+(require 'all-the-icons)
+(require 'all-the-icons-dired)
+(if (not (file-exists-p "~/.local/share/fonts/all-the-icons.ttf"))
+    (all-the-icons-install-fonts))
+(add-hook 'dired-mode-hook '(lambda () (if (display-graphic-p) (all-the-icons-dired-mode))))
 
 ;; Octave stuff.
 (add-hook 'octave-mode-hook
