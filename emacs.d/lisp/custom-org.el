@@ -1,9 +1,11 @@
 ;; -*- mode: Lisp; lexical-binding: t; -*-
+(require 'company)
 (require 'f)
 (require 'org)
 (require 'org-agenda)
+(require 'ox-pandoc)
 (require 's)
-(require 'company)
+(require 'seq)
 
 ;; No completion, since it's plain text.
 (add-hook 'org-mode-hook (lambda () (progn (company-mode -1))))
@@ -116,7 +118,7 @@ get opened with `browse-url`."
   "E.g., 'p1556311700001200' -> '1556311700.001200'"
   (if ts (let
              ((no-p-ts (s-chop-prefix "p" ts)))
-           (s-join "." (list (subseq no-p-ts 0 -6) (subseq no-p-ts -6))))))
+           (s-join "." (list (substring no-p-ts 0 -6) (substring no-p-ts -6))))))
 
 ;; Transform https:// link into slack:// link.
 (defun process-slack-link (link)
@@ -175,6 +177,6 @@ get opened with `browse-url`."
   (org-sort-entries nil ?o nil nil nil nil))
 
 (setq org-after-refile-insert-hook
-      '(lambda () (org-up-heading-safe) (my-org-sort)))
+      '(lambda () (org-up-heading-safe) (my-org-sort) (save-buffer)))
 (setq org-after-sorting-entries-or-items-hook
       '(lambda () (progn (org-overview) (org-reveal) (org-show-children))))

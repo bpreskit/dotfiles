@@ -12,6 +12,7 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(byte-compile-warnings nil)
+ '(auth-source-save-behavior nil)
  '(column-number-mode t)
  '(custom-theme-directory "~/.emacs.d/lisp/themes")
  '(inhibit-startup-screen t)
@@ -19,9 +20,10 @@
  '(org-export-with-sub-superscripts '{})
  '(org-use-sub-superscripts '{})
  '(package-selected-packages
-   '(zenburn-theme clipetty xclip counsel project xref xref-union plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
+   '(zenburn-theme clipetty xclip ox-pandoc pandoc counsel project xref xref-union plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
  '(safe-local-variable-values
-   '((org-agenda-skip-archived-trees)
+   '((org-agenda-skip-archived-trees . t)
+     (org-agenda-skip-archived-trees)
      (org-sparse-tree-open-archived-trees . t)
      (org-cycle-open-archived-trees . t)))
  '(shell-prompt-pattern "^[^#$%>\12]*[#$%>⇒] *")
