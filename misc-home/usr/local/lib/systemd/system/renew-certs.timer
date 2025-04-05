@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodic cert renew
+
+[Timer]
+# Run every 25 days
+# Certs last 90 days and may be renewed within 30 days of expiry
+OnActiveSec=2160000
+
+[Install]
+WantedBy=timers.target
