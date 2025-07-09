@@ -40,6 +40,8 @@
 (global-set-key (kbd "C-x C-z") nil)
 (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "M-z") nil)
+(global-set-key (kbd "C-x t") nil)
+(global-set-key [remap imenu] 'counsel-imenu)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)

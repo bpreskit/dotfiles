@@ -93,7 +93,10 @@ are included.")
    `(message-header-subject ((,class (:foreground "#cae682"))))
    `(message-header-to ((,class (:foreground "#cae682"))))
    `(message-cited-text ((,class (:foreground "#99968b"))))
-   `(message-separator ((,class (:foreground "#e5786d" :weight bold))))))
+   `(message-separator ((,class (:foreground "#e5786d" :weight bold))))
+   ;; Org faces
+   `(org-block ((,class (:foreground "whitesmoke" :background "gray9"))))
+   ))
 
 (custom-theme-set-variables
  'my-wombat
