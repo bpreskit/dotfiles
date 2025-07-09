@@ -16,6 +16,7 @@
       "java-conf"
       "python-conf"
       "rust-conf"
+      ;; "augment-conf"
       ))
   (load-library lib))
 

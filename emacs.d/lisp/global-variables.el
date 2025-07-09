@@ -19,7 +19,7 @@
  '(org-export-with-sub-superscripts '{})
  '(org-use-sub-superscripts '{})
  '(package-selected-packages
-   '(counsel plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
+   '(zenburn-theme clipetty xclip counsel project xref xref-union plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons-ivy all-the-icons-dired all-the-icons org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
  '(safe-local-variable-values
    '((org-agenda-skip-archived-trees)
      (org-sparse-tree-open-archived-trees . t)
