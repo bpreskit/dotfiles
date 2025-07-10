@@ -73,6 +73,7 @@
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 (define-key org-mode-map (kbd "C-c ^") 'my-org-sort)
+(define-key org-mode-map [remap org-goto] 'counsel-org-goto)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
