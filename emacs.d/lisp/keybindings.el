@@ -106,7 +106,5 @@
 (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 
 (require 'swiper)
-(define-prefix-command 'my-swiper-map)
-(define-key my-swiper-map (kbd "s") 'swiper-isearch)
-(define-key my-swiper-map (kbd "r") 'swiper-isearch-backward)
-(global-set-key (kbd "C-x w") 'my-swiper-map)
+(global-set-key (kbd "C-M-s") 'swiper-isearch)
+(global-set-key (kbd "C-M-r") 'swiper-isearch-backward)
