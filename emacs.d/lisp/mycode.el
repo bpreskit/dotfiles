@@ -261,13 +261,21 @@ With optional prefix argument, also kill this buffer."
 (require 'counsel)
 (defun fzf-or-projectile (&optional prefix-p)
     (interactive "P")
-    (if (projectile-project-root) (projectile-find-file)
+    (if prefix-p
         (let ((fzf-basename (car (split-string counsel-fzf-cmd))))
           (let
               ((initial-directory
-                (if current-prefix-arg
-                    (counsel-read-directory-name (concat
-                                                  fzf-basename
-                                                  " in directory:"))
-                    nil)))
-          (counsel-fzf nil initial-directory)))))
+                (counsel-read-directory-name
+                 (concat
+                  fzf-basename
+                  " in directory:"))))
+            (counsel-fzf nil initial-directory)))
+        (if
+         (projectile-project-root) (projectile-find-file)
+         (counsel-fzf)
+         )))
+
+(defun my-counsel-imenu ()
+  (interactive)
+  (push-mark (point) nil nil)
+  (counsel-imenu))

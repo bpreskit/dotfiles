@@ -180,3 +180,7 @@ get opened with `browse-url`."
       '(lambda () (org-up-heading-safe) (my-org-sort) (save-buffer)))
 (setq org-after-sorting-entries-or-items-hook
       '(lambda () (progn (org-overview) (org-reveal) (org-show-children))))
+
+(defun my-counsel-org-goto (&optional prefix-p)
+  (interactive "P")
+  (if prefix-p (counsel-org-goto-all) (counsel-org-goto)))
