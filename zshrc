@@ -88,44 +88,9 @@ PATH=$PATH:$HOME/.local/bin
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Set personal aliases
 if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
-fi
-
-# These lines set up the SSH agent, which is necessary to get into
-# your SSH connections.
-SSH_ENV="$HOME/.ssh/environment"
-
-function start_agent {
-    echo "Initialising new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-    if [[ -f ~/.ssh/brian_home ]]; then
-      ssh-add ~/.ssh/brian_home
-    fi
-}
-
-if [[ ! $TERM == "dumb" ]]; then
-  if [ -f "${SSH_ENV}" ]
-  then
-    . "${SSH_ENV}" > /dev/null
-    ps h ${SSH_AGENT_PID} &>/dev/null || {
-      start_agent;
-    }
-  else
-    start_agent;
-  fi
 fi
 
 # Some setting
