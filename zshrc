@@ -74,6 +74,7 @@ plugins=(
   git
   my-emacs
   my-git
+  my-fzf
 )
 
 source $ZSH/oh-my-zsh.sh
