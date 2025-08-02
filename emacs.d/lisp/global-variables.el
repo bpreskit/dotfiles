@@ -11,8 +11,8 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(byte-compile-warnings nil)
  '(auth-source-save-behavior nil)
+ '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(custom-theme-directory "~/.emacs.d/lisp/themes")
  '(inhibit-startup-screen t)
