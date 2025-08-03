@@ -45,5 +45,5 @@ function fzfd {
     fi
     find "${directory}" | \
         fzf --bind "alt-e:become(emacsclient -n {1}; wmctrl -a '${MY_EMACS_WINDOW}')" \
-            --bind "alt-e:become(batcat --style=numbers --color=always {1})"
+            --bind "alt-l:become(batcat --style=numbers --color=always {1})"
 }
