@@ -11,34 +11,56 @@
 
 ;; Global modes
 ;; Do some stuff to set up smartparens.
-(require 'smartparens)
-(smartparens-global-mode)
-(show-smartparens-global-mode)
-(setq sp-escape-quotes-after-insert nil)
-(setq sp-autoescape-string-quote nil)
-(sp-pair "\"" nil :actions :rem)
-(sp-pair "'" nil :actions :rem)
-(sp-pair "`" nil :actions :rem)
-(sp-pair "\\\"" nil :actions :rem)
+(use-package smartparens
+  :custom
+  (sp-escape-quotes-after-insert nil)
+  (sp-autoescape-string-quote nil)
+  :config
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+  (sp-pair "\"" nil :actions :rem)
+  (sp-pair "'" nil :actions :rem)
+  (sp-pair "`" nil :actions :rem)
+  (sp-pair "\\\"" nil :actions :rem)
+  )
 
 ;; Auto-complete
-(require 'company)
-(global-company-mode)
+(use-package company
+  :init
+  (global-company-mode)
+)
 
 ;; Monitor whitespace problems
-(require 'whitespace)
-(setq whitespace-style '(face trailing empty space-after-tab space-before-tab))
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(use-package whitespace
+  :hook (before-save . whitespace-cleanup)
+  :custom
+  (whitespace-style '(face trailing empty space-after-tab space-before-tab))
+)
 (setq-default indent-tabs-mode nil)
 
 ;; Some random hooks.
 (display-line-numbers-mode nil)
 (add-hook 'find-file-hook 'linum-mode-ifnt-log)
-(require 'all-the-icons)
-(require 'all-the-icons-dired)
-(if (not (file-exists-p "~/.local/share/fonts/all-the-icons.ttf"))
-    (all-the-icons-install-fonts))
-(add-hook 'dired-mode-hook '(lambda () (if (display-graphic-p) (all-the-icons-dired-mode))))
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :config
+  (if (not (file-exists-p "~/.local/share/fonts/all-the-icons.ttf"))
+      (all-the-icons-install-fonts)))
+(use-package all-the-icons-dired
+  :if (display-graphic-p)
+  :hook dired-mode)
+(use-package all-the-icons-ivy
+  :if (display-graphic-p)
+  :after (ivy)
+  :init (all-the-icons-ivy-setup)
+)
+(use-package all-the-icons-completion
+  :if (display-graphic-p)
+)
+(use-package marginalia
+  :custom (marginalia-align 'left)
+  :init (marginalia-mode)
+)
 
 ;; Octave stuff.
 (add-hook 'octave-mode-hook
@@ -55,22 +77,33 @@
 (add-hook 'ediff-quit-hook 'restore-ediff-before-windows)
 
 ;; Initialize ivy mode
-(require 'ivy)
-(ivy-mode)
-(setq ivy-use-selectable-prompt t)
+(use-package ivy
+  :custom
+  (ivy-use-selectable-prompt t)
+  :config
+  (ivy-mode)
+)
 
 ;; ansible
 (require 'ansible)
 (require 'ansible-doc)
 
 ;; projectile
-(require 'projectile)
-(projectile-mode)
+(use-package projectile
+  :config
+  (projectile-mode)
+  )
 
 ;; Turn off scroll bars, menu bars, tool bars.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(use-package inhibit-mouse
+  :ensure t
+  :custom
+  (inhibit-mouse-button-numbers '(2 3 4 5))
+  :config
+  (inhibit-mouse-mode 1))
 
 ;; Set up JS(X) autocomplete
 (add-to-list 'load-path "/path/to/tern/emacs/")
