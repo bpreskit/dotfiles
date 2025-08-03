@@ -70,6 +70,13 @@
 (setq org-link-abbrev-alist
       (append org-link-abbrev-alist custom-org-link-abbrevs))
 
+;; Make emails linkable
+;; Use https://github.com/garoose/copy-message-id extension to get the message id
+(org-add-link-type "email" 'org-thunderbird-open)
+
+(defun org-thunderbird-open (link)
+  (start-process "thunderbird" nil "thunderbird" (concat "mid:" link)))
+
 ;; Set category of links where the link determines the description.
 ;; Do that.
 (setq auto-desc-link-prefixes
