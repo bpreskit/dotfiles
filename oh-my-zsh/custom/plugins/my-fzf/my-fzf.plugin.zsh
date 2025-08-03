@@ -19,6 +19,22 @@ function fzg {
         --preview-window '+{2}/2'
 }
 
+function fzgb {
+    for branch in $(git branch | cut -c 3-); do
+        echo "branch: $branch"
+        git show --decorate --no-patch $branch
+        echo "\0"
+    done | \
+        fzf \
+            --no-multi \
+            --read0 \
+            --gap \
+            --highlight-line \
+            --color "header:italic" \
+            --header "M-c to checkout, RET to print" \
+            --bind 'alt-c:become(echo {} | grep -P "^branch: " | cut -d " " -f 2- | xargs git checkout)'
+}
+
 function gbg {
     git branch | fzf --preview 'git show --color=always {-1}' \
                      --height 40% --layout reverse
@@ -32,7 +48,7 @@ function gcog {
                      --layout reverse
 }
 
-function fzglog {
+function fzgl {
     git log --decorate |
         awk '/^commit/ { print "\0" } { print }' |
         fzf --read0 --gap --ansi --highlight-line
