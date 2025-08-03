@@ -89,6 +89,10 @@ do_emacs () {
         maybe_ediff_files ${local_file} ${repo_file}
     done
 
+    # Special handling for weirdly-named files.
+    maybe_ediff_files ~/.emacs.d/.projectile projectile
+    maybe_ediff_files ~/.emacs.d/.dir-locals.el dir-locals.el.suffix
+
     popd
 }
 

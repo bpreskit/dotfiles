@@ -1,0 +1,7 @@
+((nil . ((projectile-indexing-method . native)
+         (projectile-enable-caching . t)
+         )))
+
+;; Local variables:
+;; mode: lisp
+;; End:
