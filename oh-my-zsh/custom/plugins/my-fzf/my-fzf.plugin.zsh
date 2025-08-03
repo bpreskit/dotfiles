@@ -1,5 +1,4 @@
 export FZF_DEFAULT_OPTS='--multi --bind "alt-v:page-up,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept"'
-export MY_FZF_EMACS_WINDOW=${MY_FZF_EMACS_WINDOW:-"GNU Emacs"}
 
 function fzg {
     local rg_dir=""
@@ -15,7 +14,7 @@ function fzg {
         --bind "change:$reload" \
         --delimiter : \
         --bind "alt-l:become(batcat --pager='less +{2}' --style=numbers --color=always --highlight-line {2} {1})" \
-        --bind "alt-e:become(emacsclient -n +{2} {1}; wmctrl -a '${MY_FZF_EMACS_WINDOW}')" \
+        --bind "alt-e:become(emacsclient -n +{2} {1}; wmctrl -a '${MY_EMACS_WINDOW}')" \
         --preview 'batcat --style=numbers --color=always --highlight-line {2} {1}' \
         --preview-window '+{2}/2'
 }
@@ -44,5 +43,7 @@ function fzfd {
     if [[ -z "${directory}" ]]; then
         directory="."
     fi
-    find "${directory}" | fzf
+    find "${directory}" | \
+        fzf --bind "alt-e:become(emacsclient -n {1}; wmctrl -a '${MY_EMACS_WINDOW}')" \
+            --bind "alt-e:become(batcat --style=numbers --color=always {1})"
 }

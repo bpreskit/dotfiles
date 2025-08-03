@@ -109,6 +109,9 @@ fi
 # Use ripgrep.conf
 export RIPGREP_CONFIG_PATH=${HOME}/.config/ripgrep.conf
 
+# Used in a few places to auto-focus on emacs.
+export MY_EMACS_WINDOW=${MY_EMACS_WINDOW:-"GNU Emacs"}
+
 # Local variables:
 # mode: shell-script
 # End:

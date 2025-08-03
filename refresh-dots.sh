@@ -14,6 +14,9 @@ EOF
   exit 1
 }
 
+# For focusing on ediff
+export MY_EMACS_WINDOW=${MY_EMACS_WINDOW:-"GNU Emacs"}
+
 # Keep this in sync with copy_items in unpack_dots/vars/main.yml
 OTHER_DOTS=(
   zshrc
@@ -54,7 +57,7 @@ maybe_ediff_files () {
         if ! diff -q "${repo_file}" "${local_file}" &>/dev/null; then
             read -p "${repo_file} differs between repo and local. Ediff them? (y/N) " -N 1 resp
             if grep -qPi "^y$" <<<$resp; then
-                wmctrl -a "GNU Emacs"
+                wmctrl -a "${MY_EMACS_WINDOW}"
                 ediff_cmd="(ediff \"${repo_file}\" \"${local_file}\")"
                 ALTERNATE_EDITOR="emacs" emacsclient --eval "$ediff_cmd"
                 wmctrl -a "ediff"
@@ -102,7 +105,7 @@ do_other () {
     pushd "${repo_dir}"
     local repo_file
     local local_file
-    for repo_file in ${OTHER_DOTS}; do
+    for repo_file in ${OTHER_DOTS[@]}; do
         local_file="${HOME}/.${repo_file}"
         maybe_ediff_files "${local_file}" "${repo_file}"
     done
