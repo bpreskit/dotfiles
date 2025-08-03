@@ -41,6 +41,7 @@
 (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "M-z") nil)
 (global-set-key (kbd "C-x t") nil)
+(global-set-key [remap find-file] 'counsel-find-file)
 (global-set-key [remap imenu] 'my/counsel-imenu)
 
 (require 'projectile)

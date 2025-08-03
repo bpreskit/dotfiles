@@ -20,9 +20,11 @@
  '(org-export-with-sub-superscripts '{})
  '(org-use-sub-superscripts '{})
  '(package-selected-packages
-   '(inhibit-mouse rg marginalia protobuf-mode zenburn-theme clipetty xclip ox-pandoc pandoc counsel project xref xref-union plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons all-the-icons-completion all-the-icons-dired all-the-icons-ivy org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
+   '(inhibit-mouse rg which-key ivy-hydra marginalia protobuf-mode zenburn-theme clipetty xclip ox-pandoc pandoc counsel project xref xref-union plantuml-mode python-black gnu-elpa-keyring-update lsp-pyright blacken rust-mode cmake-mode lsp-mode systemd json-mode groovy-mode tide nginx-mode apache-mode all-the-icons all-the-icons-completion all-the-icons-dired all-the-icons-ivy org org-bullets markdown-mode load-theme-buffer-local ansible-doc yaml-mode ivy ansible elpy flycheck company flymake-go go-autocomplete go-complete company-ycmd flycheck-ycmd ycmd magit dash smartparens multi-term mo-git-blame go-mode electric-case projectile swiper))
  '(safe-local-variable-values
-   '((blacken-mode . t)
+   '((projectile-indexing-method . native)
+     (projectile-enable-caching . t)
+     (blacken-mode . t)
      (org-agenda-skip-archived-trees . t)
      (org-sparse-tree-open-archived-trees . t)
      (org-cycle-open-archived-trees . t)))
