@@ -65,7 +65,7 @@
 
 ;; Map special link types `org-link-abbrev-alist'.
 (setq custom-org-link-abbrevs
-      '(("ddg" . "https://duckduckgo.com/?q=") ("jira" . "https://jira.purestorage.com/browse/")))
+      '(("ddg" . "https://duckduckgo.com/?q=")))
 
 (setq org-link-abbrev-alist
       (append org-link-abbrev-alist custom-org-link-abbrevs))
@@ -108,45 +108,6 @@ get opened with `browse-url`."
                                :follow follow))))
 
 (dolist (prefix prefix-list) (add-prefix-to-links prefix))
-
-;; Make slack:// style links go straight into desktop,
-;; even if they were specified with https://.
-
-;; Team ID for slack's API.
-(defconst purestorage-slack-team-id "T02UZQP39")
-
-;; Helpers to construct slack:// URL
-(defun slack-link-from-components (channel ts)
-  (s-concat "slack://channel?" "team=" purestorage-slack-team-id "&"
-            "id=" channel
-            (if ts "&message=") (slack-format-ts ts)))
-
-(defun slack-format-ts (ts)
-  "E.g., 'p1556311700001200' -> '1556311700.001200'"
-  (if ts (let
-             ((no-p-ts (s-chop-prefix "p" ts)))
-           (s-join "." (list (substring no-p-ts 0 -6) (substring no-p-ts -6))))))
-
-;; Transform https:// link into slack:// link.
-(defun process-slack-link (link)
-  "Turn a link from Slack's 'Copy Link' think into a proper
-`slack://`-style deep link."
-  (interactive)
-  (let* ((components (s-split "/" (s-chop-prefix (car (s-match ".*archives/" link)) link) t))
-         (channel (car components))
-         (ts (car (cdr components))))
-    (slack-link-from-components channel ts)))
-
-;; Idempotently transform to slack://
-(defun insert-or-process-slack-link (tag)
-  (if (s-contains-p "purestorage.slack.com" tag)
-      (process-slack-link tag)
-    (s-concat (if (not (s-prefix-p "slack://" tag)) "slack://") tag)))
-
-;; Put it into org!
-(let ((follow
-       (lambda (url) (browse-url (insert-or-process-slack-link url)))))
-  (org-link-set-parameters "slack" :follow follow))
 
 (defun org-source ()
   (interactive)

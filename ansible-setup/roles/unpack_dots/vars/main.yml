@@ -16,7 +16,7 @@ git_config_items:
   - name: user.name
     value: "Brian Preskitt"
   - name: user.email
-    value: "{{ 'bppresk@outlook.com' if at_home|bool else 'bpreskitt@purestorage.com' }}"
+    value: "{{ 'bppresk@outlook.com' }}"
   - name: core.excludesfile
     value: "{{ ansible_user_dir }}/.gitignore_global"
   - name: core.editor

@@ -96,11 +96,6 @@ fi
 # Some setting
 export IGNOREEOF=42
 
-# Username on VM at work is "ir"
-if [[ $(whoami) = "ir" ]]; then
-    source ~/.zshrc_pure
-fi
-
 # Inside emacs, take autocorrection out
 # (otherwise, this can trip tramp)
 if [[ $TERM == "dumb" ]]; then
