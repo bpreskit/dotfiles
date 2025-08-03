@@ -5,9 +5,6 @@ all:
       children:
         home_servers:
         home_clients:
-    work:
-      children:
-        work_vms:
     home_servers:
       hosts:
         bristream:
@@ -15,9 +12,3 @@ all:
       hosts:
         owlfrog:
         math-blaster:
-    work_vms:
-      hosts:
-        irvm-bpreskitt3:
-        irdv-bpreskitt:
-      vars:
-        ansible_user: ir
