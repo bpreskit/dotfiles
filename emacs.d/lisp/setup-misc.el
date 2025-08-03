@@ -42,21 +42,19 @@
 (display-line-numbers-mode nil)
 (add-hook 'find-file-hook 'linum-mode-ifnt-log)
 (use-package all-the-icons
-  :if (display-graphic-p)
+  :if my/use-all-the-icons
   :config
   (if (not (file-exists-p "~/.local/share/fonts/all-the-icons.ttf"))
       (all-the-icons-install-fonts)))
 (use-package all-the-icons-dired
-  :if (display-graphic-p)
-  :hook dired-mode)
+  :if (and my/use-all-the-icons my/use-all-the-icons-dired)
+  :hook dired-mode
+)
 (use-package all-the-icons-ivy
-  :if (display-graphic-p)
+  :if (and my/use-all-the-icons my/use-all-the-icons-ivy)
   :after (ivy)
-  :init (all-the-icons-ivy-setup)
-)
-(use-package all-the-icons-completion
-  :if (display-graphic-p)
-)
+  :custom (all-the-icons-spacer . ("  "))
+  :init (all-the-icons-ivy-setup))
 (use-package marginalia
   :custom (marginalia-align 'left)
   :init (marginalia-mode)

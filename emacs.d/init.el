@@ -6,9 +6,13 @@
 
 
 ;; Load setup code code!
+;; Initialize variables
+(load-library "global-variables")
+(load-library "custom-variables")
+(load "local-custom-vars.el" t)
+;; Load remaining code
 (dolist (lib
      (list
-      "global-variables"
       "install-packages"
       "mycode"
       "setup-misc"
