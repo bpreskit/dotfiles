@@ -188,6 +188,6 @@ get opened with `browse-url`."
 (setq org-after-sorting-entries-or-items-hook
       '(lambda () (progn (org-overview) (org-reveal) (org-show-children))))
 
-(defun my-counsel-org-goto (&optional prefix-p)
+(defun my/counsel-org-goto (&optional prefix-p)
   (interactive "P")
   (if prefix-p (counsel-org-goto-all) (counsel-org-goto)))

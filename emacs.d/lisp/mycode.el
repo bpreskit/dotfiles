@@ -275,7 +275,19 @@ With optional prefix argument, also kill this buffer."
          (counsel-fzf)
          )))
 
-(defun my-counsel-imenu ()
+(defun my/counsel-smart-grep ()
+  "Use counsel-git-grep if in a git repo, otherwise use counsel-rg.
+   Falls back to standard grep if neither git nor ripgrep work."
+  (interactive)
+  (cond
+   ((locate-dominating-file default-directory ".git")
+    (counsel-git-grep))
+   ((executable-find "rg")
+    (counsel-rg))
+   (t
+    (counsel-grep-or-swiper))))
+
+(defun my/counsel-imenu ()
   (interactive)
   (push-mark (point) nil nil)
   (counsel-imenu))

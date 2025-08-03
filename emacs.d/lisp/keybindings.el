@@ -32,7 +32,7 @@
 (global-set-key (kbd "C-c +") 'golden-cycle)
 (global-set-key (kbd "C-x 1") 'delete-other-windows-or-restore)
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
-(global-set-key (kbd "M-g r") 'vc-git-grep)
+(global-set-key (kbd "M-g r") 'my/counsel-smart-grep)
 (global-set-key (kbd "M-%") 'query-replace-regexp)
 (global-set-key (kbd "C-<delete>") 'delete-region)
 (global-set-key (kbd "M-n") 'next-defun)
@@ -41,7 +41,7 @@
 (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "M-z") nil)
 (global-set-key (kbd "C-x t") nil)
-(global-set-key [remap imenu] 'my-counsel-imenu)
+(global-set-key [remap imenu] 'my/counsel-imenu)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
@@ -73,7 +73,7 @@
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 (define-key org-mode-map (kbd "C-c ^") 'my-org-sort)
-(define-key org-mode-map [remap org-goto] 'my-counsel-org-goto)
+(define-key org-mode-map [remap org-goto] 'my/counsel-org-goto)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
@@ -106,5 +106,5 @@
 (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 
 (require 'swiper)
-(global-set-key (kbd "C-M-s") 'swiper-isearch)
-(global-set-key (kbd "C-M-r") 'swiper-isearch-backward)
+(global-set-key (kbd "C-M-s") 'counsel-grep-or-swiper)
+(global-set-key (kbd "C-M-r") 'counsel-grep-or-swiper-backward)
