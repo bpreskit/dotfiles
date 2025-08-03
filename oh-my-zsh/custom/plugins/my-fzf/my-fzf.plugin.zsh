@@ -2,8 +2,13 @@ export FZF_DEFAULT_OPTS='--multi --bind "alt-v:page-up,ctrl-v:page-down,alt-<:la
 export MY_FZF_EMACS_WINDOW=${MY_FZF_EMACS_WINDOW:-"GNU Emacs"}
 
 function fzg {
+    local rg_dir=""
+    if [[ -d $1 ]]; then
+        local rg_dir=$1
+        shift
+    fi
     local rg_options=$(printf "%q" "$@")
-    local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} || :"
+    local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_dir} || :"
     fzf --disabled --ansi \
         --no-multi \
         --bind "start:$reload" \
@@ -26,6 +31,12 @@ function gcog {
                      --bind 'enter:become(git checkout {-1})' \
                      --height 40% \
                      --layout reverse
+}
+
+function fzglog {
+    git log --decorate |
+        awk '/^commit/ { print "\0" } { print }' |
+        fzf --read0 --gap --ansi --highlight-line
 }
 
 function fzfd {
