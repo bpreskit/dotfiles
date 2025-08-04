@@ -84,6 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # PATH changes
 # export MANPATH="/usr/local/man:$MANPATH"
 PATH=$PATH:$HOME/.local/bin
+if [[ -d "${HOME}/.local/venvs/my-venv/bin" ]]; then
+    PATH=$PATH:${HOME}/.local/venvs/my-venv/bin
+fi
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
