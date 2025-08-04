@@ -60,6 +60,12 @@
   :init (marginalia-mode)
 )
 
+(use-package which-key
+  :init (which-key-mode)
+  :custom
+  (which-key-idle-delay . (0.5))
+  )
+
 ;; Octave stuff.
 (add-hook 'octave-mode-hook
 		(lambda () (progn (setq octave-comment-char ?%)
