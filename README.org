@@ -24,7 +24,7 @@ sudo dpkg --set-selections < dpkg-selections
 3. Use ~sudo add-apt-repository~ to add the PPAs listed in ~roles/common_packages/vars/main.yml~.
 4. Run ~ansible-playbook -K -i local-machine setup.yml~ and give it your ~sudo~ password.
 * Improvements
-** TODO ssh-agent is no longer set up in ~.zshrc~
+** ssh-agent is no longer set up in ~.zshrc~
 Therefore, it must be set up elsewhere. ~gpg~ and
 ~gnome-keyring-daemon~ are good ways.
 #+begin_src
