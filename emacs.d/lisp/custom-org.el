@@ -8,7 +8,11 @@
 (require 'seq)
 
 ;; No completion, since it's plain text.
-(add-hook 'org-mode-hook (lambda () (progn (company-mode -1))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (progn
+              (company-mode -1)
+              (display-line-numbers-mode -1))))
 
 ;; Misc org variables
 (setq org-ellipsis "⤵"

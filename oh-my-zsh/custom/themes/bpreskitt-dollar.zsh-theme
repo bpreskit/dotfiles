@@ -28,3 +28,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗✗✗ "
 # Put it all together!
 PROMPT="$BPRESKITT_TIME_$BPRESKITT_CURRENT_USER_@$BPRESKITT_MACHINE_$BPRESKITT_LOCA_
  $ "
+
+# Local variables:
+# mode: shell-script
+# End:

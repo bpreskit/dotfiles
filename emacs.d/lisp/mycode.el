@@ -209,7 +209,7 @@
 (defun linum-mode-ifnt-log ()
   (if (not (and
            (stringp (buffer-file-name))
-           (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
+           (string-match ".*\\(\.\\|\\(sys\\)\\)\\(log\\|org\\).*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name))))
       (display-line-numbers-mode 1)))
 
 (defun copy-file-name (&optional basename-p)
