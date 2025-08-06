@@ -50,7 +50,7 @@ function gcog {
 }
 
 function fzgl {
-    git log --decorate |
+    git log "$@" --decorate |
         awk '/^commit/ { print "\0" } { print }' |
         fzf --read0 --gap --ansi --highlight-line
 }
