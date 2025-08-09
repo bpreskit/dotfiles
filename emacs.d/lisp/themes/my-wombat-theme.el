@@ -36,6 +36,7 @@ are included.")
    `(fringe ((,class (:background "#303030"))))
    `(highlight ((,class (:background "#454545"))))
    `(hl-line ((,class (:background "gray20"))))
+   `(line-number-current-line ((,class (:inherit 'font-lock-function-name-face))))
    `(region ((,class (:background "#444444"))))
    `(secondary-selection ((,class (:background "#333366" :foreground "#f6f3e8"))))
    `(isearch ((,class (:background "#343434" :foreground "#857b6f"))))
@@ -43,6 +44,7 @@ are included.")
    ;; Mode line faces
    `(mode-line ((,class (:background "#444444" :foreground "#f6f3e8"))))
    `(mode-line-inactive ((,class (:background "#444444" :foreground "#857b6f"))))
+   `(which-func ((,class (:inherit 'font-lock-string-face))))
    ;; Escape and prompt faces
    `(minibuffer-prompt ((,class (:foreground "#e5786d"))))
    `(escape-glyph ((,class (:foreground "#ddaa6f" :weight bold))))
@@ -95,8 +97,7 @@ are included.")
    `(message-cited-text ((,class (:foreground "#99968b"))))
    `(message-separator ((,class (:foreground "#e5786d" :weight bold))))
    ;; Org faces
-   `(org-block ((,class (:foreground "whitesmoke" :background "gray9"))))
-   ))
+   `(org-block ((,class (:foreground "whitesmoke" :background "gray9"))))))
 
 (custom-theme-set-variables
  'my-wombat

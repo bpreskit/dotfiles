@@ -40,7 +40,14 @@
 
 ;; Some random hooks.
 (display-line-numbers-mode nil)
-(add-hook 'find-file-hook 'linum-mode-ifnt-log)
+(add-hook 'find-file-hook
+          (lambda ()
+            (progn
+              (linum-modent-if-log)
+              (if (and
+           (stringp (buffer-file-name))
+           (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name)))
+      (show-smartparens-mode -1)))))
 (use-package all-the-icons
   :if my/use-all-the-icons
   :config
@@ -59,7 +66,9 @@
   :custom (marginalia-align 'left)
   :init (marginalia-mode)
 )
-
+(use-package hl-line
+  :init (global-hl-line-mode)
+  )
 (use-package which-key
   :init (which-key-mode)
   :custom
@@ -86,7 +95,12 @@
   (ivy-use-selectable-prompt t)
   :config
   (ivy-mode)
-)
+  )
+(defun my/company-common-or-ivy ()
+    (interactive)
+    (if (company--active-p)
+        (counsel-company) (company-complete-common))
+    )
 
 ;; ansible
 (require 'ansible)

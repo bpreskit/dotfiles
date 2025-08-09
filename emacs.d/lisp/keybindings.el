@@ -102,7 +102,7 @@
 (define-key magit-diff-mode-map (kbd "C-RET") 'magit-diff-visit-worktree-file)
 
 (require 'company)
-(define-key company-mode-map (kbd "C-M-i") 'company-complete-common)
+(define-key company-mode-map (kbd "C-M-i") 'my/company-common-or-ivy)
 (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
 (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 

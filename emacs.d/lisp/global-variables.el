@@ -28,11 +28,9 @@
      (org-agenda-skip-archived-trees . t)
      (org-sparse-tree-open-archived-trees . t)
      (org-cycle-open-archived-trees . t)))
- '(shell-prompt-pattern "^[^#$%>
-]*[#$%>⇒] *")
+ '(shell-prompt-pattern "^[^#$%>\12]*[#$%>⇒] *")
  '(tab-width 4)
- '(tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>
-]*#?[]#$%>⇒] *\\(\\[.*\\)*"))
+ '(tramp-shell-prompt-pattern "\\(?:^\\|\15\\)[^]#$%>\12]*#?[]#$%>⇒] *\\(\33\\[.*\\)*"))
 ;; Customized faces
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
