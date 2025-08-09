@@ -3,9 +3,9 @@ export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-v:page-down,alt-<:l
 
 function fzg {
     local rg_dir=""
-    if [[ -d $1 ]]; then
-        local rg_dir=$1
-        shift
+    if [[ -d "${@[$#]}" ]]; then
+        local rg_dir="${@[$#]}"
+        argv=($argv[1,-2])
     fi
     local rg_options=$(printf "%q" "$@")
     local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_dir} || :"
