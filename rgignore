@@ -1,0 +1,21 @@
+# Always ignore emacs stuff
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+TAGS
+
+# Don't ignore things from git that I care about
+!brian-special
+!brian_special
+!.projectile
+!.dir-locals.el
+
+#
+# Local variables:
+# mode: conf
+# End:
