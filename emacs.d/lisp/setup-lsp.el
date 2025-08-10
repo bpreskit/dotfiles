@@ -1,19 +1,18 @@
 ;; Basic setup for lsp-mode
-(defun my/lsp-describe ()
-  "`lsp-describe-thing-at-point' but it jumps to the help buffer"
-  (interactive)
-  (lsp-describe-thing-at-point)
-  (switch-to-buffer-other-window "*lsp-help*"))
 (use-package lsp-mode
   :custom
   (gc-cons-threshold (* 100 1024 1024))
   (read-process-output-max (* 1024 1024))
   (lsp-idle-delay 0.1)
   (eldoc-idle-delay 0)
+  :hook
+  ((go-mode rust-mode java-mode python-mode c-mode c++-mode)
+   .
+   lsp-deferred)
   :bind
   (:map
    lsp-mode-map
-   ("C-c C-d" . my/lsp-describe)
+   ("C-c C-d" . lsp-describe-thing-at-point)
    ([remap xref-find-definitions] . lsp-find-definition)
    ([remap xref-find-references] . lsp-find-references)
    :map
@@ -37,8 +36,7 @@
   "Unfocus from lsp-ui-doc frame and describe"
   (interactive)
   (lsp-ui-doc-unfocus-frame)
-  (lsp-describe-thing-at-point)
-  (switch-to-buffer-other-window "*lsp-help*"))
+  (lsp-describe-thing-at-point))
 (use-package lsp-ui
   :custom
   (lsp-ui-doc-enable t)
