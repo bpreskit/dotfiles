@@ -56,6 +56,7 @@ maybe_ediff_files () {
     if [[ -f "${local_file}" ]]; then
         if ! diff -q "${repo_file}" "${local_file}" &>/dev/null; then
             read -p "${repo_file} differs between repo and local. Ediff them? (y/N) " -N 1 resp
+            echo ""
             if grep -qPi "^y$" <<<$resp; then
                 wmctrl -a "${MY_EMACS_WINDOW}"
                 ediff_cmd="(ediff \"${repo_file}\" \"${local_file}\")"
@@ -70,6 +71,7 @@ maybe_ediff_files () {
     else
         echo "local didn't exist"
         read -p "${repo_file} doesn't exist locally. Copy it in? (y/N) " -N 1 resp
+        echo ""
         if grep -qPi "^y$" <<<$resp; then
             cp "${repo_file}" "${local_file}"
         fi
