@@ -99,6 +99,16 @@
   (projectile-mode)
   )
 
+;; magit
+(use-package magit)
+(use-package magit-delta
+  :after magit
+  :custom
+  (magit-delta-default-dark-theme "Monokai Extended")
+  (magit-delta-default-light-theme "Github")
+  (magit-delta-hide-plus-minus-markers nil)
+  :hook (magit-mode . magit-delta-mode))
+
 ;; Turn off scroll bars, menu bars, tool bars.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
