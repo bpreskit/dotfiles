@@ -1,4 +1,3 @@
-;; -*- mode: Lisp; lexical-binding: t; -*-
 (require 'company)
 (require 'f)
 (require 'org)

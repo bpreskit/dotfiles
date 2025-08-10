@@ -90,17 +90,27 @@
 (add-hook 'ediff-quit-hook 'restore-ediff-before-windows)
 
 ;; Initialize ivy mode
+(use-package orderless
+  :ensure t
+  :custom
+  ;; You can add other styles here as fallbacks.
+  ;; `basic` is often a good idea for file and TRAMP completion.
+  (completion-styles '(orderless basic))
+  (completion-category-overrides
+   '((file (styles basic partial-completion))))
+  (orderless-matching-styles '(orderless-literal orderless-regexp orderless-initialism)))
 (use-package ivy
   :custom
   (ivy-use-selectable-prompt t)
+  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
   :config
   (ivy-mode)
-  )
+  (add-to-list
+   'ivy-highlight-functions-alist
+   '(orderless-ivy-re-builder . orderless-ivy-highlight)))
 (defun my/company-common-or-ivy ()
     (interactive)
-    (if (company--active-p)
-        (counsel-company) (company-complete-common))
-    )
+    (if (company--active-p) (counsel-company) (company-complete-common)))
 
 ;; ansible
 (require 'ansible)

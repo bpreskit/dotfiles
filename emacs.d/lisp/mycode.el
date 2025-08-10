@@ -1,4 +1,4 @@
-;; -*- mode: Lisp; lexical-binding: t; -*-
+;; -*- lexical-binding: t -*-
 (require 'find-file)
 
 (defun copy-line-to-end (&optional arg)
@@ -287,7 +287,13 @@ With optional prefix argument, also kill this buffer."
   (interactive)
   (cond
    ((locate-dominating-file default-directory ".git")
-    (counsel-git-grep))
+    (progn
+      (let
+          ((initial-directory
+            (if (>= (prefix-numeric-value current-prefix-arg) 4)
+                (counsel-read-directory-name "Git grep in directory: ")
+              default-directory)))
+        (counsel-git-grep nil initial-directory))))
    ((executable-find "rg")
     (counsel-rg))
    (t
