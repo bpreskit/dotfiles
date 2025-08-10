@@ -294,7 +294,7 @@ With optional prefix argument, also kill this buffer."
      ((locate-dominating-file initial-directory ".git")
       (counsel-git-grep nil initial-directory))
      ((executable-find "rg")
-      (counsel-rg))
+      (counsel-rg nil initial-directory))
      (t (counsel-grep-or-swiper)))))
 
 (defun my/counsel-imenu ()

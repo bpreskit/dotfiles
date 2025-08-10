@@ -21,7 +21,7 @@
 (use-package ivy
   :custom
   (ivy-use-selectable-prompt t)
-  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+  (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus) (t . orderless-ivy-re-builder)))
   :config
   (ivy-mode)
   (add-to-list
