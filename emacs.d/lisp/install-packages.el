@@ -6,6 +6,9 @@
              '("melpa" . "http://melpa.org/packages/") t)
 ;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (if (not
-     (string= (package-install-selected-packages) "All your packages are already installed"))
+     (let ((install-result (package-install-selected-packages t)))
+     (and
+      (stringp install-result)
+      (string= install-result "All your packages are already installed"))))
     (progn (package-refresh-contents)
-     (package-install-selected-packages)))
+     (package-install-selected-packages t)))
