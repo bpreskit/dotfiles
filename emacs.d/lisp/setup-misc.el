@@ -40,11 +40,10 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Some random hooks.
-(display-line-numbers-mode t)
 (add-hook 'find-file-hook
           (lambda ()
             (progn
-              (linum-modent-if-log)
+              (linum-mode-ifnt-log)
               (if (and
            (stringp (buffer-file-name))
            (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name)))
