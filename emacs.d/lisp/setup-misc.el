@@ -39,7 +39,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Some random hooks.
-(display-line-numbers-mode nil)
+(display-line-numbers-mode t)
 (add-hook 'find-file-hook
           (lambda ()
             (progn
@@ -107,7 +107,18 @@
   (ivy-mode)
   (add-to-list
    'ivy-highlight-functions-alist
-   '(orderless-ivy-re-builder . orderless-ivy-highlight)))
+   '(orderless-ivy-re-builder . orderless-ivy-highlight))
+  :bind
+  (:map
+   ivy-minibuffer-map
+   ([remap kill-ring-save] . 'my/ivy-save-current)))
+(defun my/ivy-save-current ()
+  (interactive)
+  (let ((end (and ivy--directory
+                  (ivy--dirname-p (ivy-state-current ivy-last))
+                  -1)))
+    (kill-new (substring-no-properties
+                     (ivy-state-current ivy-last) 0 end))))
 (defun my/company-common-or-ivy ()
     (interactive)
     (if (company--active-p) (counsel-company) (company-complete-common)))

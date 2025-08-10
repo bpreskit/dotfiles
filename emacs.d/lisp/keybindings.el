@@ -56,15 +56,6 @@
 (define-key python-mode-map (kbd "M-n") 'python-nav-forward-defun)
 (define-key python-mode-map (kbd "M-p") 'python-nav-backward-defun)
 
-(require 'lsp-mode)
-(define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
-(define-key lsp-signature-mode-map (kbd "M-n") nil)
-(define-key lsp-signature-mode-map (kbd "M-p") nil)
-(define-key lsp-signature-mode-map (kbd "M-<right>") #'lsp-signature-next)
-(define-key lsp-signature-mode-map (kbd "M-<left>") #'lsp-signature-previous)
-(define-key lsp-command-map (kbd "a r") 'lsp-rename)
-
 (require 'org)
 (define-key org-mode-map (kbd "M-j") 'org-meta-return)
 (define-key org-mode-map (kbd "C-c RET") 'org-insert-heading-respect-content)
