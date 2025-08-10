@@ -155,3 +155,15 @@ get opened with `browse-url`."
 (defun my/counsel-org-goto (&optional prefix-p)
   (interactive "P")
   (if prefix-p (counsel-org-goto-all) (counsel-org-goto)))
+
+(defun my/org-next-item-or-heading ()
+  (interactive)
+  (if (not (integer-or-marker-p (ignore-errors (org-next-item))))
+      ;; If `org-next-item` failed, move to the next heading instead.
+      (org-next-visible-heading 1)))
+
+(defun my/org-previous-item-or-heading ()
+  (interactive)
+  (if (not (integer-or-marker-p (ignore-errors (org-previous-item))))
+      ;; If `org-previous-item` failed, move to the previous heading instead.
+      (org-previous-visible-heading 1)))

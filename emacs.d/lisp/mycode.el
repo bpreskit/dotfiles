@@ -285,19 +285,17 @@ With optional prefix argument, also kill this buffer."
   "Use counsel-git-grep if in a git repo, otherwise use counsel-rg.
    Falls back to standard grep if neither git nor ripgrep work."
   (interactive)
-  (cond
-   ((locate-dominating-file default-directory ".git")
-    (progn
-      (let
-          ((initial-directory
-            (if (>= (prefix-numeric-value current-prefix-arg) 4)
-                (counsel-read-directory-name "Git grep in directory: ")
-              default-directory)))
-        (counsel-git-grep nil initial-directory))))
-   ((executable-find "rg")
-    (counsel-rg))
-   (t
-    (counsel-grep-or-swiper))))
+  (let
+      ((initial-directory
+        (if (>= (prefix-numeric-value current-prefix-arg) 4)
+            (counsel-read-directory-name "Grep in directory: ")
+          default-directory)))
+    (cond
+     ((locate-dominating-file initial-directory ".git")
+      (counsel-git-grep nil initial-directory))
+     ((executable-find "rg")
+      (counsel-rg))
+     (t (counsel-grep-or-swiper)))))
 
 (defun my/counsel-imenu ()
   (interactive)

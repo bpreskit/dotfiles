@@ -16,6 +16,7 @@
       "install-packages"
       "mycode"
       "setup-misc"
+      "setup-ivy"
       "setup-lsp"
       "setup-org"
       "keybindings"))
