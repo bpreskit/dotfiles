@@ -29,6 +29,26 @@
 
 (dolist (target custom-org-refile-targets) (add-to-list 'org-refile-targets target))
 
+;; Add headerline showing path of current headline
+(defcustom my/org-mode-headerline-separator " ❭ "
+  "Separator for elements of heading in org mode headerline"
+  )
+(defun my/org-mode-headerline ()
+    (unless (org-before-first-heading-p)
+      (org-format-outline-path
+       (org-get-outline-path t)
+       (window-width)
+       nil
+       my/org-mode-headerline-separator)))
+(defconst my/org-header-line-format
+  '(:eval (propertize (my/org-mode-headerline) 'face 'font-lock-doc-face))
+  "The header line format used by my org mode.")
+(add-hook 'org-mode-hook
+          (lambda () (progn
+                       (unless (listp header-line-format)
+                         (setq header-line-format (list header-line-format)))
+                       (add-to-list 'header-line-format '(t my/org-header-line-format)))))
+
 ;; Enable plantuml
 ;; You'll need the plantuml apt package for this
 (org-babel-do-load-languages
