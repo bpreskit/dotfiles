@@ -36,6 +36,10 @@ function fzgb {
             --bind 'alt-c:become(echo {} | grep -P "^branch: " | cut -d " " -f 2- | xargs git checkout)'
 }
 
+function fzwm {
+    wmctrl -l | fzf --with-nth "4.." --bind 'enter:become(wmctrl -ia {1})'
+}
+
 function gbg {
     git branch | fzf --preview 'git show --color=always {-1}' \
                      --height 40% --layout reverse
@@ -64,3 +68,15 @@ function fzfd {
         fzf --bind "alt-e:become(emacsclient -n {1}; wmctrl -a '${MY_EMACS_WINDOW}')" \
             --bind "alt-l:become(batcat --style=numbers --color=always {1})"
 }
+
+# Add the widgets
+export FZF_CTRL_T_COMMAND=""
+export FZF_ALT_C_COMMAND=""
+source <(fzf --zsh | rg -v "(zle|bindkey).*fzf-history-widget")
+# Add C-M-r for history
+zle     -N                  fzf-history-widget
+bindkey -M emacs "\e\C-r"   fzf-history-widget
+zle     -N                  fzf-file-widget
+bindkey -M emacs "\C-x\C-f" fzf-file-widget
+zle     -N                  fzf-cd-widget
+bindkey -M emacs "\C-xd"    fzf-cd-widget
