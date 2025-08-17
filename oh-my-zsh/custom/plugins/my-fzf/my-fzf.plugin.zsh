@@ -2,22 +2,35 @@ FZF_COPY='if [[ -n $TMUX ]]; then tmux set-buffer {}; fi; echo {} | xclip -i -se
 export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)\""
 
 function fzg {
-    local rg_dir=""
+    local rg_target=""
+    local open_target=""
+    local line_number="{2}"
     if [[ -d "${@[$#]}" ]]; then
-        local rg_dir="${@[$#]}"
+        rg_target="${@[$#]}"
+        open_target="{2}"
         argv=($argv[1,-2])
+    elif [[ -r "${@[$#]}" ]]; then
+        rg_target="${@[$#]}"
+        open_target="${rg_target}"
+        line_number="{1}"
+        argv=($argv[1,-2])
+    else
+        rg_target=""
+        open_target="{1}"
     fi
     local rg_options=$(printf "%q" "$@")
-    local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_dir} || :"
+    local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_target} || :"
     fzf --disabled --ansi \
         --no-multi \
+        --header "/ M-l : bat / M-e emacs / RET print" \
+        --header-border \
         --bind "start:$reload" \
         --bind "change:$reload" \
         --delimiter : \
-        --bind "alt-l:become(batcat --pager='less +{2}' --style=numbers --color=always --highlight-line {2} {1})" \
-        --bind "alt-e:become(emacsclient -n +{2} {1}; wmctrl -a '${MY_EMACS_WINDOW}')" \
-        --preview 'batcat --style=numbers --color=always --highlight-line {2} {1}' \
-        --preview-window '+{2}/2'
+        --bind "alt-l:become(batcat --pager='less +${line_number}' --style=numbers --color=always --highlight-line ${line_number} ${open_target})" \
+        --bind "alt-e:become(emacsclient -n +${line_number} ${open_target}; wmctrl -a '${MY_EMACS_WINDOW}')" \
+        --preview "batcat --style=numbers --color=always --highlight-line ${line_number} ${open_target}" \
+        --preview-window "+${line_number}/2"
 }
 
 function fzgb {
