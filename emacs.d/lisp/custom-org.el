@@ -5,6 +5,7 @@
 (require 'ox-pandoc)
 (require 's)
 (require 'seq)
+(use-package org-roam)
 
 ;; No completion, since it's plain text.
 (add-hook 'org-mode-hook

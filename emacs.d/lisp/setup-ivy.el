@@ -10,14 +10,7 @@
    '((file (styles basic partial-completion))))
   (orderless-matching-styles '(orderless-literal orderless-regexp orderless-initialism)))
 
-(defun my/make-ivy-action-doer (action exiting-call-p)
-  (lambda ()
-    (interactive)
-    (ivy-set-action action)
-    (if exiting-call-p (ivy-done) (ivy-call))))
-(setq my/factorized-do-ivy-copy (my/make-ivy-action-doer #'ivy--action-copy nil))
-(setq my/factorized-do-ivy-copy-and-exit (my/make-ivy-action-doer #'ivy--action-copy t))
-
+;; Bring in ivy
 (use-package ivy
   :custom
   (ivy-use-selectable-prompt t)
@@ -34,7 +27,33 @@
    ("C-M-o" . 'ivy-dispatching-done)
    ("M-o" . 'ivy-dispatching-call)))
 
+;; Create new actions
+(defun my/make-ivy-action-doer (action exiting-call-p)
+  "Creates ivy actions out of simple functions.
+
+To create an ivy action and give it a keybinding, first write a
+function that takes one string as an argument; return type is
+immaterial. Then use
+
+(define-key ivy-minibuffer-map KEYBINDING
+  (my/make-ivy-action-doer #'your-function EXITING-CALL-P))
+
+Where EXITING-CALL-P specifies whether the action should exit
+ivy.
+"
+  (lambda ()
+    (interactive)
+    (ivy-set-action action)
+    (if exiting-call-p (ivy-done) (ivy-call))))
+
+(defun my/counsel-describe-action (x)
+  (if lsp-mode
+      (progn
+        (imenu (cdr x))
+        (lsp-describe-thing-at-point))
+    (describe-symbol (intern x))))
 (define-key ivy-minibuffer-map [remap kill-ring-save] (my/make-ivy-action-doer #'ivy--action-copy nil))
+(define-key ivy-minibuffer-map (kbd "C-c C-d") (my/make-ivy-action-doer #'my/counsel-describe-action nil))
 
 ;; Make ivy prefer exact matches, even when using orderless
 (defun my/ivy-recompute-index-prefer-match (_re-str cands)

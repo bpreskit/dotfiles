@@ -116,7 +116,7 @@
 (use-package inhibit-mouse
   :ensure t
   :custom
-  (inhibit-mouse-button-numbers '(2 3 4 5))
+  (inhibit-mouse-button-numbers '(1 2 3 4 5))
   :config
   (inhibit-mouse-mode 1))
 
