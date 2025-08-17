@@ -1,4 +1,4 @@
-FZF_COPY='if [[ -n $TMUX ]]; then tmux set-buffer {}; fi; echo {} | xclip -i -selection clipboard'
+FZF_COPY='if [[ -n $TMUX ]]; then tmux set-buffer {}; fi; echo -n {} | xclip -i -selection clipboard'
 export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)\""
 
 function fzg {
