@@ -19,7 +19,6 @@ export MY_EMACS_WINDOW=${MY_EMACS_WINDOW:-"GNU Emacs"}
 
 # Keep this in sync with copy_items in unpack_dots/vars/main.yml
 OTHER_DOTS=(
-  gitignore_global
   rgignore
   tmux.conf
   zsh_aliases
