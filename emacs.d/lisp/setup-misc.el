@@ -47,7 +47,9 @@
               (if (and
            (stringp (buffer-file-name))
            (string-match ".*\\(\.\\|\\(sys\\)\\)log.*\\(\.tar\\)?\\(\.gz\\)?" (buffer-file-name)))
-      (show-smartparens-mode -1)))))
+                  (progn
+                    (read-only-mode)
+                    (show-smartparens-mode -1))))))
 (use-package all-the-icons
   :if my/use-all-the-icons
   :config

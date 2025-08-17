@@ -41,8 +41,10 @@
 (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "M-z") nil)
 (global-set-key (kbd "C-x t") nil)
+(global-set-key (kbd "C-c C-j") 'imenu)
 (global-set-key [remap find-file] 'counsel-find-file)
 (global-set-key [remap imenu] 'my/counsel-imenu)
+(global-set-key [remap where-is] 'counsel-descbinds)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
@@ -70,7 +72,8 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (require 'go-mode)
-(define-key go-mode-map (kbd "C-h d") 'godoc)
+(define-key go-mode-map (kbd "C-c C-j") nil)
+(define-key go-mode-map (kbd "C-c C-d") nil)
 
 (require 'rust-mode)
 (define-key rust-mode-map (kbd "C-c C-d") nil)

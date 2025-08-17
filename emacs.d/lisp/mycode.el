@@ -301,3 +301,30 @@ With optional prefix argument, also kill this buffer."
   (interactive)
   (push-mark (point) nil nil)
   (counsel-imenu))
+
+(defun my/kill-indirect-buffer ()
+  "Kill the current buffer if it's indirect, then switch to its parent buffer
+and restore the point."
+  (interactive)
+  (let ((indirect-buffer (current-buffer))
+        (parent-buffer (buffer-base-buffer (current-buffer))))
+    (if (and (buffer-live-p parent-buffer)
+             (not (eq indirect-buffer parent-buffer)))
+        ;; Save the point from the indirect buffer.
+        (let ((indirect-marker (marker-position (point-marker))))
+          (progn
+            ;; Now kill the indirect buffer.
+            (kill-buffer indirect-buffer)
+            ;; Switch to the parent buffer to move the point.
+            (switch-to-buffer parent-buffer)
+            (goto-char indirect-marker)))
+      (message "The current buffer is not an indirect buffer."))))
+
+;; Only highlight one line in visual-line-mode
+;; https://stackoverflow.com/questions/20275596/how-to-use-hl-line-mode-to-highlight-just-one-1-line-when-visual-line-mode-is#comment30278964_20276250
+(defun my/visual-line-line-range ()
+  (save-excursion
+    (cons
+     (progn (vertical-motion 0) (point))
+     (progn (vertical-motion 1) (point)))))
+(setq hl-line-range-function #'my/visual-line-line-range)
