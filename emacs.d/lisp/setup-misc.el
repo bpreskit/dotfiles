@@ -134,3 +134,104 @@
 (setq js2-missing-semi-one-line-override t)
 
 (add-hook 'before-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+
+;; Set fonts
+;; Source them from
+;;   https://fonts.google.com/specimen/Roboto+Mono
+;;   https://fonts.google.com/specimen/Fira+Code
+;;   https://fonts.google.com/specimen/Inter
+;;   https://fonts.google.com/specimen/Source+Sans+3
+;;   https://github.com/edwardtufte/et-book
+;; Copy the ttf's into ~/.local/share/fonts
+(defun my/set-default-fonts (&optional fonts_)
+  (let ((fonts (if fonts_ fonts_ (font-family-list))))
+  (when (member "Roboto Mono" fonts)
+    (set-face-attribute 'default nil :family "Roboto Mono" :height 150)
+    (set-face-attribute 'fixed-pitch nil :family "Roboto Mono" :height 0.9))
+  (when (member "Fira Code" fonts)
+    (set-face-attribute 'default nil :family "Fira Code" :height 150)
+    (set-face-attribute 'fixed-pitch nil :family "Fira Code" :height 0.9))
+  (when (member "Inter" fonts)
+    (set-face-attribute 'variable-pitch nil :family "Inter" :height 1.18))
+  (when (member "Source Sans 3" fonts)
+    (set-face-attribute 'variable-pitch nil :family "Source Sans 3" :height 1.18))
+  (when (member "ETBembo" fonts)
+    (set-face-attribute 'variable-pitch nil :family "ETBembo" :height 1.18))))
+
+;; Fonts aren't loaded at emacs.service time, so add them later.
+(defun my/set-default-fonts-and-dip ()
+  "Set default font on first graphical frame creation."
+  (let ((fonts (font-family-list)))
+        (if fonts
+            (progn
+              (my/set-default-fonts fonts)
+              (setq after-make-frame-functions (remove #'my/set-default-fonts-and-dip after-make-frame-functions))))))
+
+(setq after-make-frame-functions (append after-make-frame-functions (my/set-default-fonts-and-dip)))
+
+;; Get ligatures going for Fira Code
+(use-package ligature
+  :config
+  ;; Enable all Cascadia and Fira Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode
+                        '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+                          ;; =:= =!=
+                          ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+                          ;; ;; ;;;
+                          (";" (rx (+ ";")))
+                          ;; && &&&
+                          ("&" (rx (+ "&")))
+                          ;; !! !!! !. !: !!. != !== !~
+                          ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+                          ;; ?? ??? ?:  ?=  ?.
+                          ("?" (rx (or ":" "=" "\." (+ "?"))))
+                          ;; %% %%%
+                          ("%" (rx (+ "%")))
+                          ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+                          ;; |->>-||-<<-| |- |== ||=||
+                          ;; |==>>==<<==<=>==//==/=!==:===>
+                          ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+                                          "-" "=" ))))
+                          ;; \\ \\\ \/
+                          ("\\" (rx (or "/" (+ "\\"))))
+                          ;; ++ +++ ++++ +>
+                          ("+" (rx (or ">" (+ "+"))))
+                          ;; :: ::: :::: :> :< := :// ::=
+                          (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+                          ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+                          ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+                                          "="))))
+                          ;; .. ... .... .= .- .? ..= ..<
+                          ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+                          ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+                          ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+                          ;; *> */ *)  ** *** ****
+                          ("*" (rx (or ">" "/" ")" (+ "*"))))
+                          ;; ;; www wwww
+                          ;; ("w" (rx (+ "w")))
+                          ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+                          ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+                          ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+                          ;; << <<< <<<<
+                          ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+                                          "-"  "/" "|" "="))))
+                          ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+                          ;; >> >>> >>>>
+                          (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+                          ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+                          ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+                                       (+ "#"))))
+                          ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+                          ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+                          ;; __ ___ ____ _|_ __|____|_
+                          ("_" (rx (+ (or "_" "|"))))
+                          ;; Fira code: 0xFF 0x12
+                          ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+                          ;; Fira code:
+                          "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
+                          ;; The few not covered by the regexps.
+                          "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
