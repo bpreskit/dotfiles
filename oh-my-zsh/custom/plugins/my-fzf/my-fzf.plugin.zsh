@@ -1,5 +1,5 @@
 FZF_COPY='if [[ -n $TMUX ]]; then tmux set-buffer {}; fi; echo -n {} | xclip -i -selection clipboard'
-export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)\""
+export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-k:kill-line,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)\""
 
 function fzg {
     local rg_target=""
@@ -22,7 +22,7 @@ function fzg {
     local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_target} || :"
     fzf --disabled --ansi \
         --no-multi \
-        --header "/ M-l : bat / M-e emacs / RET print" \
+        --header "╱ M-l: bat ╱ M-e: emacs ╱ RET: print" \
         --header-border \
         --bind "start:$reload" \
         --bind "change:$reload" \
@@ -45,7 +45,7 @@ function fzgb {
             --gap \
             --highlight-line \
             --color "header:italic" \
-            --header "M-c to checkout, RET to print" \
+            --header "╱ M-c: checkout ╱ RET: print ╱" \
             --bind 'alt-c:become(echo {} | grep -P "^branch: " | cut -d " " -f 2- | xargs git checkout)'
 }
 
