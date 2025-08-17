@@ -36,6 +36,13 @@
 
 (define-key ivy-minibuffer-map [remap kill-ring-save] (my/make-ivy-action-doer #'ivy--action-copy nil))
 
+;; Make ivy prefer exact matches, even when using orderless
+(defun my/ivy-recompute-index-prefer-match (_re-str cands)
+  "Recompute index of selected candidate.
+This function serves as a fallback when nothing else is available."
+  (or (cl-position ivy-text cands :test #'string=) 0))
+(setf (alist-get t ivy-index-functions-alist) 'my/ivy-recompute-index-prefer-match)
+
 (defun my/company-common-or-ivy ()
     (interactive)
     (if (company--active-p) (counsel-company) (company-complete-common)))
