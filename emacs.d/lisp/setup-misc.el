@@ -160,15 +160,17 @@
     (set-face-attribute 'variable-pitch nil :family "ETBembo" :height 1.18))))
 
 ;; Fonts aren't loaded at emacs.service time, so add them later.
-(defun my/set-default-fonts-and-dip ()
+(defun my/set-default-fonts-and-dip (&optional _frame)
   "Set default font on first graphical frame creation."
   (let ((fonts (font-family-list)))
-        (if fonts
-            (progn
-              (my/set-default-fonts fonts)
-              (setq after-make-frame-functions (remove #'my/set-default-fonts-and-dip after-make-frame-functions))))))
+    (if fonts
+        (progn
+          (my/set-default-fonts fonts)
+          (remove-hook 'server-after-make-frame-hook #'my/set-default-fonts-and-dip)))))
 
-(setq after-make-frame-functions (append after-make-frame-functions (my/set-default-fonts-and-dip)))
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook 'my/set-default-fonts-and-dip)
+  (my/set-default-fonts))
 
 ;; Get ligatures going for Fira Code
 (use-package ligature
@@ -235,3 +237,8 @@
   ;; Enables ligature checks globally in all buffers. You can also do it
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
+
+(use-package doom-modeline
+  :if nil
+  :config
+  (doom-modeline-mode))
