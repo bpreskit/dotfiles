@@ -1,22 +1,22 @@
 FZF_COPY='if [[ -n $TMUX ]]; then tmux set-buffer {}; fi; echo -n {} | xclip -i -selection clipboard'
-export FZF_DEFAULT_OPTS="--multi --bind \"alt-v:page-up,ctrl-k:kill-line,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)\""
+export FZF_DEFAULT_OPTS=$(cat <<EOF
+--multi \
+--bind "alt-v:page-up,ctrl-k:kill-line,ctrl-v:page-down,alt-<:last,alt->:first,alt-c:select-all+accept,alt-w:become($FZF_COPY)"
+EOF
+)
 
 function fzg {
     local rg_target=""
-    local open_target=""
+    local open_target="{1}"
     local line_number="{2}"
     if [[ -d "${@[$#]}" ]]; then
         rg_target="${@[$#]}"
-        open_target="{2}"
         argv=($argv[1,-2])
     elif [[ -r "${@[$#]}" ]]; then
         rg_target="${@[$#]}"
         open_target="${rg_target}"
         line_number="{1}"
         argv=($argv[1,-2])
-    else
-        rg_target=""
-        open_target="{1}"
     fi
     local rg_options=$(printf "%q" "$@")
     local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_target} || :"

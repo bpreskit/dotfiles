@@ -238,7 +238,13 @@
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
 
+;; IME, you have to `nerd-icons-install-fonts' then restart to get
+;; this working properly.
 (use-package doom-modeline
-  :if nil
+  :requires nerd-icons
+  :if
+  (member "Symbols Nerd Font Mono" (font-family-list))
+  :init
+  (nerd-icons-install-fonts t)
   :config
   (doom-modeline-mode))
