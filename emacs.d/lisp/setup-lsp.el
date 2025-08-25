@@ -47,6 +47,10 @@
   (lsp-eldoc-enable-hover nil)
   :bind
   (:map
+   lsp-ui-mode-map
+   ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+   ([remap xref-find-references] . lsp-ui-peek-find-references)
+   :map
    lsp-command-map
    ("h o" . lsp-ui-doc-focus-frame)
    :map

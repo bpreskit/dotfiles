@@ -328,3 +328,64 @@ and restore the point."
      (progn (vertical-motion 0) (point))
      (progn (vertical-motion 1) (point)))))
 (setq hl-line-range-function #'my/visual-line-line-range)
+
+(defun my/pandoc-convert-stdio (body input-format output-format)
+  "Convert `BODY' as `INPUT-FORMAT' to `OUTPUT-FORMAT'."
+  (let ((args nil))
+    (if input-format (setq args (append (list "-f" input-format) args)))
+    (setq args (append (list "-t" (or output-format "org")) args))
+    (with-temp-buffer
+      (insert body)
+      (apply 'call-process-region (point-min) (point-max) "pandoc" t t nil args)
+      (buffer-substring-no-properties (point-min) (point-max)))))
+
+(defun my/get-region-or-buffer-content ()
+  "Return the contents of the active region, or the entire buffer if no region is active."
+  (if (use-region-p)
+      (buffer-substring-no-properties (region-beginning) (region-end))
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+(defun my/find-unique-org-name (base-file)
+  "Generate a unique .org filename from BASE-FILE.
+If 'file.org' exists, it tries 'file<1>.org', etc."
+  (let* ((base-name (file-name-sans-extension base-file))
+         (extension ".org")
+         (new-file (concat base-name extension))
+         (counter 1))
+    ;; Loop to find a unique filename if the initial one exists
+    (while (file-exists-p new-file)
+      (setq new-file (concat base-name
+                             "<" (number-to-string counter) ">"
+                             extension))
+      (setq counter (1+ counter)))
+    new-file))
+
+(defun my/convert-to-org (prefix)
+  "Convert the current region or buffer to Org mode using pandoc."
+  (interactive "P")
+  (let* ((content (my/get-region-or-buffer-content))
+         (org-content (my/pandoc-convert-stdio content nil "org"))
+         (original-file (buffer-file-name)))
+    (with-current-buffer
+        (get-buffer-create
+         (concat "*"
+                 (if original-file
+                     (my/find-unique-org-name
+                      (file-name-nondirectory original-file))
+                   "Org Conversion")
+                 "*"))
+      (read-only-mode -1)
+      (erase-buffer)
+      (insert org-content)
+      (org-mode)
+      (read-only-mode 1)
+      (pop-to-buffer (current-buffer)))))
+
+(defun my/safe-kill-region ()
+  "Kill the active region if one exists, otherwise do nothing."
+  (interactive)
+  (if (use-region-p)
+      (progn
+        (kill-region (region-beginning) (region-end))
+        (message "Region killed."))
+    (message "No active region to kill.")))

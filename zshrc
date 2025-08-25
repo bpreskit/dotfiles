@@ -87,6 +87,11 @@ PATH=$HOME/.local/bin:$PATH
 if [[ -d "${HOME}/.local/venvs/my-venv/bin" ]]; then
     PATH=${HOME}/.local/venvs/my-venv/bin:$PATH
 fi
+# Add ruby
+if [[ -x "${HOME}/.rbenv/bin/rbenv" ]]; then
+    eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
+fi
+. "$HOME/.cargo/env"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

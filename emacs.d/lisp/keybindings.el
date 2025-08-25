@@ -45,6 +45,9 @@
 (global-set-key [remap find-file] 'counsel-find-file)
 (global-set-key [remap imenu] 'my/counsel-imenu)
 (global-set-key [remap where-is] 'counsel-descbinds)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key [remap kill-region] 'my/safe-kill-region)
+(global-set-key (kbd "C-c C-x o") 'my/convert-to-org)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-x .") 'projectile-command-map)
@@ -68,6 +71,7 @@
 (define-key org-mode-map (kbd "M-p") 'my/org-previous-item-or-heading)
 (define-key org-mode-map (kbd "C-c ^") 'my-org-sort)
 (define-key org-mode-map [remap org-goto] 'my/counsel-org-goto)
+(define-key org-mode-map (kbd "C-c C-x o") nil)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 

@@ -3,9 +3,9 @@
   "Options for doc-mode"
   :tag "Doc Mode")
 
-(defcustom doc-mode-body-width 80
+(defcustom doc-mode-body-width 100
   "The desired body width in `olivetti-mode` when in `doc-mode`.")
-(defcustom doc-mode-variable-pitch nil
+(defcustom doc-mode-variable-pitch t
   "If non-nil, set variable-pitch-mode in doc-mode.")
 
 (defun doc-mode-propagate-fixed-pitch ()
@@ -60,6 +60,9 @@
           ;; 4a. Don't want parentheses to be bolded in variable
             (setq-local doc-mode-spm-weight (face-attribute 'show-paren-match :weight))
             (set-face-attribute 'show-paren-match nil :weight 'unspecified))
+        ;; Unset auto-fill-mode
+        (setq-local prev-auto-fill-mode (not (eq auto-fill-function nil)))
+        (auto-fill-mode -1)
 
         (doc-mode-propagate-fixed-pitch))
     ;; --- On Deactivation ---
@@ -75,6 +78,9 @@
       ;; 3. Show leading stars
       (setq org-superstar-leading-bullet doc-mode-original-leading-bullet)
       (org-superstar-restart)
+
+      ;; Reset auto-fill-mode
+      (auto-fill-mode prev-auto-fill-mode)
 
       ;; 4. Restore original themes
       (disable-theme doc-mode-theme)
