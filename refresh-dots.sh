@@ -88,7 +88,7 @@ do_emacs () {
     local base_emacs_dir
     while read file; do
         file_array=("${file_array[@]}" "$file")
-    done < <(find . -type f -name "*.el")
+    done < <(find . -type f \( -name "*.el" -o -name "*.lua" \))
 
     base_emacs_dir="${HOME}/.emacs.d"
     for repo_file in "${file_array[@]}"; do
