@@ -8,6 +8,7 @@ ExecStart=/usr/bin/emacs --bg-daemon
 ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 ExecStop=/usr/bin/tail --pid=${MAINPID} --follow /dev/null
 Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+PassEnvironment=SKIP_EMACS_PKG_INSTALL
 Restart=on-failure
 
 [Install]

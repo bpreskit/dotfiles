@@ -8,10 +8,11 @@
                                    ("melpa" . 5)
                                    ("gnu" . 0)))
 ;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(if (not
-     (let ((install-result (package-install-selected-packages t)))
-     (and
-      (stringp install-result)
-      (string= install-result "All your packages are already installed"))))
-    (progn (package-refresh-contents)
-     (package-install-selected-packages t)))
+(unless (getenv "SKIP_EMACS_PKG_INSTALL")
+  (if (not
+       (let ((install-result (package-install-selected-packages t)))
+         (and
+          (stringp install-result)
+          (string= install-result "All your packages are already installed"))))
+      (progn (package-refresh-contents)
+             (package-install-selected-packages t))))
