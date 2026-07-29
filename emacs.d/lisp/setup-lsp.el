@@ -6,7 +6,7 @@
   (lsp-idle-delay 0.1)
   (eldoc-idle-delay 0)
   :hook
-  ((go-mode rust-mode java-mode python-mode c-mode c++-mode)
+  ((go-mode rust-mode java-mode python-mode c-mode c++-mode protobuf-mode)
    .
    lsp-deferred)
   :bind

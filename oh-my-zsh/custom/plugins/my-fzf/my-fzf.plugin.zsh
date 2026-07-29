@@ -19,7 +19,7 @@ function fzg {
         argv=($argv[1,-2])
     fi
     local rg_options=$(printf "%q" "$@")
-    local reload="reload:rg ${rg_options} --line-number --column --color=always --smart-case {q} ${rg_target} || :"
+    local reload="reload:rg ${rg_options} --search-zip --line-number --column --color=always --smart-case {q} ${rg_target} || :"
     fzf --disabled --ansi \
         --no-multi \
         --header "╱ M-l: bat ╱ M-e: emacs ╱ RET: print" \
