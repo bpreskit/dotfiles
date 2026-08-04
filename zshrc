@@ -63,6 +63,7 @@ for flag in "${less_options[@]}"; do
       LESS="${LESS} -${flag}"
   fi
 done
+eval "$(lesspipe)"
 export LESS
 
 # Which plugins would you like to load?
