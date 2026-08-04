@@ -12,13 +12,12 @@
               (company-mode -1)
               (display-line-numbers-mode -1))))
 (setq my/org-default-face nil)
-(when (member "Roboto Mono" (font-family-list))
-  (setq my/org-default-face '(:family "Roboto Mono"))
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (progn
-                (setq buffer-face-mode-face my/org-default-face)
-                (buffer-face-mode)))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (when (member "Roboto Mono" (font-family-list))
+              (setq my/org-default-face '(:family "Roboto Mono"))
+              (setq buffer-face-mode-face my/org-default-face)
+              (buffer-face-mode))))
 
 (defun org-pandoc-export-to-jira-and-open (&optional a s v b e)
   "Export to jira."
@@ -26,12 +25,14 @@
 
 ;; Don't do subscripts in pandoc
 (use-package ox-pandoc
+  :after org
   :config
   (let ((rev-sub-file (f-join user-emacs-directory "assets/pandoc/reverse-subscript.lua")))
     (add-to-list 'org-pandoc-options `(lua-filter ,rev-sub-file)))
   (let ((rev-sub-file (f-join user-emacs-directory "assets/pandoc/reverse-subscript.lua"))
         (jira-codeblock-title (f-join user-emacs-directory "assets/pandoc/jira-codeblock-title.lua")))
     (add-to-list 'org-pandoc-options-for-jira `(lua-filter ,jira-codeblock-title)))
+  (add-to-list 'org-pandoc-options-for-org '(wrap "none"))
   (dolist (json-item
            '((106 "to json and open." org-pandoc-export-to-json-and-open)
              (74 "as json." org-pandoc-export-as-json))

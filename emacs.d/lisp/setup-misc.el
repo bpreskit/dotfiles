@@ -240,3 +240,11 @@
   (nerd-icons-install-fonts t)
   :config
   (doom-modeline-mode))
+
+(use-package blamer
+  :custom
+  (blamer-face ((t
+                 (:italic t :inherit 'unspecified :foreground "#796a64"))))
+  :config
+  (global-blamer-mode)
+  )

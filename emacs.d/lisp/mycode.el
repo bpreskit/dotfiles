@@ -333,7 +333,7 @@ and restore the point."
   "Convert `BODY' as `INPUT-FORMAT' to `OUTPUT-FORMAT'."
   (let ((args nil))
     (if input-format (setq args (append (list "-f" input-format) args)))
-    (setq args (append (list "-t" (or output-format "org")) args))
+    (setq args (append (list "-t" (or output-format "org") "--wrap" "none") args))
     (with-temp-buffer
       (insert body)
       (apply 'call-process-region (point-min) (point-max) "pandoc" t t nil args)
