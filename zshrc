@@ -92,7 +92,9 @@ fi
 if [[ -x "${HOME}/.rbenv/bin/rbenv" ]]; then
     eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
 fi
-. "$HOME/.cargo/env"
+if [[ -r "$HOME/.cargo/env" ]]; then
+    . "$HOME/.cargo/env"
+fi
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
