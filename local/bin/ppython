@@ -1,0 +1,2 @@
+#!/bin/bash
+PYTHONHISTFILE=/dev/null python3 -c "import readline; readline.clear_history(); readline.set_history_length(0); getattr(__import__('code'), 'interact')()"
