@@ -73,3 +73,48 @@
 
 (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
 (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]site-packages\\'")
+
+;; Fix imenu'ing with counsel in lsp, particularly in python
+(define-advice counsel--imenu-candidates (:around (fn) prefer-lsp)
+  "Don't let counsel replace the LSP imenu index with python.el's."
+  (if (bound-and-true-p lsp-mode)
+      ;; The `cond' in counsel only checks `major-mode'; `imenu--make-index-alist'
+      ;; still uses the buffer-local `imenu-create-index-function' (LSP).
+      (let ((major-mode 'fundamental-mode))
+        (funcall fn))
+    (funcall fn)))
+
+;; 1. Remember where a parent symbol lives, since lsp-mode discards it.
+(define-advice lsp--symbol-to-hierarchical-imenu-elem (:around (fn sym) keep-parent-pos)
+  (let ((elem (funcall fn sym)))
+    (if (imenu--subalist-p elem)
+        (cons (propertize (car elem) 'counsel-imenu-pos
+                          (ht-get lsp--line-col-to-point-hash-table
+                                  (lsp--get-line-and-col sym)))
+              (cdr elem))
+      elem)))
+
+;; 2. Same as counsel's version, plus a candidate for each positioned parent.
+(define-advice counsel-imenu-get-candidates-from (:override (alist &optional prefix) include-parents)
+  (cl-flet ((make-key (name)
+              (concat (when prefix
+                        (concat (propertize prefix 'face 'ivy-grep-info) ": "))
+                      name)))
+    (cl-mapcan
+     (lambda (elm)
+       (if (imenu--subalist-p elm)
+           (let* ((name (car elm))
+                  (pos (get-text-property 0 'counsel-imenu-pos name))
+                  (key (make-key name)))
+             (append
+              (when pos (list (cons key (cons key pos))))
+              (counsel-imenu-get-candidates-from
+               (cl-loop for (e . v) in (cdr elm) collect
+                        (cons e (if (integerp v) (copy-marker v) v)))
+               (concat prefix (if prefix ".") name))))
+         (let ((key (make-key (car elm))))
+           (list (cons key
+                       (cons key (if (overlayp (cdr elm))
+                                     (overlay-start (cdr elm))
+                                   (cdr elm))))))))
+     alist)))
