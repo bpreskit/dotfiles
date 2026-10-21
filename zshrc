@@ -121,6 +121,12 @@ export RIPGREP_CONFIG_PATH=${HOME}/.config/ripgrep.conf
 # Used in a few places to auto-focus on emacs.
 export MY_EMACS_WINDOW=${MY_EMACS_WINDOW:-"GNU Emacs"}
 
+chunk_sort() {
+    local CHUNK_STR="${1}"
+
+    sed "/^${CHUNK_STR}/s/^/\x00/" | sort -z | tr -d "\0"
+}
+
 # Local variables:
 # mode: shell-script
 # End:
